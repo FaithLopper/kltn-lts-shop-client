@@ -1,0 +1,197 @@
+/* ============== GOOGLE FONT ============== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+
+
+/* ============== BASE ============== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  body,
+  button,
+  input,
+  textarea {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+  }
+  
+  body{
+    background-color: var(--body-color);
+  }
+  
+  h1, h2, h3 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+  }
+  
+  ul{
+    list-style: none;
+  }
+  
+  a{
+    text-decoration: none;
+  }
+  
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  
+  img{
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* ============== REUSABLE CSS CLASS ============== */
+  
+  .section{
+    padding: 6rem 0 2rem;
+  }
+  
+  .section__title{
+    font-size: var(--h1-font-size);
+    color: var(--title-color);
+  }
+  
+  .section__subtitle{
+    display: block;
+    font-size: var(--small-font-size);
+    margin-bottom: 4rem;
+  }
+  
+  .section__title,
+  .section__subtitle{
+    text-align: center;
+  }
+  
+  /* ============== LAYOUT ============== */
+  
+  .container{
+    max-width: 968px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .grid{
+    display: grid;
+    gap:1.5rem;
+  }
+  
+  /* ============== BUTTONS ============== */
+  
+  .button{
+    display: inline-block;
+    background-color: var(--title-color);
+    color:var(--container-color);
+    padding: 1.25rem 2rem;
+    border-radius: 1rem;
+    font-weight: var(--font-medium);
+  }
+  
+  .button:hover{
+    background-color: var(--title-color-dark);
+  }
+  
+  .button__icon{
+    margin-left: var(--mb-0-5) ;
+  }
+  
+  .button--flex{
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* ============== BREAK POINT ============== */
+  
+  /* For large device */
+  @media screen and (max-width: 992px) {
+    .container{
+      margin-left: var(--mb-1-5);
+      margin-right: var(--mb-1-5);
+    }
+  
+    .button{
+      padding: 1rem 1.75rem;
+    }
+  
+    .button__icon{
+      width: 1.375rem;
+      height: 1.375rem;
+    }
+  }
+  /* For small device */
+  @media screen and (max-width: 768px) {
+    .section {
+      padding: 2rem 0 4rem;
+    }
+  
+    body{
+      margin:0 0 var(--header-height);
+    }
+  
+    .section__subtitle{
+      margin-bottom: var(--mb-3);
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    
+  }
+  
+  @media screen and (max-width: 350px) {
+    :root{
+      --big-font-size:2.25rem;
+    }
+    .container{
+      margin-left: var(--mb-1);
+      margin-right: var(--mb-1);
+    }
+  }
+  
+  .App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

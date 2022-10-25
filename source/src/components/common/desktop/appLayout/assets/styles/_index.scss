@@ -1,0 +1,9 @@
+@import 'antd/dist/antd.css';
+// @import 'antd-mobile/dist/antd-mobile.css';
+// @import "quill.snow.css";
+@import "variables";
+@import "common";
+body.bd-desktop {
+    @import '../../components/navigation/AppNavigation.scss';
+    // @import '../../components/**/**/*.scss';
+}
