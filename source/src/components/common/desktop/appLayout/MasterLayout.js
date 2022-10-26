@@ -3,7 +3,6 @@ import Utils from "../../../../utils";
 import AppBody from "./components/body/AppBody";
 import AppFooter from "./components/footer/AppFooter";
 import AppHeader from "./components/header/AppHeader";
-import AppNavigation from "./components/navigation/AppNavigation";
 class MasterLayout extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +21,8 @@ class MasterLayout extends Component {
           id="home"
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
-          <AppNavigation
-            NavigatorMenu={NavigatorMenu}
-            // setShowDetailModal={this.setShowDetailModal}
-          />
           <AppHeader
+          // NavigatorMenu={NavigatorMenu}
           // configPageData={configPageData}
           // setShowDetailModal={this.setShowDetailModal}
           />

@@ -4,6 +4,7 @@
 @import "variables";
 @import "common";
 body.bd-desktop {
-    @import '../../components/navigation/AppNavigation.scss';
-    // @import '../../components/**/**/*.scss';
+    @import '../../components/header/_header.scss';
+    @import '../../components/body/_body.scss';
+    @import '../../components/footer/_footer.scss';
 }

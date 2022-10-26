@@ -1,8 +1,15 @@
 import React from 'react'
+import Home from './home/Home'
+import New from './new/New'
+import Product from './product/Product'
 
 const AppBody = () => {
   return (
-    <div>AppBody</div>
+    <main className='main'>
+      <Home/>
+      <Product/>
+      <New/>
+    </main>
   )
 }
 
