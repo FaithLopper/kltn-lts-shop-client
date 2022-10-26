@@ -1,6 +1,5 @@
 import React from 'react'
 import Banner from './Banner'
-import './_home.scss'
 const Home = () => {
   return (
     <section className="home section" id="home">

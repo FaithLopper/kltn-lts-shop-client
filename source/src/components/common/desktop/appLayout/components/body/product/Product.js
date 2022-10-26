@@ -1,7 +1,6 @@
 import React from 'react'
 import ProductCategory from './ProductCategory'
 import ProductItem from './ProductItem'
-import './_product.scss'
 const Product = () => {
   return (
     <section className="product section" id="product">

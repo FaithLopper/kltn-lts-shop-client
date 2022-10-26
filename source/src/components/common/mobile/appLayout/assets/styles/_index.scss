@@ -3,8 +3,8 @@
 // @import "quill.snow.css";
 @import "variables";
 @import "common";
-body.bd-desktop {
-    @import '../../components/header/_header.scss';
-    @import '../../components/body/_body.scss';
-    @import '../../components/footer/_footer.scss';
+body.bd-mobile {
+    @import '../../components/header/header';
+    @import '../../components/body/body';
+    @import '../../components/footer/footer';
 }

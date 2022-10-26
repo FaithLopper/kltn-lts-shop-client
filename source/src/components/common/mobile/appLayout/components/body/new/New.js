@@ -1,5 +1,4 @@
 import React from 'react'
-import './_new.scss'
 const New = () => {
   return (
     <section className="new section" id="new">
