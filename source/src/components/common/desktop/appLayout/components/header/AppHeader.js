@@ -6,7 +6,7 @@ const AppHeader = () => {
       <div className="header__container container">
         <div className="menu">Menu</div>
         <nav className="nav">Nav</nav>
-        <div className="hot-new">Hot-new</div>
+        <div className="hot-new">Promotion Slider</div>
       </div>
     </header>
   );
