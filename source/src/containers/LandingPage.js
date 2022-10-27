@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
+import { connect } from "react-redux";
 import MasterLayout from "../components/common/desktop/appLayout/MasterLayout";
 import MobileMasterLayout from "../components/common/mobile/appLayout/MobileMasterLayout";
 import Utils from "../utils";
@@ -8,7 +9,7 @@ const { isMobileDevice} = Utils
 const isMobile = isMobileDevice()
 
 const LandingPage = (props) => {
-  const { t } = useTranslation();
+  const { t } = props;
   const mobileMasterLayoutRef = useRef(null);
   const homeRef = useRef(null);
   const functionRef = useRef(null);
@@ -19,46 +20,31 @@ const LandingPage = (props) => {
   const newsRef = useRef(null);
   const NavigatorMenu = [
     {
-      title: t("navigationBar:Home"),
+      title: t("navigationBar:findStore"),
       refKey: "home",
       refValue: homeRef,
     },
     {
-      title: t("navigationBar:Function"),
-      refKey: "function",
-      refValue: functionRef,
+      title: t("navigationBar:help"),
+      refKey: "help",
+      refValue: homeRef,
     },
     {
-      title: t("navigationBar:Services"),
-      refKey: "services",
-      refValue: servicesRef,
+      title: t("navigationBar:login"),
+      refKey: "help",
+      refValue: homeRef,
     },
     {
-      title: t("navigationBar:Review"),
-      refKey: "review",
-      refValue: reviewRef,
+      title: t("navigationBar:signIn"),
+      refKey: "help",
+      refValue: homeRef,
     },
-    {
-      title: t("navigationBar:News"),
-      refKey: "news",
-      refValue: newsRef,
-    },
-    {
-      title: t("navigationBar:Customer"),
-      refKey: "customer",
-      refValue: customerRef,
-    },
-    // {
-    //     title: t('navigationBar:Contact'),
-    //     refKey: 'contact',
-    //     refValue: contactRef,
-    // },
   ];
   return !isMobile ? (
     <MasterLayout
       {...props}
       // configPageData={_configPage}
-      // NavigatorMenu={NavigatorMenu}
+      NavigatorMenu={NavigatorMenu}
     />
   ) : (
     <MobileMasterLayout
@@ -72,4 +58,13 @@ const LandingPage = (props) => {
   );
 };
 
-export default LandingPage;
+
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+ 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('landingPage')(LandingPage)) ;

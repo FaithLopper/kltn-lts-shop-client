@@ -16,7 +16,7 @@ class MobileMasterLayout extends Component {
     return (
       <>
         <div
-          className="master-layout desktop-screen"
+          className="master-layout mobile-screen"
           id="home"
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >

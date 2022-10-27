@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Utils from "../../../../utils";
+import { connect } from 'react-redux';
 import AppBody from "./components/body/AppBody";
 import AppFooter from "./components/footer/AppFooter";
 import AppHeader from "./components/header/AppHeader";
+import { withTranslation } from 'react-i18next';
 class MasterLayout extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ class MasterLayout extends Component {
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
           <AppHeader
-          // NavigatorMenu={NavigatorMenu}
+          NavigatorMenu={NavigatorMenu}
           // configPageData={configPageData}
           // setShowDetailModal={this.setShowDetailModal}
           />
@@ -45,4 +47,12 @@ class MasterLayout extends Component {
   }
 }
 
-export default MasterLayout;
+
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = dispatch => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['masterLayout','index', 'common'])(MasterLayout));
