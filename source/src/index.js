@@ -6,10 +6,6 @@ import Utils from "./utils";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { Provider } from "react-redux";
-import { I18nextProvider } from "react-i18next";
-import i18n from "./locales/i18n";
-import store from "./store";
 const { isMobileDevice } = Utils;
 
 // Global Use
