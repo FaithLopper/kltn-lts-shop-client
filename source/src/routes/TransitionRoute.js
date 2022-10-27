@@ -5,7 +5,6 @@ import {
     useLocation,
 } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next'
 import Utils from '../utils'
 import { setShowModal as _setShowModal } from '../reducers/appCommon'
 import MobileInvalidPathPage from '../components/common/mobile/appLayout/components/pages/InvalidPathPage'
@@ -16,7 +15,6 @@ const TransitionRoute = ({ getRedirect, routes }) => {
     const dispatch = useDispatch()
     const location = useLocation()
     const routesArr = Object.values(routes)
-    const { t } = useTranslation("common")
     const setShowModal = (value) => {
         dispatch(_setShowModal(value))
     }
@@ -32,7 +30,6 @@ const TransitionRoute = ({ getRedirect, routes }) => {
         location={location}
         getRedirect={getRedirect}
         setShowModal={setShowModal}
-        t={t}
         routes={routes}
         dispatch={dispatch}
         />
@@ -40,7 +37,6 @@ const TransitionRoute = ({ getRedirect, routes }) => {
         routesArr={routesArr}
         location={location}
         getRedirect={getRedirect}
-        t={t}
         routes={routes}
         dispatch={dispatch}
         />

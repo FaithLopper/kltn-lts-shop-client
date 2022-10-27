@@ -1,28 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import 'antd/dist/antd.min.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "antd/dist/antd.min.css";
 import Utils from "./utils";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { Provider } from 'react-redux'
-import store from './store'
-const {isMobileDevice}= Utils
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { Provider } from "react-redux";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./locales/i18n";
+import store from "./store";
+const { isMobileDevice } = Utils;
 
 // Global Use
 // https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react#using
-library.add(fas, fab)
+library.add(fas, fab);
 
-const isMobile= isMobileDevice()
-if(!isMobile){
-    require('./components/common/desktop/appLayout/assets/styles/_index.scss')
-}else{
-    require('./components/common/mobile/appLayout/assets/styles/_index.scss')
+const isMobile = isMobileDevice();
+if (!isMobile) {
+  require("./components/common/desktop/appLayout/assets/styles/_index.scss");
+} else {
+  require("./components/common/mobile/appLayout/assets/styles/_index.scss");
 }
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-)
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
