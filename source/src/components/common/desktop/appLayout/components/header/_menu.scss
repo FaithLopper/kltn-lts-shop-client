@@ -1,0 +1,13 @@
+.menu__list{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.menu__link{
+    color: var(--title-color);
+    font-size: var(--normal-font-size);
+    font-weight:var(--font-medium);
+}
+
+

@@ -1,10 +1,14 @@
+@import './hotnew';
+@import './nav';
+@import './menu';
 .header{
     background-color: #D78181;
 }
 
 .menu{
-    background-color: rgb(121, 9, 76);
     min-height: 2.25rem;
+    display: flex;
+    justify-content: end;
 }
 
 .nav{
@@ -16,3 +20,4 @@
     background-color: rgb(176, 50, 187);
     min-height: 3.125rem;
 }
+

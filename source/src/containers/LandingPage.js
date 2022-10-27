@@ -20,22 +20,22 @@ const LandingPage = (props) => {
   const newsRef = useRef(null);
   const NavigatorMenu = [
     {
-      title: t("navigationBar:findStore"),
+      title: t("findStore"),
       refKey: "home",
       refValue: homeRef,
     },
     {
-      title: t("navigationBar:help"),
+      title: t("help"),
       refKey: "function",
       refValue: functionRef,
     },
     {
-      title: t("navigationBar:login"),
+      title: t("login"),
       refKey: "services",
       refValue: servicesRef,
     },
     {
-      title: t("navigationBar:signIn"),
+      title: t("signIn"),
       refKey: "review",
       refValue: reviewRef,
     },
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
  
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('landingPage')(LandingPage)) ;
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('navigationBar')(LandingPage)) ;

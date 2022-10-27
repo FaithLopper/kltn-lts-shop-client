@@ -9,16 +9,17 @@
     --title-color: hsl(var(--hue), var(--sat), 20%);
     --title-color-dark: hsl(var(--hue), var(--sat), 0%);
     --text-color: hsl(var(--hue), var(--sat), 46%);
-    --body-color: hsl(var(--hue), var(--sat), 98%);
+    --body-color: rgb(245, 245, 245);
     --container-color: white;
   
     /* ======== Font weight ======== */
+    --font-light: 300;
     --font-normal: 400;
     --font-medium: 500;
-    --font-semi-bold: 600;
+    --font-semi-bold: 700;
   
     /* ======== Font and typography ======== */
-    --body-font: "Poppins", sans-serif;
+    --body-font: "Roboto", sans-serif;
   
     /* ======== .5rem = 8px | 1rem = 16px ======== */
     --big-font-size: 3.5rem;
