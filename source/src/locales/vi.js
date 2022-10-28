@@ -17,18 +17,10 @@ export default {
     help: "Trợ giúp",
     login: "Đăng nhập",
     signIn: "Đăng kí",
-
-    footer: {
-      product: "SẢN PHẨM",
-      about: "VỀ CÔNG TY",
-      support: "HỖ TRỢ",
-      contact: "LIÊN HỆ",
-    },
   },
   appHeader: {
     profile: "Hồ sơ",
     logout: "Đăng xuất",
   },
-
   constants: {},
 };
