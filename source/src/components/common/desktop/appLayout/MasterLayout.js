@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Utils from "../../../../utils";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import AppBody from "./components/body/AppBody";
 import AppFooter from "./components/footer/AppFooter";
 import AppHeader from "./components/header/AppHeader";
-import { withTranslation } from 'react-i18next';
+import { withTranslation } from "react-i18next";
 class MasterLayout extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ class MasterLayout extends Component {
     // this.setShowDetailModal = this.setShowDetailModal.bind(this);
   }
   render() {
-    const { configPageData, clientListData, NavigatorMenu } = this.props;
+    const { configPageData, clientListData, NavigatorMenu, FooterMenu } = this.props;
     return (
       <>
         <div
@@ -24,22 +24,22 @@ class MasterLayout extends Component {
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
           <AppHeader
-          NavigatorMenu={NavigatorMenu}
-          // configPageData={configPageData}
-          // setShowDetailModal={this.setShowDetailModal}
-          />
-          <AppBody
+            NavigatorMenu={NavigatorMenu}
             // configPageData={configPageData}
-            // clientListData={clientListData}
-            // NavigatorMenu={NavigatorMenu}
             // setShowDetailModal={this.setShowDetailModal}
           />
+          <AppBody
+          // configPageData={configPageData}
+          // clientListData={clientListData}
+          // NavigatorMenu={NavigatorMenu}
+          // setShowDetailModal={this.setShowDetailModal}
+          />
           <AppFooter
+            FooterMenu={FooterMenu}
             // configPageData={configPageData}
             // setShowDetailModal={this.setShowDetailModal}
             // showDetailModal={this.state.showDetailModal}
             // isNotEmail={this.state.isNotEmail}
-            // NavigatorMenu={NavigatorMenu}
           />
         </div>
       </>
@@ -47,12 +47,11 @@ class MasterLayout extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({});
 
-const mapStateToProps = state => ({
+const mapDispatchToProps = (dispatch) => ({});
 
-})
-
-const mapDispatchToProps = dispatch => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['masterLayout','index', 'common'])(MasterLayout));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTranslation(["masterLayout", "index", "common"])(MasterLayout));

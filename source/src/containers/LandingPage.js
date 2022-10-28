@@ -5,8 +5,8 @@ import Utils from "../utils";
 import { useTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
-const { isMobileDevice} = Utils
-const isMobile = isMobileDevice()
+const { isMobileDevice } = Utils;
+const isMobile = isMobileDevice();
 
 const LandingPage = (props) => {
   const { t } = props;
@@ -18,24 +18,28 @@ const LandingPage = (props) => {
   const reviewRef = useRef(null);
   const contactRef = useRef(null);
   const newsRef = useRef(null);
+  const productRef = useRef(null);
+  const aboutRef = useRef(null);
+  const supportRef = useRef(null);
+
   const NavigatorMenu = [
     {
-      title: t("navigationBar:findStore"),
+      title: t("findStore"),
       refKey: "home",
       refValue: homeRef,
     },
     {
-      title: t("navigationBar:help"),
+      title: t("help"),
       refKey: "function",
       refValue: functionRef,
     },
     {
-      title: t("navigationBar:login"),
+      title: t("login"),
       refKey: "services",
       refValue: servicesRef,
     },
     {
-      title: t("navigationBar:signIn"),
+      title: t("signIn"),
       refKey: "review",
       refValue: reviewRef,
     },
@@ -45,17 +49,103 @@ const LandingPage = (props) => {
     //     refValue: contactRef,
     // },
   ];
+
+  const FooterMenu = {
+    product: {
+      title: "SẢN PHẨM",
+      refKey: "product",
+      refValue: productRef,
+      items: [
+        {
+          title: "product1",
+          refKey: "product1",
+        },
+        {
+          title: "product2",
+          refKey: "product1",
+        },
+        {
+          title: "product3",
+          refKey: "product1",
+        },
+      ],
+    },
+    about: {
+      title: "VỀ CÔNG TY",
+      refKey: "about",
+      refValue: aboutRef,
+      items: [
+        {
+          title: "Tuyển dụng",
+          refKey: "about1",
+        },
+        {
+          title: "Nhượng quyền",
+          refKey: "about1",
+        },
+        {
+          title: "Về chúng tôi",
+          refKey: "about1",
+        },
+      ],
+    },
+    support: {
+      title: "HỖ TRỢ",
+      refKey: "support",
+      refValue: supportRef,
+      items: [
+        {
+          title: "FAQs",
+          refKey: "about1",
+        },
+        {
+          title: "Bảo mật thông tin",
+          refKey: "about1",
+        },
+        {
+          title: "Chính sách chung",
+          refKey: "about1",
+        },
+        {
+          title: "Tra cứu đơn hàng",
+          refKey: "about1",
+        },
+      ],
+    },
+    contact: {
+      title: "LIÊN HỆ",
+      refKey: "contact",
+      refValue: contactRef,
+      items: [
+        {
+          title: "Email góp ý",
+          refKey: "about1",
+        },
+        {
+          title: "Hotline",
+          refKey: "about1",
+        },
+        {
+          title: "0364 521 323",
+          refKey: "about1",
+        },
+      ],
+    },
+  };
+
   return !isMobile ? (
     <MasterLayout
       {...props}
       // configPageData={_configPage}
       NavigatorMenu={NavigatorMenu}
+      FooterMenu={FooterMenu}
     />
   ) : (
     <MobileMasterLayout
       {...props}
       // configPageData={_configPage}
       NavigatorMenu={NavigatorMenu}
+      FooterMenu={FooterMenu}
       // t={t}
       // mobileMasterLayoutRef={mobileMasterLayoutRef}
       // currentScrollY={_currentScrollY}
@@ -63,12 +153,11 @@ const LandingPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({});
 
-});
+const mapDispatchToProps = (dispatch) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
- 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('landingPage')(LandingPage)) ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTranslation("navigationBar")(LandingPage));
