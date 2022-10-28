@@ -9,10 +9,34 @@ class MobileMasterLayout extends Component {
       showDetailModal: false,
       isNotEmail: false,
     };
+    const {t}= props
+    const NavigatorMenu = [
+      {
+        title: t("findStore"),
+        refKey: "home",
+        // refValue: homeRef,
+      },
+      {
+        title: t("help"),
+        refKey: "function",
+        // refValue: functionRef,
+      },
+      {
+        title: t("login"),
+        refKey: "services",
+        // refValue: servicesRef,
+      },
+      {
+        title: t("signIn"),
+        refKey: "review",
+        // refValue: reviewRef,
+      },
+    ];
+    this.NavigatorMenu= NavigatorMenu
     // this.setShowDetailModal = this.setShowDetailModal.bind(this);
   }
   render() {
-    const { configPageData, clientListData, NavigatorMenu } = this.props;
+    const { configPageData, clientListData } = this.props;
     return (
       <>
         <div
@@ -21,7 +45,7 @@ class MobileMasterLayout extends Component {
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
           <AppHeader
-          // NavigatorMenu={NavigatorMenu}
+          NavigatorMenu={this.NavigatorMenu}
           // configPageData={configPageData}
           // setShowDetailModal={this.setShowDetailModal}
           />

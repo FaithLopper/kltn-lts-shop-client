@@ -1,14 +1,9 @@
 import React from 'react'
-import Home from './home/Home'
-import New from './new/New'
-import Product from './product/Product'
 
-const AppBody = () => {
+const AppBody = ({Component}) => {
   return (
     <main className='main'>
-      <Home/>
-      <Product/>
-      <New/>
+      <Component/>
     </main>
   )
 }

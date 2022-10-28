@@ -1,12 +1,16 @@
 .nav__logo{
     width: 60px;
     height: 60px;
+    transform:scale(1.4);
 }
 
 .nav{
     display: flex;
     justify-content: space-between;
     column-gap: 3rem;
+    ::placeholder{
+        color: var(--blur-color);
+    }
 }
 
 .nav__list{
@@ -31,7 +35,7 @@
 
 .nav__search{
     background-color: var(--content-color);
-    padding: 0.3rem 0.75rem;
+    padding: 0.18rem 0.75rem;
     border-radius: 1.5rem;
 }
 
@@ -39,6 +43,8 @@
     outline: none;
     border: none;
     background-color: var(--content-color);
+    width: 8rem;
+    color: var(--title-color);
 }
 
 .nav__icon{

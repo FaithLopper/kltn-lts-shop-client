@@ -8,19 +8,23 @@
     --sat: 0%;
     --title-color: hsl(var(--hue), var(--sat), 20%);
     --title-color-dark: hsl(var(--hue), var(--sat), 0%);
+    --background-color-dark: rgb(17, 17, 17);
     --text-color: hsl(var(--hue), var(--sat), 46%);
     --body-color: white;
     --content-color: rgb(245, 245, 245);
     --container-color: white;
+    --blur-color:rgb(210, 207, 210);
   
     /* ======== Font weight ======== */
-    --font-light: 300;
-    --font-normal: 400;
-    --font-medium: 500;
+    --font-light-ultra: 300;
+    --font-light: 400;
+    --font-normal: 500;
+    --font-medium: 600;
     --font-semi-bold: 700;
   
+  
     /* ======== Font and typography ======== */
-    --body-font: "Roboto", sans-serif;
+    --body-font: "HelveticaNeue", sans-serif;
   
     /* ======== .5rem = 8px | 1rem = 16px ======== */
     --big-font-size: 3.5rem;

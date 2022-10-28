@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "../../../../../../assets/svg/logo-500.svg";
+import {Link} from "react-router-dom"
 const Nav = () => {
   return (
     <nav className="nav wrapper">
-      <a href="index.html">
+      <Link to="/">
         <img src={logo} alt="shop" className="nav__logo" />
-      </a>
+      </Link>
 
       <ul className="nav__list grid">
         <li className="nav__item">Nam</li>

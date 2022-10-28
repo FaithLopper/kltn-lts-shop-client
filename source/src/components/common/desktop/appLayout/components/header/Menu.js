@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = (props) => {
   const { NavigatorMenu } = props;
@@ -10,9 +11,9 @@ const Menu = (props) => {
             NavigatorMenu.map(({ refKey, title }, index) => (
               <>
                 <li className="menu__item">
-                  <a href={refKey} className="menu__link">
+                  <Link to={refKey} className="menu__link">
                     {title}
-                  </a>
+                  </Link>
                 </li>
                 {index !== NavigatorMenu.length - 1 ? (
                   <span className="menu__line"></span>

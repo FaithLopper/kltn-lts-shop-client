@@ -4,7 +4,9 @@ import MobileMasterLayout from "../components/common/mobile/appLayout/MobileMast
 import Utils from "../utils";
 import { useTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-
+import Product from "../components/common/desktop/appLayout/components/body/product/Product";
+import New from  "../components/common/desktop/appLayout/components/body/new/New";
+import Home from  "../components/common/desktop/appLayout/components/body/home/Home";
 const { isMobileDevice} = Utils
 const isMobile = isMobileDevice()
 
@@ -18,45 +20,23 @@ const LandingPage = (props) => {
   const reviewRef = useRef(null);
   const contactRef = useRef(null);
   const newsRef = useRef(null);
-  const NavigatorMenu = [
-    {
-      title: t("findStore"),
-      refKey: "home",
-      refValue: homeRef,
-    },
-    {
-      title: t("help"),
-      refKey: "function",
-      refValue: functionRef,
-    },
-    {
-      title: t("login"),
-      refKey: "services",
-      refValue: servicesRef,
-    },
-    {
-      title: t("signIn"),
-      refKey: "review",
-      refValue: reviewRef,
-    },
-    // {
-    //     title: t('navigationBar:Contact'),
-    //     refKey: 'contact',
-    //     refValue: contactRef,
-    // },
-  ];
+  const Component= ()=><>
+  <Home/>
+  <Product/>
+  <New/></>
   return !isMobile ? (
     <MasterLayout
       {...props}
+       t={t}
+       Component={Component}
       // configPageData={_configPage}
-      NavigatorMenu={NavigatorMenu}
     />
   ) : (
     <MobileMasterLayout
       {...props}
       // configPageData={_configPage}
-      NavigatorMenu={NavigatorMenu}
-      // t={t}
+      Component={Component}
+      t={t}
       // mobileMasterLayoutRef={mobileMasterLayoutRef}
       // currentScrollY={_currentScrollY}
     />

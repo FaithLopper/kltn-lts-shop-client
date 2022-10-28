@@ -5,6 +5,7 @@ import AppBody from "./components/body/AppBody";
 import AppFooter from "./components/footer/AppFooter";
 import AppHeader from "./components/header/AppHeader";
 import { withTranslation } from 'react-i18next';
+
 class MasterLayout extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +13,35 @@ class MasterLayout extends Component {
       showDetailModal: false,
       isNotEmail: false,
     };
+    const {t}= props
+    const NavigatorMenu = [
+      {
+        title: t("findStore"),
+        refKey: "/store",
+        // refValue: homeRef,
+      },
+      {
+        title: t("help"),
+        refKey: "/help",
+        // refValue: functionRef,
+      },
+      {
+        title: t("login"),
+        refKey: "/login",
+        // refValue: servicesRef,
+      },
+      {
+        title: t("signIn"),
+        refKey: "/register",
+        // refValue: reviewRef,
+      },
+    ];
+    this.NavigatorMenu= NavigatorMenu
     // this.setShowDetailModal = this.setShowDetailModal.bind(this);
   }
+  
   render() {
-    const { configPageData, clientListData, NavigatorMenu } = this.props;
+    const { configPageData, clientListData,Component } = this.props;
     return (
       <>
         <div
@@ -24,7 +50,7 @@ class MasterLayout extends Component {
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
           <AppHeader
-          NavigatorMenu={NavigatorMenu}
+          NavigatorMenu={this.NavigatorMenu}
           // configPageData={configPageData}
           // setShowDetailModal={this.setShowDetailModal}
           />
@@ -33,6 +59,7 @@ class MasterLayout extends Component {
             // clientListData={clientListData}
             // NavigatorMenu={NavigatorMenu}
             // setShowDetailModal={this.setShowDetailModal}
+            Component={Component}
           />
           <AppFooter
             // configPageData={configPageData}
@@ -55,4 +82,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(['masterLayout','index', 'common'])(MasterLayout));
+export default connect(mapStateToProps, mapDispatchToProps)(MasterLayout);

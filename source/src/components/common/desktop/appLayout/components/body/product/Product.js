@@ -4,7 +4,7 @@ import ProductItem from "./ProductItem";
 const Product = () => {
   return (
     <section className="product section" id="product">
-      <h2 className="section__title">Danh mục mua hàng</h2>
+      <h2 className="section__title">DANH MỤC MUA HÀNG</h2>
       <div className="product__container container">
         <ProductCategory />
         <ProductItem />

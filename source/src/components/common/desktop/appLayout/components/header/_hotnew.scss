@@ -9,9 +9,13 @@
 
 .hotnew__title{
     font-size: var(--normal-font-size);
-    margin-bottom: 0.17rem;
+    margin-bottom: 0.08rem;
 }
 
 .hotnew__description{
-    font-size: var(--smaller-font-size);
+    font-size: 0.8rem;
+}
+
+.remove-hotnew{
+    display: none;
 }
