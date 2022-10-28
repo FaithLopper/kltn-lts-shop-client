@@ -36,12 +36,92 @@ class MasterLayout extends Component {
         // refValue: reviewRef,
       },
     ];
+    
+  const FooterMenu = {
+    product: {
+      title: "SẢN PHẨM",
+      refKey: "product",
+      items: [
+        {
+          title: "product1",
+          refKey: "product1",
+        },
+        {
+          title: "product2",
+          refKey: "product1",
+        },
+        {
+          title: "product3",
+          refKey: "product1",
+        },
+      ],
+    },
+    about: {
+      title: "VỀ CÔNG TY",
+      refKey: "about",
+      items: [
+        {
+          title: "Tuyển dụng",
+          refKey: "about1",
+        },
+        {
+          title: "Nhượng quyền",
+          refKey: "about1",
+        },
+        {
+          title: "Về chúng tôi",
+          refKey: "about1",
+        },
+      ],
+    },
+    support: {
+      title: "HỖ TRỢ",
+      refKey: "support",
+      items: [
+        {
+          title: "FAQs",
+          refKey: "about1",
+        },
+        {
+          title: "Bảo mật thông tin",
+          refKey: "about1",
+        },
+        {
+          title: "Chính sách chung",
+          refKey: "about1",
+        },
+        {
+          title: "Tra cứu đơn hàng",
+          refKey: "about1",
+        },
+      ],
+    },
+    contact: {
+      title: "LIÊN HỆ",
+      refKey: "contact",
+      items: [
+        {
+          title: "Email góp ý",
+          refKey: "about1",
+        },
+        {
+          title: "Hotline",
+          refKey: "about1",
+        },
+        {
+          title: "0364 521 323",
+          refKey: "about1",
+        },
+      ],
+    },
+  };
     this.NavigatorMenu= NavigatorMenu
+    this.FooterMenu= FooterMenu
     // this.setShowDetailModal = this.setShowDetailModal.bind(this);
   }
   
   render() {
-    const { configPageData, clientListData,Component, FooterMenu } = this.props;
+    const { configPageData, clientListData,Component } = this.props;
     return (
       <>
         <div
@@ -62,7 +142,7 @@ class MasterLayout extends Component {
             Component={Component}
           />
           <AppFooter
-            FooterMenu={FooterMenu}
+            FooterMenu={this.FooterMenu}
             // configPageData={configPageData}
             // setShowDetailModal={this.setShowDetailModal}
             // showDetailModal={this.state.showDetailModal}

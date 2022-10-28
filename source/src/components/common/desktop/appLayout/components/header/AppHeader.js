@@ -9,7 +9,7 @@ const AppHeader = (props) => {
       <div className="header__container">
         <Menu NavigatorMenu={NavigatorMenu}/>
         <Nav/>
-        <HotNew/>
+        {/* <HotNew/>  */}
       </div>
     </header>
   );

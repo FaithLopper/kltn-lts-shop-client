@@ -20,7 +20,7 @@ const LoginPage = (props) => {
   return !isMobile ? (
     <MasterLayout {...props} t={t} Component={LoginForm}/>
   ) : (
-    <MobileMasterLayout {...props} t={t} Component={LoginForm} />
+    <MobileMasterLayout {...props} t={t} Component={LoginForm}/>
   );
 };
 

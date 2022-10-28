@@ -18,7 +18,7 @@ const RegisterPage = (props) => {
   });
   const { t } = props;
   return !isMobile ? (
-    <MasterLayout {...props} t={t} Component={RegisterForm}/>
+    <MasterLayout {...props} t={t} Component={RegisterForm} />
   ) : (
     <MobileMasterLayout {...props} t={t} Component={RegisterForm} />
   );
