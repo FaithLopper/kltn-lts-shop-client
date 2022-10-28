@@ -20,6 +20,92 @@ const LandingPage = (props) => {
   const reviewRef = useRef(null);
   const contactRef = useRef(null);
   const newsRef = useRef(null);
+  const productRef = useRef(null);
+  const aboutRef = useRef(null);
+  const supportRef = useRef(null);
+  
+  const FooterMenu = {
+    product: {
+      title: "SẢN PHẨM",
+      refKey: "product",
+      refValue: productRef,
+      items: [
+        {
+          title: "product1",
+          refKey: "product1",
+        },
+        {
+          title: "product2",
+          refKey: "product1",
+        },
+        {
+          title: "product3",
+          refKey: "product1",
+        },
+      ],
+    },
+    about: {
+      title: "VỀ CÔNG TY",
+      refKey: "about",
+      refValue: aboutRef,
+      items: [
+        {
+          title: "Tuyển dụng",
+          refKey: "about1",
+        },
+        {
+          title: "Nhượng quyền",
+          refKey: "about1",
+        },
+        {
+          title: "Về chúng tôi",
+          refKey: "about1",
+        },
+      ],
+    },
+    support: {
+      title: "HỖ TRỢ",
+      refKey: "support",
+      refValue: supportRef,
+      items: [
+        {
+          title: "FAQs",
+          refKey: "about1",
+        },
+        {
+          title: "Bảo mật thông tin",
+          refKey: "about1",
+        },
+        {
+          title: "Chính sách chung",
+          refKey: "about1",
+        },
+        {
+          title: "Tra cứu đơn hàng",
+          refKey: "about1",
+        },
+      ],
+    },
+    contact: {
+      title: "LIÊN HỆ",
+      refKey: "contact",
+      refValue: contactRef,
+      items: [
+        {
+          title: "Email góp ý",
+          refKey: "about1",
+        },
+        {
+          title: "Hotline",
+          refKey: "about1",
+        },
+        {
+          title: "0364 521 323",
+          refKey: "about1",
+        },
+      ],
+    },
+  };
   const Component= ()=><>
   <Home/>
   <Product/>
@@ -30,6 +116,7 @@ const LandingPage = (props) => {
        t={t}
        Component={Component}
       // configPageData={_configPage}
+      FooterMenu={FooterMenu}
     />
   ) : (
     <MobileMasterLayout
@@ -37,18 +124,16 @@ const LandingPage = (props) => {
       // configPageData={_configPage}
       Component={Component}
       t={t}
+      FooterMenu={FooterMenu}
+      // t={t}
       // mobileMasterLayoutRef={mobileMasterLayoutRef}
       // currentScrollY={_currentScrollY}
     />
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({});
 
-});
-
-const mapDispatchToProps = (dispatch) => ({
- 
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation('navigationBar')(LandingPage)) ;
