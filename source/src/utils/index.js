@@ -75,7 +75,7 @@ const Utils = {
         if((value || value === 0) && !isNaN(value)) {
             const groupSeparator = setting.groupSeparator || ',';
             const decimalSeparator = setting.decimalSeparator || '.';
-            const currentcy = setting.currencySymbol || 'Đ';
+            const currentcy = setting.currencySymbol || '₫';
             const currencySymbolPosition = setting.currencySymbolPosition;
             const moneyRatio = setting.moneyRatio || 1;
             const decimal = Number(setting.decimal) || 0;
