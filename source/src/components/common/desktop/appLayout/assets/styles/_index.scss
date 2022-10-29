@@ -1,8 +1,8 @@
 @import 'antd/dist/antd.css';
 // @import 'antd-mobile/dist/antd-mobile.css';
 // @import "quill.snow.css";
-@import "variables";
-@import "common";
+@import "../../../../commonStyles/common";
+@import "../../../../commonStyles/variables";
 @import "style";
 body.bd-desktop {
     @import '../../components/header/_header.scss';

@@ -32,9 +32,7 @@ const Nav = () => {
             className="nav__search-input"
           />
         </div>
-        <Link to='/cart'>
-        <i class='bx bx-shopping-bag nav__icon' value={3}></i>
-        </Link>
+        <i class='bx bx-shopping-bag nav__icon'></i>
       </div>
     </nav>
   );

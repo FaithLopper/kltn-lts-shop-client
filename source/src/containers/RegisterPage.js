@@ -14,6 +14,7 @@ const RegisterPage = (props) => {
   useEffect(() => {
     // Cập nhập document title sử dụng browser API
     const hotNew= document.querySelector(".hot-new")
+    if(hotNew)
     hotNew.classList.add("remove-hotnew")
   });
   const { t } = props;

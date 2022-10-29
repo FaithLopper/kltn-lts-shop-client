@@ -4,7 +4,7 @@
 @font-face {
   font-family: Montreal;
   // font-weight: 700;
-  src: url("../../../../../../assets/fonts/NHL-Montreal.ttf.woff");
+  src: url("../../../assets/fonts/NHL-Montreal.ttf.woff");
 }
 
 // @font-face {
@@ -73,6 +73,23 @@ body::-webkit-scrollbar-thumb {
   border: 0.1875rem solid rgb(93, 94, 94); /* creates padding around scroll thumb */
 }
 
+.desktop-screen{
+  width: 100%;
+  max-width: 1920px;
+  // min-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.mobile-screen{
+  width: 100%;
+  max-width: 1920px;
+  // min-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+
 h1,
 h2,
 h3 {
@@ -138,6 +155,10 @@ img {
 .grid {
   display: grid;
   gap: var(--mb-1);
+}
+
+main{
+  margin-top: var(--header-height);
 }
 
 /* ============== BUTTONS ============== */

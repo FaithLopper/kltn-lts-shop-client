@@ -7,6 +7,10 @@ import { connect } from "react-redux";
 import Product from "../components/common/desktop/appLayout/components/body/product/Product";
 import New from  "../components/common/desktop/appLayout/components/body/new/New";
 import Home from  "../components/common/desktop/appLayout/components/body/home/Home";
+
+import ProductMobile from "../components/common/mobile/appLayout/components/body/product/Product";
+import NewMobile from  "../components/common/mobile/appLayout/components/body/new/New";
+import HomeMobile from  "../components/common/mobile/appLayout/components/body/home/Home";
 const { isMobileDevice} = Utils
 const isMobile = isMobileDevice()
 
@@ -16,6 +20,11 @@ const LandingPage = (props) => {
   <Home/>
   <Product/>
   <New/></>
+
+const ComponentMobile= ()=><>
+<HomeMobile/>
+<ProductMobile/>
+<NewMobile/></>
   return !isMobile ? (
     <MasterLayout
       {...props}
@@ -27,7 +36,7 @@ const LandingPage = (props) => {
     <MobileMasterLayout
       {...props}
       // configPageData={_configPage}
-      Component={Component}
+      Component={ComponentMobile}
       t={t}
       // t={t}
       // mobileMasterLayoutRef={mobileMasterLayoutRef}

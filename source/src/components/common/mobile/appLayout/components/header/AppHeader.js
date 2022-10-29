@@ -1,12 +1,15 @@
 import React from "react";
-
-const AppHeader = () => {
+import HotNew from "./HotNew";
+import Menu from './Menu'
+import Nav from "./Nav";
+const AppHeader = (props) => {
+  const {NavigatorMenu}=props
   return (
     <header className="header">
-      <div className="header__container container">
-        <div className="menu">Menu</div>
-        <nav className="nav">Nav</nav>
-        <div className="hot-new">Hot-new</div>
+      <div className="header__container">
+        <Menu NavigatorMenu={NavigatorMenu}/>
+        <Nav/>
+        {/* <HotNew/>  */}
       </div>
     </header>
   );

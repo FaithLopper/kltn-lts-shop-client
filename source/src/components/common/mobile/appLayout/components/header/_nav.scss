@@ -60,22 +60,10 @@
 }
 
 .nav__icon {
-  font-size: 1.5rem;
+  font-size: var(--h2-font-size);
   color: var(--title-color);
   cursor: pointer;
 }
-
-.nav__icon:after{
-  content:attr(value);
-  font-size:0.55rem;
-  font-weight: var(--font-medium);
-  font-family: sans-serif;
-  padding:3px;
-  position:relative;
-  left: -17.5px;
-  top: -3.9px;
-  opacity:0.9;
-  }
 
 .nav__search-icon {
   font-size: var(--h3-font-size);

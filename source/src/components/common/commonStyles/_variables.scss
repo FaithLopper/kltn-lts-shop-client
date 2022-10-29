@@ -1,6 +1,6 @@
 /* ============== VARIALE CSS ============== */
 :root {
-    --header-height: 3rem;
+    --header-height: 6rem;
   
     /* ======== Colors ======== */
     /* Color mode HSL (hue, saturation, lightness) */
@@ -14,6 +14,7 @@
     --content-color: rgb(245, 245, 245);
     --container-color: white;
     --blur-color:rgb(210, 207, 210);
+    --input-color:#8d8d8d;
   
     /* ======== Font weight ======== */
     --font-light-ultra: 300;
@@ -22,9 +23,8 @@
     --font-medium: 600;
     --font-semi-bold: 700;
   
-  
     /* ======== Font and typography ======== */
-    --body-font: "HelveticaNeue", sans-serif;
+    --body-font: sans-serif;
   
     /* ======== .5rem = 8px | 1rem = 16px ======== */
     --big-font-size: 3.5rem;
