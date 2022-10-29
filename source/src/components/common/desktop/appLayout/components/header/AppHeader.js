@@ -4,13 +4,12 @@ import Menu from './Menu'
 import Nav from "./Nav";
 const AppHeader = (props) => {
   const {NavigatorMenu}=props
-  console.log(NavigatorMenu)
   return (
     <header className="header">
       <div className="header__container">
         <Menu NavigatorMenu={NavigatorMenu}/>
         <Nav/>
-        <HotNew/>
+        {/* <HotNew/>  */}
       </div>
     </header>
   );

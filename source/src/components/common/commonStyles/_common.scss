@@ -1,0 +1,353 @@
+/* ============== FONT ============== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+@font-face {
+  font-family: Montreal;
+  // font-weight: 700;
+  src: url("../../../assets/fonts/NHL-Montreal.ttf.woff");
+}
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   font-weight: 300;
+//   src: url('../../../../../../assets/fonts/HelveticaNeue-UltraLight.otf');
+// }
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   font-weight: 400;
+//   src: url('../../../../../../assets/fonts/HelveticaNeue-Light.otf');
+// }
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   font-weight: 500;
+//   src: url('../../../../../../assets/fonts/HelveticaNeue.otf');
+// }
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   font-weight: 600;
+//   src: url('../../../../../../assets/fonts/HelveticaNeue-Medium.otf');
+// }
+
+// @font-face {
+//   font-family: HelveticaNeue;
+//   font-weight: 700;
+//   src: url('../../../../../../assets/fonts/HelveticaNeue-Bold.otf');
+// }
+
+/* ============== BASE ============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+textarea {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 0.2rem; /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: rgb(174, 174, 174); /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(93, 94, 94); /* color of the scroll thumb */
+  border-radius: 1.25rem; /* roundness of the scroll thumb */
+  border: 0.1875rem solid rgb(93, 94, 94); /* creates padding around scroll thumb */
+}
+
+.desktop-screen{
+  width: 100%;
+  max-width: 1920px;
+  // min-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.mobile-screen{
+  width: 100%;
+  max-width: 1920px;
+  // min-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============== REUSABLE CSS CLASS ============== */
+
+.section {
+  padding: 6rem 0 2rem; // padding section in body
+}
+
+.section__title {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-normal);
+  color: var(--title-color);
+}
+
+.section__subtitle {
+  display: block;
+  font-size: var(--small-font-size);
+  margin-bottom: 4rem;
+}
+
+.section__title,
+.section__subtitle {
+  text-align: center;
+}
+
+.content__title{
+  font-size: 1.4rem;
+  font-weight: var(--font-normal);
+  color: var(--title-color-dark);
+  padding-bottom: 1.7rem;
+}
+
+.content__subtitle {
+  display: block;
+  font-size: var(--small-font-size);
+  margin-bottom: 4rem;
+}
+
+/* ============== LAYOUT ============== */
+
+.container {
+  max-width: 1432px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrapper {
+  padding-left: 2.85rem;
+  padding-right: 2.85rem;
+}
+
+.page-wrapper{
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+  display: grid;
+  gap: var(--mb-1);
+}
+
+main{
+  margin-top: var(--header-height);
+}
+
+/* ============== BUTTONS ============== */
+
+.button {
+  display: inline-block;
+  background-color: var(--background-color-dark);
+  color: var(--container-color);
+  padding: 0.5rem 2rem;
+  border-radius: 0.1875rem;
+  font-family: Montreal;
+}
+
+.button:hover {
+  background-color: var(--title-color-dark);
+}
+
+.button__icon {
+  margin-left: var(--mb-0-5);
+}
+
+.button--flex {
+  display: inline-flex;
+  align-items: center;
+}
+
+.round-button{
+  border-radius: 1.875rem;
+  background-color: var(--background-color-dark);
+  padding: 1.125rem 1.5rem;
+  color: var(--body-color);
+  width: 100%;
+  text-align: center;
+}
+
+.round-button:hover{
+  background-color: var(--round-button-hover);
+}
+
+/* ============== INPUT ============== */
+
+.input {
+  background-color: var(--body-color) !important;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  height: 2.5rem;
+  line-height: 1.0625rem;
+  padding: 0 1rem;
+  border-radius: 0.1875rem;
+  font-size: 0.875rem;
+  color: var(--input-color);
+}
+
+/* ============== BREAK POINT ============== */
+
+/* For large device */
+@media screen and (max-width: 992px) {
+  .container {
+    margin-left: var(--mb-1-5);
+    margin-right: var(--mb-1-5);
+  }
+
+  .button {
+    padding: 1rem 1.75rem;
+  }
+
+  .button__icon {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+}
+/* For small device */
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 2rem 0 4rem;
+  }
+
+  body {
+    margin: 0 0 var(--header-height);
+  }
+
+  .section__subtitle {
+    margin-bottom: var(--mb-3);
+  }
+}
+
+@media screen and (max-width: 576px) {
+}
+
+@media screen and (max-width: 350px) {
+  :root {
+    --big-font-size: 2.25rem;
+  }
+  .container {
+    margin-left: var(--mb-1);
+    margin-right: var(--mb-1);
+  }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ant-form-item {
+  margin-bottom: 1.5rem;
+}
+
+.ant-input,
+.ant-input-password,
+.ant-picker,
+.ant-btn {
+  box-shadow: none !important;
+}
+
+.ant-input:hover,
+.ant-input-password:hover,
+.ant-picker:hover,
+.ant-btn:hover {
+  border-color: var(--input-color) !important;
+  color: var(--input-color);
+}
+
+.ant-input:focus,
+.ant-input-password:focus,
+.ant-picker:focus,
+.ant-btn:focus {
+  border-color: var(--input-color) !important;
+  color: var(--input-color);
+}
+
+.ant-picker {
+  width: 100%;
+}
+
+.ant-btn:active {
+  color: var(--input-color);
+  border-color: var(--input-color);
+}
