@@ -1,5 +1,6 @@
 import NotFoundPage from "../components/common/desktop/appLayout/components/body/NotFoundPage"
 import CartPage from "../containers/CartPage"
+import CheckoutPage from "../containers/CheckoutPage"
 import LandingPage from "../containers/LandingPage"
 import LoginPage from "../containers/LoginPage"
 import RegisterPage from "../containers/RegisterPage"
@@ -10,7 +11,7 @@ const desktopRoutes = {
         auth: true, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'title.landingPage',
+        title: 'Trang chủ',
         routeConfig: {
             contentClass: 'landing-site'
         }
@@ -19,9 +20,9 @@ const desktopRoutes = {
         path: '/login',
         component: LoginPage,
         auth: false, // Consider if this site need userdata
-        // exact: !isMobile ? false : true,
+        // exac.t: !isMobile ? false : true,
         exact: true,
-        title: 'title.loginPage',
+        title: 'Đăng nhập',
         routeConfig: {
             contentClass: 'login-site'
         },
@@ -32,7 +33,7 @@ const desktopRoutes = {
         auth: true, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'title.registerPage',
+        title: 'Đăng kí',
         routeConfig: {
             contentClass: 'register-site'
         },
@@ -40,12 +41,23 @@ const desktopRoutes = {
     cartPage: {
         path: '/cart',
         component: CartPage,
-        auth: true, // Consider if this site need userdata
+        auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'title.cartPage',
+        title: 'Giỏ hàng',
         routeConfig: {
             contentClass: 'cart-site'
+        },
+    },
+    checkoutPage: {
+        path: '/checkout',
+        component: CheckoutPage,
+        auth: false, // Consider if this site need userdata
+        // exact: !isMobile ? false : true,
+        exact: true,
+        title: 'Thanh toán',
+        routeConfig: {
+            contentClass: 'checkout-site'
         },
     },
     // pageNotAllowed: {

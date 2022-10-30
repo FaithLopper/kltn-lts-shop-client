@@ -63,7 +63,7 @@ const SwitchDesktopRoute = ({
                     const PageComponent = route.component
                     return (
                         <div className="master-layout-desktop">
-                            <PageComponent {...props} />
+                            <PageComponent title={route.title} {...props} />
                         </div>
                     )
                 }}
@@ -104,7 +104,7 @@ const SwitchMobileRoute = ({
                 }).component || MobileInvalidPathPage
                 return (
                         <div className="master-layout-mobile">
-                            <PageComponent {...props} setShowModal={setShowModal} dispatch={dispatch}/>
+                            <PageComponent {...props} title={route.title} setShowModal={setShowModal} dispatch={dispatch}/>
                         </div>
                     )
                 }}

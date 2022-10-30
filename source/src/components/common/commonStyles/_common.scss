@@ -143,7 +143,7 @@ img {
   font-size: 1.4rem;
   font-weight: var(--font-normal);
   color: var(--title-color-dark);
-  padding-bottom: 1.7rem;
+  padding-bottom: 0.5rem;
 }
 
 .content__subtitle {
@@ -211,10 +211,28 @@ main{
   color: var(--body-color);
   width: 100%;
   text-align: center;
+  display: block;
 }
 
 .round-button:hover{
   background-color: var(--round-button-hover);
+  color: var(--body-color);
+}
+
+.round-button-white{
+  border-radius: 1.875rem;
+  border: solid 1px var(--blur-color);
+  background-color: var(--body-color);
+  padding: 1.125rem 1.5rem;
+  color: var(--title-color-dark);
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.round-button-white:hover{
+  color: var(--title-color-dark);
+  background-color: rgb(245, 245, 245);
 }
 
 /* ============== INPUT ============== */
@@ -323,14 +341,16 @@ main{
 .ant-input,
 .ant-input-password,
 .ant-picker,
-.ant-btn {
+.ant-btn,
+.ant-input-affix-wrapper {
   box-shadow: none !important;
 }
 
 .ant-input:hover,
 .ant-input-password:hover,
 .ant-picker:hover,
-.ant-btn:hover {
+.ant-btn:hover,
+.ant-input-affix-wrapper {
   border-color: var(--input-color) !important;
   color: var(--input-color);
 }
@@ -338,7 +358,8 @@ main{
 .ant-input:focus,
 .ant-input-password:focus,
 .ant-picker:focus,
-.ant-btn:focus {
+.ant-btn:focus,
+.ant-input-affix-wrapper {
   border-color: var(--input-color) !important;
   color: var(--input-color);
 }
