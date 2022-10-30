@@ -18,7 +18,11 @@ const Nav = () => {
     variants: { size: 40, quantity: 1 },
     price: `3239000`,
   };
-  const [show, setShow]= useState(false)
+  const showModal =  (show)=>{
+    const cart = document.querySelector(".cart__modal");
+    if (show) cart.classList.add("active__modal-cart");
+    else cart.classList.remove("active__modal-cart");
+  }
   return (
     <>
       <nav className="nav wrapper">
@@ -47,17 +51,17 @@ const Nav = () => {
           {/* <Link to="/cart">
             <i class="bx bx-shopping-bag nav__icon" value={3}></i>
           </Link> */}
-            <i class="bx bx-shopping-bag nav__icon" onClick={()=>setShow(!show)} value={3}></i>
+            <i class="bx bx-shopping-bag nav__icon" onClick={()=>showModal(true)} value={3}></i>
         </div>
       </nav>
 
-      <div className={!show ? "cart__modal": "cart__modal active__modal-cart"}>
+      <div className="cart__modal">
         <div className="card__modal-header">
           <span>
             <CheckCircleFilled style={{ color: "green" }} /> Đã thêm vào giỏ
             hàng
           </span>
-          <i class="uil uil-multiply cart__modal-icon"></i>
+          <i class="uil uil-multiply cart__modal-icon" onClick={()=>showModal(false)}></i>
         </div>
         <div className="cart__product grid">
           <img src={product.image} alt="" className="cart__item-image" />
