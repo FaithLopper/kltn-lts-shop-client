@@ -121,7 +121,7 @@ class MasterLayout extends Component {
   }
   
   render() {
-    const { configPageData, clientListData,Component } = this.props;
+    const { configPageData, clientListData, Component } = this.props;
     return (
       <>
         <div
