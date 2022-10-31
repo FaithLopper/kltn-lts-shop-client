@@ -372,3 +372,5 @@ main{
   color: var(--input-color);
   border-color: var(--input-color);
 }
+
+[ant-click-animating-without-extra-node='true']::after{display:none;}

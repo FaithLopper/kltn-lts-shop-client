@@ -1,38 +1,45 @@
-import { Form, Input, Row, Col } from "antd";
+import { Form, Input, Row, Col, Button } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Shipping = () => {
+const Shipping = ({product,onNext,setFormData,formRef }) => {
+  const handleSubmit= (formValue)=>{
+      setFormData(formValue,1)
+      onNext(1)
+  }
   return (
+    <Form onFinish={handleSubmit} ref={formRef}>
+
     <div className="checkout__shipping">
       <div className="checkout__part-info">
         <div className="content__title">
           Khi nào bạn muốn nhận được đơn đặt hàng của mình?
         </div>
-        <button className="big-button round-button-white">
-          <span className="big__button-title">Dự kiến Tue, Nov 8 - Tue, Nov 15 </span>
+        <Button className="big-button round-button-white">
+          <span className="big__button-title">Dự kiến giao Tue, Nov 8 - Tue, Nov 15 </span>
           <span className="big__button-value">250,000₫</span>
-        </button>
+        </Button>
 
-        <button className="big-button round-button-white">
-          <span className="big__button-title">Dự kiến Tue, Nov 7 - Tue, Nov 30 </span>
+        <Button className="big-button round-button-white">
+          <span className="big__button-title">Dự kiến giao Tue, Nov 7 - Tue, Nov 30 </span>
           <span className="big__button-value">150,000₫</span>
-        </button>
-        <div className="checkout__redirect">
-          <Link to="/register" className="round-button-white">
-            Trở thành thành viên
-          </Link>
-          <Link to="/login" className="round-button-white">
-            Đăng nhập
-          </Link>
-        </div>
+        </Button>
       </div>
 
       <div className="checkout__part-info">
-        <button className="round-button">Tiếp tục</button>
+        <div className="content__title_sub">
+        Dự kiến giao Tue, Nov 8 - Tue, Nov 15 
+        </div>
+        <div className="checkout__shipping-product grid">
+            {product.map(({image}) =>   <img src={image} alt="" className="shipping__image" />)}
+        </div>
+      </div>
+      <div className="checkout__part-info">
+        <button className="round-button" type="submit">Tiếp tục</button>
       </div>
     </div>
+    </Form>
   );
 };
 

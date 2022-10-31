@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const data = [
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DQ7658_300?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "https://secure-images.nike.com/is/image/DotCom/DH0956_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Force 1 '07 LV8`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -19,7 +19,7 @@ const data = [
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DQ7658_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "https://secure-images.nike.com/is/image/DotCom/DJ9946_100?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Max Flyknit Racer`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -30,7 +30,7 @@ const data = [
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/BQ5453_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Force 1 '07 LV8`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -41,7 +41,7 @@ const data = [
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DJ6106_300?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Court Borough Low 2`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",

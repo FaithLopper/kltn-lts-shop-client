@@ -33,11 +33,12 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 0.3rem;
+  padding: 0 4.8px;
 }
 
 .nav__item:hover {
   border-bottom: solid 0.125rem var(--title-color-dark);
+  // padding-bottom: -0.125rem;
 }
 .nav__action {
   display: flex;
