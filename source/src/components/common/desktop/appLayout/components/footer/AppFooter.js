@@ -9,21 +9,18 @@ import FooterListItemsBox from "./footerListItemsBox";
 
 const AppFooter = (props) => {
   const { FooterMenu } = props;
-  const { contact, about, support, product } = FooterMenu;
+  const { product } = FooterMenu;
 
   return (
     <footer className="footer">
       <div className="footer__container container">
-        <div class="container">
+        <div class="container_footer">
           <div class="findstore">
             <img src={storeLogo} alt="store-svg" />
             <button className="find-store-btn">FIND STORE</button>
           </div>
           <FooterListItemsBox item={product} />
-          <FooterListItemsBox item={about} />
-          <FooterListItemsBox item={support} />
-          <FooterListItemsBox item={contact} />
-          <div class="social px-10">
+          {/* <div class="social px-10">
             <h4>ANANAS SOCIAL</h4>
             <div className="social-link">
               <a href="https://facebook.com">
@@ -36,16 +33,7 @@ const AppFooter = (props) => {
                 <img src={YtLogo} alt="yt-svg" />
               </a>
             </div>
-          </div>
-          <div class="mail px-10">
-            <h4>ĐĂNG KÝ NHẬN MAIL</h4>
-            <div className="inputRecieveMail">
-              <input type="email" id="inputRecieveMail" />
-              <button>
-                <img src={ArrowRight} alt="arrow-right" />
-              </button>
-            </div>
-          </div>
+          </div> */}
           <div class="copyright px-10">
             <h5>Copyright © 2022 Long Term Shop. All rights reserved.</h5>
           </div>
