@@ -3,11 +3,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Shipping = ({product,onNext,setFormData,formRef }) => {
+const Shipping = ({product,onNext,setFormData,formRef,shippingOption,scrollTop }) => {
   const handleSubmit= (formValue)=>{
-      setFormData(formValue,1)
+      setFormData( {
+        arrives: "Dự kiến giao Tue, Nov 8 - Tue, Nov 15",
+        shippCost: 250000,
+        shippType: "Shipment One",
+      },1)
       onNext(1)
+      scrollTop()
   }
+  const {arrives,shippCost,shippType}= shippingOption
   return (
     <Form onFinish={handleSubmit} ref={formRef}>
 

@@ -1,13 +1,44 @@
-import { Form, Input, Row, Col, Button } from "antd";
+import { Form, Input, Row, Col, Button, AutoComplete } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Option } from "antd/lib/mentions";
 
-const Delivery = ({ formRef,onNext,setFormData }) => {
-  const handleSubmit= (formValue)=>{
-      setFormData(formValue,0)
-      onNext(0)
-  }
+const Delivery = ({ formRef, onNext, setFormData, scrollTop }) => {
+  const address = [
+    {
+      customerName: "Nhà riêng",
+      phone: "0946220172",
+      address:
+        "1 Đ. Võ Văn Ngân, Linh Chiểu, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh",
+    },
+    {
+      customerName: "Cơ quan",
+      phone: "0946220172",
+      address:
+        "135 Đ. Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
+    },
+    {
+      customerName: "Trường học",
+      phone: "0946220172",
+      address:
+        "215/145 Nguyễn Xí, Phường 13, Quận Bình Thạnh, Thành phố Hồ chí Minh",
+    },
+  ];
+  const options = address.map(({ customerName,phone,address }) => ({
+    value: address,
+    label: (
+      <div className="delivery__address">
+        <div className="delivery__addresss-address">{address}</div>
+        <div className="delivery__addresss-info">{customerName} | {phone}</div>
+      </div>
+    )
+  }))
+  const handleSubmit = (formValue) => {
+    setFormData(formValue, 0);
+    onNext(0);
+    scrollTop();
+  };
   return (
     <Form onFinish={handleSubmit} ref={formRef}>
       <div class="checkout__delivery">
@@ -75,19 +106,23 @@ const Delivery = ({ formRef,onNext,setFormData }) => {
             rules={[
               {
                 type: "text",
-                message: "The input is not valid address!",
+                message: "The input is not select address!",
               },
               {
-                required: true,
-                message: "Please input your address!",
+                required: false,
+                message: "Please input select address!",
               },
             ]}
           >
-            <Input
+            <AutoComplete
+              options={options}
+            >
+                <Input
               type="text"
               className="checkout__input input"
               placeholder="Địa chỉ số 1"
             />
+            </AutoComplete>
           </Form.Item>
 
           <Form.Item
@@ -95,19 +130,25 @@ const Delivery = ({ formRef,onNext,setFormData }) => {
             rules={[
               {
                 type: "text",
-                message: "The input is not valid address!",
+                message: "The input is not select address!",
               },
               {
-                message: "Please input your address!",
+                required: false,
+                message: "Please input select address!",
               },
             ]}
           >
-            <Input
+            <AutoComplete
+              options={options}
+            >
+                <Input
               type="text"
               className="checkout__input input"
               placeholder="Địa chỉ số 2"
             />
+            </AutoComplete>
           </Form.Item>
+
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -124,7 +165,7 @@ const Delivery = ({ formRef,onNext,setFormData }) => {
                 ]}
               >
                 <Input
-                  type='number'
+                  type="number"
                   maxLength={6}
                   className="checkout__input input"
                   placeholder="Mã bưu điện"
@@ -218,7 +259,9 @@ const Delivery = ({ formRef,onNext,setFormData }) => {
         </div>
 
         <div className="checkout__part-info">
-          <button className="round-button" type="submit" >Tiếp tục</button>
+          <button className="round-button" type="submit">
+            Tiếp tục
+          </button>
         </div>
       </div>
     </Form>

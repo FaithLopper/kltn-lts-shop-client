@@ -4,6 +4,7 @@ import CheckoutPage from "../containers/CheckoutPage"
 import LandingPage from "../containers/LandingPage"
 import LoginPage from "../containers/LoginPage"
 import RegisterPage from "../containers/RegisterPage"
+import SummaryPage from "../containers/SummaryPage"
 const desktopRoutes = {
     root: {
         path: '/',
@@ -58,6 +59,17 @@ const desktopRoutes = {
         title: 'Thanh toán',
         routeConfig: {
             contentClass: 'checkout-site'
+        },
+    },
+    summaryPage: {
+        path: '/summary',
+        component: SummaryPage,
+        auth: false, // Consider if this site need userdata
+        // exact: !isMobile ? false : true,
+        exact: true,
+        title: 'Thanh toán',
+        routeConfig: {
+            contentClass: 'summary-site'
         },
     },
     // pageNotAllowed: {

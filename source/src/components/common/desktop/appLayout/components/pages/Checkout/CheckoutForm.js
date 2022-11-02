@@ -2,11 +2,13 @@ import { QuestionCircleFilled } from "@ant-design/icons";
 import { Button, Form } from "antd";
 import React from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Utils from "../../../../../../../utils";
 import Billing from "./Billing";
 import Delivery from "./Delivery";
+import Payment from "./Payment";
 import Shipping from "./Shipping";
 
 const data = [
@@ -78,6 +80,19 @@ const data = [
   },
 ];
 
+const shippingOption = [
+  {
+    arrives: "Dự kiến giao Tue, Nov 8 - Tue, Nov 15",
+    shippCost: 250000,
+    shippType: "Shipment One",
+  },
+  {
+    arrives: "Dự kiến giao Tue, Nov 8 - Tue, Nov 30",
+    shippCost: 150000,
+    shippType: "Shipment One",
+  },
+];
+
 const CheckoutForm = () => {
   const deliveryRef = useRef();
   const shippingRef = useRef();
@@ -96,28 +111,42 @@ const CheckoutForm = () => {
     billing: {},
     payment: {},
   });
+  const { delivery, shipping, billing, payment } = form;
   const [product, setProduct] = useState(data);
 
+  useEffect(() => {
+    if (form.billing.delivery) {
+      setForm({
+        ...form,
+        billing: form.delivery,
+      });
+    } else
+      setForm({
+        ...form,
+        billing: form.billing,
+      });
+  }, [form.billing]);
   const onNext = (current) => {
     switch (current) {
       case 0:
         setActive({
           ...active,
-          delivery: { ...active.delivery, active: false },
+          delivery: { isEdited: true, active: false },
           shipping: { ...active.shipping, active: true },
         });
+
         break;
       case 1:
         setActive({
           ...active,
-          shipping: { ...active.shipping, active: false },
+          shipping: { isEdited: true, active: false },
           billing: { ...active.billing, active: true },
         });
         break;
       case 2:
         setActive({
           ...active,
-          billing: { ...active.billing, active: false },
+          billing: { isEdited: true, active: false },
           payment: { ...active.payment, active: true },
         });
         break;
@@ -131,26 +160,63 @@ const CheckoutForm = () => {
       case 0:
         setForm({
           ...form,
-          delivery:data
-        })
+          delivery: data,
+        });
         break;
       case 1:
         setForm({
           ...form,
-          shipping:data
-        })
+          shipping: data,
+        });
         break;
       case 2:
         setForm({
           ...form,
-          billing:data
-        })
+          billing: data,
+        });
         break;
       default:
         break;
     }
   };
-  console.log(form)
+
+  const scrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const onEdit = (current) => {
+    switch (current) {
+      case 0:
+        setActive({
+          delivery: { active: true, isEdited: false },
+          shipping: { ...active.shipping, active: false },
+          billing: { ...active.billing, active: false },
+          payment: { ...active.payment, active: false },
+        });
+
+        break;
+      case 1:
+        setActive({
+          shipping: { active: true, isEdited: false },
+          delivery: { ...active.delivery, active: false },
+          billing: { ...active.billing, active: false },
+          payment: { ...active.payment, active: false },
+        });
+        break;
+      case 2:
+        setActive({
+          billing: { active: true, isEdited: false },
+          delivery: { ...active.delivery, active: false },
+          shipping: { ...active.shipping, active: false },
+          payment: { ...active.payment, active: false },
+        });
+        break;
+      default:
+        break;
+    }
+    scrollTop();
+  };
+  console.log(active);
   return (
     <section className="checkout section">
       <div className="checkout__container page-wrapper grid">
@@ -161,6 +227,7 @@ const CheckoutForm = () => {
                 formRef={deliveryRef}
                 onNext={onNext}
                 setFormData={setFormData}
+                scrollTop={scrollTop}
               />
             )}
             {active.shipping.active && (
@@ -169,6 +236,8 @@ const CheckoutForm = () => {
                 formRef={shippingRef}
                 setFormData={setFormData}
                 onNext={onNext}
+                shippingOption={shippingOption}
+                scrollTop={scrollTop}
               />
             )}
             {active.billing.active && (
@@ -176,20 +245,171 @@ const CheckoutForm = () => {
                 formRefa={billingRef}
                 onNext={onNext}
                 setFormData={setFormData}
+                scrollTop={scrollTop}
               />
             )}
-            {/* <Delivery formRef={deliveryRef}/>
-          <Shipping product={product} formRef={shippingRef} />
-          <Billing formRefa={billingRef}/> */}
+
+            {active.payment.active && (
+              <Payment
+                formRefa={billingRef}
+                onNext={onNext}
+                setFormData={setFormData}
+                scrollTop={scrollTop}
+              />
+            )}
           </div>
           <div className="checkout__process">
             <div className="checkout__process-item">
               <div className="checkout__process-header">
-                <div className="process__title">Delivery</div>
-                <Button className="process__button round-button-white">
-                  Sửa
-                </Button>
+                <div
+                  className={
+                    active.delivery.active
+                      ? "content__title active-title"
+                      : "content__title"
+                  }
+                >
+                  Vận chuyển
+                </div>
+                {active.delivery.isEdited ? (
+                  <Button
+                    className="process__button round-button-white"
+                    onClick={() => onEdit(0)}
+                  >
+                    Sửa
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </div>
+              {active.delivery.isEdited ? (
+                <div
+                  className={
+                    active.delivery.active
+                      ? "checkout__process-body active-title"
+                      : "checkout__process-body"
+                  }
+                >
+                  <span>
+                    {delivery.firstName} {delivery.lastName}
+                  </span>
+                  <span>{delivery.address1}</span>
+                  <span>{delivery.email}</span>
+                  <span>{delivery.phone}</span>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className="checkout__process-item">
+              <div className="checkout__process-header">
+                <div
+                  className={
+                    active.shipping.active
+                      ? "content__title active-title"
+                      : "content__title"
+                  }
+                >
+                  Giao hàng
+                </div>
+                {active.shipping.isEdited ? (
+                  <Button
+                    className="process__button round-button-white"
+                    onClick={() => onEdit(1)}
+                  >
+                    Sửa
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </div>
+              {active.shipping.isEdited ? (
+                <div
+                  className={
+                    active.delivery.active
+                      ? "checkout__process-body active-title"
+                      : "checkout__process-body"
+                  }
+                >
+                  <span>{Utils.formatMoney(shipping.shippCost) || 0}</span>
+                  <span>{shipping.shippType}</span>
+                  <span>{shipping.arrives}</span>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className="checkout__process-item">
+              <div className="checkout__process-header">
+                <div
+                  className={
+                    active.billing.active
+                      ? "content__title active-title"
+                      : "content__title"
+                  }
+                >
+                  Hoá đơn
+                </div>
+                {active.billing.isEdited ? (
+                  <Button className="process__button round-button-white">
+                    Sửa
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </div>
+              {active.billing.isEdited ? (
+                <div
+                  className={
+                    active.delivery.active
+                      ? "checkout__process-body active-title"
+                      : "checkout__process-body"
+                  }
+                >
+                  <span>
+                    {delivery.firstName} {delivery.lastName}
+                  </span>
+                  <span>{delivery.address1}</span>
+                  <span>{delivery.phone}</span>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className="checkout__process-item">
+              <div className="checkout__process-header">
+                <div
+                  className={
+                    active.payment.active
+                      ? "content__title active-title"
+                      : "content__title"
+                  }
+                >
+                  Thanh toán
+                </div>
+                {active.payment.isEdited ? (
+                  <Button className="process__button round-button-white">
+                    Sửa
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </div>
+              {active.payment.isEdited ? (
+                <div
+                  className={
+                    active.delivery.active
+                      ? "checkout__process-body active-title"
+                      : "checkout__process-body"
+                  }
+                >
+                  <span>{payment.type}</span>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
@@ -200,6 +420,7 @@ const CheckoutForm = () => {
               <div className="summary__name" onClick={() => onNext(0)}>
                 Giá trị
                 <QuestionCircleFilled
+                  className="summary__icon"
                   style={{ fontSize: "14px", cursor: "pointer" }}
                 />
               </div>
