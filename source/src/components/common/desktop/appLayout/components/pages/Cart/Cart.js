@@ -1,6 +1,10 @@
 import React from "react";
-import { Select } from "antd";
-import { QuestionCircleFilled } from "@ant-design/icons";
+import { Button, Select } from "antd";
+import {
+  QuestionCircleFilled,
+  WarningOutlined,
+  WarningTwoTone,
+} from "@ant-design/icons";
 import Utils from "../../../../../../../utils";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -8,18 +12,18 @@ import { useEffect } from "react";
 const data = [
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DQ7658_300?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "https://secure-images.nike.com/is/image/DotCom/DH0956_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Force 1 '07 LV8`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
     variants: { size: 40, quantity: 1 },
     price: 3239000,
-    totalPrice:3239000,
+    totalPrice: 3239000,
     quantity: 1,
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DQ7658_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "https://secure-images.nike.com/is/image/DotCom/DJ9946_100?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Max Flyknit Racer`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -30,7 +34,7 @@ const data = [
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/BQ5453_100?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Air Force 1 '07 LV8`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -41,7 +45,7 @@ const data = [
   },
   {
     image:
-      "https://secure-images.nike.com/is/image/DotCom/DJ6106_300?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",
+      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
     name: `Nike Court Borough Low 2`,
     productCategory: `Men's Shoes`,
     description: "Malachite/Sail/White/Blue Jay",
@@ -53,6 +57,8 @@ const data = [
 ];
 const Cart = () => {
   const [product, setProduct] = useState(data);
+  const [isDelete, setDetele] = useState(null);
+  const [productId, setProductId] = useState(null);
   const [total, setTotal] = useState(() => {
     let total = 0;
     product.map((item) => {
@@ -61,20 +67,40 @@ const Cart = () => {
     return total;
   });
   const deleteProduct = (productId) => {
-    setProduct(
-      product.filter((item, _index) => {
-        if (_index !== productId) {
-          return item;
-        }
-        return false;
-      })
-    );
+    setProductId(productId);
+    showCartModal(true);
   };
+
+  useEffect(() => {
+    if (isDelete === true) {
+      setProduct(
+        product.filter((item, _index) => {
+          if (_index !== productId) {
+            return item;
+          }
+          return false;
+        })
+      );
+      showCartModal(false);
+    } else if (isDelete === false) {
+      showCartModal(false);
+    }
+  }, isDelete);
+
+  const showCartModal = (show) => {
+    const cart = document.querySelector(".section__modal");
+    if (show) cart.classList.add("active-modal-cart");
+    else {
+      cart.classList.remove("active-modal-cart");
+      setDetele(null)
+    }
+  };
+
   useEffect(() => {
     setTotal(() => {
       let total = 0;
       product.map((item) => {
-        total = total + item.price*item.quantity;
+        total = total + item.price * item.quantity;
       });
       return total;
     });
@@ -83,7 +109,11 @@ const Cart = () => {
     setProduct(
       product.map((item, _index) => {
         if (_index === productId) {
-          return { ...item, quantity: quantity,totalPrice:item.price*quantity };
+          return {
+            ...item,
+            quantity: quantity,
+            totalPrice: item.price * quantity,
+          };
         }
         return item;
       })
@@ -188,6 +218,30 @@ const Cart = () => {
             <Link to="/checkout" className="round-button">
               Thanh toán
             </Link>
+          </div>
+        </div>
+      </div>
+      <div className="section__modal">
+        <div className="modal__content">
+          <div className="modal__header">
+            <WarningTwoTone
+              className="modal__icon"
+              twoToneColor="rgb(251, 194, 25)"
+            />
+            Thông báo
+          </div>
+
+          <div className="modal__body">Xoá sản phẩm khỏi giỏ hàng ?</div>
+          <div className="modal__action">
+            <Button className="round-button" onClick={() => setDetele(true)}>
+              Xoá
+            </Button>
+            <Button
+              className="round-button-white"
+              onClick={() => setDetele(false)}
+            >
+              Huỷ
+            </Button>
           </div>
         </div>
       </div>
