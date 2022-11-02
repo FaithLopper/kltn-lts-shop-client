@@ -3,7 +3,7 @@ import MasterLayout from "../components/common/desktop/appLayout/MasterLayout";
 import MobileMasterLayout from "../components/common/mobile/appLayout/MobileMasterLayout";
 import Utils from "../utils";
 import { useTranslation, withTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Product from "../components/common/desktop/appLayout/components/body/product/Product";
 import New from "../components/common/desktop/appLayout/components/body/new/New";
 import Home from "../components/common/desktop/appLayout/components/body/home/Home";
@@ -11,12 +11,39 @@ import Home from "../components/common/desktop/appLayout/components/body/home/Ho
 import ProductMobile from "../components/common/mobile/appLayout/components/body/product/Product";
 import NewMobile from "../components/common/mobile/appLayout/components/body/new/New";
 import HomeMobile from "../components/common/mobile/appLayout/components/body/home/Home";
+
+import { getAllCategoryProduct } from "../actions/appCommon";
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
 
 const LandingPage = (props) => {
   const { t, title } = props;
+  const dispatch = useDispatch();
+
+  const getProductCategory = () => {
+    const params = {
+      // kind: 2,
+      // status: 1,
+    };
+
+    // dispatch(showFullScreenLoading())
+    dispatch(
+      getAllCategoryProduct({
+        params,
+        onCompleted: (data) => {
+          console.log("on complete", data);
+        },
+        onError: (data) => {
+          console.log("on error", data);
+          // dispatch(hideFullScreenLoading())
+        },
+      })
+    );
+  };
+
   useEffect(() => {
+    console.log('vao useEffect')
+    getProductCategory()
     if (title) document.title = title;
   }, []);
   const Component = () => (
@@ -26,7 +53,6 @@ const LandingPage = (props) => {
       <New />
     </>
   );
-
 
   const ComponentMobile = () => (
     <>

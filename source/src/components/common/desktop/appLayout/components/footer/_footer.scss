@@ -1,5 +1,5 @@
 .footer {
-  height: 522px;
+  height: 300px;
   background-color: var(--background-color-dark);
   color: #fff;
   padding: 4.375rem 0rem 3.75rem 0rem;
@@ -9,7 +9,7 @@
   .container_footer {
     display: grid;
     grid-template-columns: 26.875rem 15.625rem 15.625rem 15.625rem 15.625rem;
-    grid-template-rows: 10rem 8.75rem 6.25rem;
+    grid-template-rows: 160px 140px 100px;
     gap: 0rem 0rem;
     grid-auto-flow: row;
     grid-template-areas:

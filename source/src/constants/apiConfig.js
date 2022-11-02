@@ -1,29 +1,26 @@
 const baseHeader = {
-    'Content-Type': 'application/json',
-}
+  "Content-Type": "application/json",
+};
 
 const multipartFormHeader = {
-    'Content-Type': 'multipart/form-data',
-}
+  "Content-Type": "multipart/form-data",
+};
 
 const apiConfig = {
-    client: {
-        getClientInfo: {
-            path: 'v1/product/client-get',
-            method: 'GET',
-            headers: baseHeader,
-        },
-        getClientList: {
-            path: 'v1/product/client-list',
-            method: 'GET',
-            headers: baseHeader,
-        },
-        createClient: {
-            path: 'v1/ticket/client-create',
-            method: 'POST',
-            headers: baseHeader,
-        }
-    }
-}
+  productCategory: {
+    getAll: {
+      path: "v1/product-category/get-all",
+      method: "GET",
+      headers: baseHeader,
+    },
+  },
+  product: {
+    getListByCategory: {
+        path: "v1/product/get-by-category",
+        method: "GET",
+        headers: baseHeader,
+      },
+  }
+};
 
-export default apiConfig
+export default apiConfig;
