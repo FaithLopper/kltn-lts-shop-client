@@ -1,4 +1,5 @@
 import NotFoundPage from "../components/common/desktop/appLayout/components/body/NotFoundPage"
+import LoadingContainer from "../components/common/desktop/appLayout/components/common/components/LoadingContainer"
 import CartPage from "../containers/CartPage"
 import CheckoutPage from "../containers/CheckoutPage"
 import LandingPage from "../containers/LandingPage"
@@ -8,7 +9,7 @@ import SummaryPage from "../containers/SummaryPage"
 const desktopRoutes = {
     root: {
         path: '/',
-        component: LandingPage,
+        component:LandingPage,
         auth: true, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
