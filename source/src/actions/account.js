@@ -10,11 +10,13 @@ export const actionTypes = {
     LOGOUT: defineAction('LOGOUT'),
     GET_PROFILE: defineAction('GET_PROFILE'),
     UPDATE_PROFILE: defineAction('UPDATE_PROFILE'),
-    CLEAR_PROFILE: defineAction('CLEAR_PROFILE')
+    CLEAR_PROFILE: defineAction('CLEAR_PROFILE'),
+    REGISTER: defineAction('REGISTER'),
 }
 
 export const actions = {
     login: createActionWithLoading(actionTypes.LOGIN),
+    register: createAction(actionTypes.REGISTER),
     logout: createAction(actionTypes.LOGOUT),
     updateProfile: createActionWithLoading(actionTypes.UPDATE_PROFILE),
     getProfile: createAction(actionTypes.GET_PROFILE),

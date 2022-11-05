@@ -189,6 +189,7 @@ main{
   padding: 0.5rem 2rem;
   border-radius: 0.1875rem;
   font-family: Montreal;
+  height: 3rem;
 }
 
 .button:hover {
@@ -263,7 +264,8 @@ main{
 .ant-picker,
 .ant-btn,
 .ant-input-affix-wrapper,
-.ant-select-selector {
+.ant-select-selector,
+.ant-radio-button {
   box-shadow: none !important;
 }
 
@@ -272,7 +274,8 @@ main{
 .ant-picker:hover,
 .ant-btn:hover,
 .ant-input-affix-wrapper,
-.ant-select-selector:hover {
+.ant-select-selector:hover,
+.ant-radio-button:hover {
   border-color: var(--input-color) !important;
   color: var(--input-color);
 }
@@ -282,7 +285,8 @@ main{
 .ant-picker:focus,
 .ant-btn:focus,
 .ant-input-affix-wrapper,
-.ant-select-selector:focus {
+.ant-select-selector:focus,
+.ant-radio-button:focus {
   border-color: var(--input-color) !important;
   color: var(--input-color);
 }
@@ -292,7 +296,8 @@ main{
 }
 
 .ant-btn:active,
-.ant-select-selector:active {
+.ant-select-selector:active,
+.ant-radio-button:active {
   color: var(--input-color);
   border-color: var(--input-color);
 }
