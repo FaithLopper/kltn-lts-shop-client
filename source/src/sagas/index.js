@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
 import categoryProduct from './categoryProduct'
+import account from './account'
 // import landing from "./landing"
 const sagas = [
     // ...landing,
-    ...categoryProduct
+    ...categoryProduct,
+    ...account,
 ];
 
 function* rootSaga() {

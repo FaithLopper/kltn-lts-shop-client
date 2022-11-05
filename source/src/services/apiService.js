@@ -11,7 +11,7 @@ const sendRequest = async (options, params = {}, token) => {
   // const errorPath = window.location.protocol + '//' + window.location.host + '/error';
   userData = getObjectData(USER_DATA);
   userToken = token || userData.token;
-  if (userToken && options.auth) {
+  if (userToken) {
     options.headers.Authorization = `Bearer ${userToken}`;
   }
 

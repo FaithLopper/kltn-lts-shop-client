@@ -8,9 +8,6 @@ import StoreLogo from "../../../../../../assets/svg/logo-2000.svg";
 import FooterListItemsBox from "./footerListItemsBox";
 
 const AppFooter = (props) => {
-  const { FooterMenu } = props;
-  const { product } = FooterMenu;
-
   return (
     <footer className="footer">
       <div className="footer__container container">

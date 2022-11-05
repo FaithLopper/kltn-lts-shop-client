@@ -10,7 +10,7 @@ const desktopRoutes = {
     root: {
         path: '/',
         component:LandingPage,
-        auth: true, // Consider if this site need userdata
+        auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
         title: 'Trang chủ',
@@ -21,7 +21,7 @@ const desktopRoutes = {
     loginPage: {
         path: '/login',
         component: LoginPage,
-        auth: false, // Consider if this site need userdata
+        auth: true, // Consider if this site need userdata
         // exac.t: !isMobile ? false : true,
         exact: true,
         title: 'Đăng nhập',
@@ -82,7 +82,7 @@ const desktopRoutes = {
     // // put this at last
     notFound: {
         component: NotFoundPage,
-        auth: null,
+        auth: false,
         title: 'title.notFoundPage',
     },
 }

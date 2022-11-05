@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../../../../../assets/svg/logo-500.svg";
 import { Form, Input, Checkbox, Row, Col } from "antd";
-const LoginForm = () => {
-  const handleSubmit = (values) => {};
+const LoginForm = ({onLogin,loading}) => {
+  const handleSubmit = (formValue) => {
+    onLogin(formValue)
+  };
   return (
     <section className="login section" id="login">
       <div className="login__container">
@@ -13,10 +15,10 @@ const LoginForm = () => {
         </div>
         <Form onSubmit={handleSubmit} className="login__form">
           <Form.Item
-            name="email"
+            name="username"
             rules={[
               {
-                type: "email",
+                type: "text",
                 message: "The input is not valid E-mail!",
               },
               {
@@ -26,10 +28,10 @@ const LoginForm = () => {
             ]}
           >
             <Input
-              type="email"
-              name="email"
+              type="text"
+              name="username"
               className="login__input input"
-              placeholder="Email"
+              placeholder="Tên đăng nhập"
             />
           </Form.Item>
 

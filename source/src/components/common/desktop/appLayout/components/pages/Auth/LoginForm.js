@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../../../../../assets/svg/logo-500.svg";
-import { Form, Input, Checkbox, Row, Col } from "antd";
-const LoginForm = () => {
-  const handleSubmit = (values) => {};
+import { Form, Input, Checkbox, Row, Col, Button } from "antd";
+const LoginForm = (props) => {
+  const { onLogin,loading } = props;
+  const handleSubmit = (values) => {
+    onLogin(values);
+  };
   return (
     <section className="login section" id="login">
       <div className="login__container">
@@ -11,25 +14,25 @@ const LoginForm = () => {
         <div className="login__title">
           long term support <br /> your account
         </div>
-        <Form onSubmit={handleSubmit} className="login__form">
+        <Form onFinish={handleSubmit} className="login__form">
           <Form.Item
-            name="email"
+            name="username"
             rules={[
               {
-                type: "email",
-                message: "The input is not valid E-mail!",
+                type: "text",
+                message: "The input is not valid user name!",
               },
               {
                 required: true,
-                message: "Please input your E-mail!",
+                message: "Please input your user name!",
               },
             ]}
           >
             <Input
-              type="email"
-              name="email"
+              type="text"
+              name="username"
               className="login__input input"
-              placeholder="Email"
+              placeholder="Tên đăng nhập"
             />
           </Form.Item>
 
@@ -56,21 +59,25 @@ const LoginForm = () => {
 
           <Form.Item name="keep-login">
             <div className="login__option">
-                <input
-                  type="checkbox"
-                  id="keep-login"
-                  className="login__checkbox"
-                />
+              <input
+                type="checkbox"
+                id="keep-login"
+                className="login__checkbox"
+              />
               <label for="keep-login"> Giữ đăng nhập</label>
               <Link to="#">Quên mật khẩu</Link>
             </div>
           </Form.Item>
           <div className="login__policy">
-            Bằng cách đăng nhập, bạn đồng ý với  {" "}
-            <Link to="#">Chính sách bảo mật</Link> và {" "}
+            Bằng cách đăng nhập, bạn đồng ý với{" "}
+            <Link to="#">Chính sách bảo mật</Link> và{" "}
             <Link to="#">Điều khoản sử dụng</Link> của cửa hàng
           </div>
-          <button type="submit" className="login__button button">SIGN IN</button>
+          <Form.Item name="keep-login">
+            <Button htmlType="submit" className="login__button button" loading={loading}>
+              SIGN IN
+            </Button>
+          </Form.Item>
           <div className="login__register">
             Chưa có tài khoản? <Link to="/register">Đăng kí</Link>
           </div>

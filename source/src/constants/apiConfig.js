@@ -16,11 +16,28 @@ const apiConfig = {
   },
   product: {
     getListByCategory: {
-        path: "v1/product/get-by-category",
-        method: "GET",
-        headers: baseHeader,
-      },
-  }
+      path: "v1/product/get-by-category",
+      method: "GET",
+      headers: baseHeader,
+    },
+  },
+  account: {
+    login: {
+      path: "v1/account/login",
+      method: "POST",
+      headers: baseHeader,
+    },
+    register: {
+      path: "v1/customer/register",
+      method: "POST",
+      headers: baseHeader,
+    },
+    getProfile: {
+      path: "v1/customer/profile",
+      method: "GET",
+      headers: baseHeader,
+    },
+  },
 };
 
 export default apiConfig;

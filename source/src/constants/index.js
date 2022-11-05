@@ -92,8 +92,9 @@ export const OrdersStates = [
 ]
 
 export const UserTypes = {
+    ADMIN: 1,
+    CUSTOMER: 2,
     EMPLOYEE: 3,
-    COLLABORATOR: 4,
 }
 
 export const UserStatus = [
