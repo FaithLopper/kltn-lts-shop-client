@@ -19,7 +19,6 @@ const initialState = {
     clientId: null,
     currentScrollY: null,
     isNotGetInitialData: false,
-    categoryProduct: null,
 }
 
 const appCommon = createSlice({
@@ -88,10 +87,6 @@ const appCommon = createSlice({
         {
             state.isNotGetInitialData = action.payload
         },
-        setCategoryProduct(state,action)
-        {
-            state.categoryProduct = action.payload
-        }
     },
 })
 
@@ -108,7 +103,6 @@ export const {
     setClientId,
     setCurrentScrollY,
     setIsNotGetInitialData,
-    setCategoryProduct,
 } =
     appCommon.actions
 export default appCommon.reducer

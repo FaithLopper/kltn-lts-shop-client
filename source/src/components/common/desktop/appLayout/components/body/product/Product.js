@@ -1,13 +1,21 @@
-import React from "react";
-import ProductCategory from "./ProductCategory";
-import { productCateData } from "./sample";
-const Product = () => {
+import React, { useEffect, useState } from "react";
+import ParentProduct from "./ParentProduct";
+
+const Product = (props) => {
+  const { data } = props;
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    setProductList(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
     <section className="product section" id="product">
-      <h2 className="section__title">DANH MỤC MUA HÀNG</h2>
+      <h2 className="section__title">SẢN PHẨM</h2>
       <div className="product__container container">
-        {productCateData.map((p, index) => (
-          <ProductCategory data={p} key={index} />
+        {productList.map((p, index) => (
+          <ParentProduct data={p} key={index} />
         ))}
       </div>
     </section>

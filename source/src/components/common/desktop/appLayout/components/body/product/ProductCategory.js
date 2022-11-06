@@ -3,6 +3,7 @@ import ProductItem from "./ProductItem";
 
 const ProductCategory = ({ ...props }) => {
   const { data } = props;
+  console.log(data)
   return (
     <div className="product__category">
       <div
@@ -16,9 +17,9 @@ const ProductCategory = ({ ...props }) => {
         <div className="category__title">{data?.categoryName}</div>
       </div>
       <div className="product_grid_container">
-        {data?.items.map((ite, index) => (
+        {/* {data?.items.map((ite, index) => (
           <ProductItem key={index} data={ite} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

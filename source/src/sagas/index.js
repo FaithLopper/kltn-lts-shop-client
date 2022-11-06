@@ -1,13 +1,15 @@
-import { all } from 'redux-saga/effects';
-import categoryProduct from './categoryProduct'
+import { all } from "redux-saga/effects";
+import category from "./category";
+import product from "./product";
 // import landing from "./landing"
 const sagas = [
-    // ...landing,
-    ...categoryProduct
+  // ...landing,
+  ...category,
+  ...product,
 ];
 
 function* rootSaga() {
-    yield all(sagas);
+  yield all(sagas);
 }
 
 export default rootSaga;
