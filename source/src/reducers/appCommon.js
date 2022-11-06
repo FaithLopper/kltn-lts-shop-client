@@ -19,7 +19,6 @@ const initialState = {
     clientId: null,
     currentScrollY: null,
     isNotGetInitialData: false,
-    categoryProduct: null,
     new:null,
 }
 
@@ -89,10 +88,6 @@ const appCommon = createSlice({
         {
             state.isNotGetInitialData = action.payload
         },
-        setCategoryProduct(state,action)
-        {
-            state.categoryProduct = action.payload
-        },
         setNew(state,action)
         {
             state.new = action.payload
@@ -113,7 +108,6 @@ export const {
     setClientId,
     setCurrentScrollY,
     setIsNotGetInitialData,
-    setCategoryProduct,
     setNew,
 } =
     appCommon.actions

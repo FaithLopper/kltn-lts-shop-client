@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MasterLayout from "../components/common/desktop/appLayout/MasterLayout";
 import MobileMasterLayout from "../components/common/mobile/appLayout/MobileMasterLayout";
 import Utils from "../utils";
 import { useTranslation, withTranslation } from "react-i18next";
 import { connect, useDispatch, useSelector } from "react-redux";
-import Product from "../components/common/desktop/appLayout/components/body/product/Product";
+import ParentCategory from "../components/common/desktop/appLayout/components/body/category/ParentCategory";
 import New from "../components/common/desktop/appLayout/components/body/new/New";
 import Home from "../components/common/desktop/appLayout/components/body/home/Home";
 
@@ -12,7 +12,9 @@ import ProductMobile from "../components/common/mobile/appLayout/components/body
 import NewMobile from "../components/common/mobile/appLayout/components/body/new/New";
 import HomeMobile from "../components/common/mobile/appLayout/components/body/home/Home";
 
-import { getAllCategoryProduct, getAllNew } from "../actions/appCommon";
+import { getCategory } from "../actions/category";
+import Category from "../components/common/desktop/appLayout/components/body/category/Category";
+import { getAllNew } from "../actions/appCommon";
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
 
@@ -20,21 +22,24 @@ const LandingPage = (props) => {
   const { t, title } = props;
   const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(false);
+  const [categoryData, setCategoryData] = useState([]);
+
   const getProductCategory = () => {
     const params = {
       // kind: 2,
       // status: 1,
     };
-
-    // dispatch(showFullScreenLoading())
     dispatch(
-      getAllCategoryProduct({
+      getCategory({
         params,
         onCompleted: (data) => {
-          console.log("on complete", data);
+          setCategoryData(data);
+          setLoading(false);
         },
         onError: (data) => {
-          console.log("on error", data);
+          setLoading(false);
+          console.log(data);
           // dispatch(hideFullScreenLoading())
         },
       })
@@ -61,13 +66,15 @@ const LandingPage = (props) => {
 
   useEffect(() => {
     getProductCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // getNewList();
     if (title) document.title = title;
   }, []);
+
   const Component = () => (
     <>
       <Home />
-      <Product />
+      <Category data={categoryData} />
       <New />
     </>
   );
