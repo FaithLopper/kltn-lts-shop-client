@@ -14,6 +14,7 @@ import HomeMobile from "../components/common/mobile/appLayout/components/body/ho
 
 import { getCategory } from "../actions/category";
 import Category from "../components/common/desktop/appLayout/components/body/category/Category";
+import { getAllNew } from "../actions/appCommon";
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
 
@@ -45,9 +46,29 @@ const LandingPage = (props) => {
     );
   };
 
+  const getNewList = () => {
+    const params = {
+      page:0,
+      size:6,
+    };
+    dispatch(
+      getAllNew({
+        params,
+        onCompleted: (data) => {
+          console.log( data);
+        },
+        onError: (data) => {
+          console.log( data);
+        },
+      })
+    );
+  };
+
   useEffect(() => {
     getProductCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // getNewList();
+    if (title) document.title = title;
   }, []);
 
   const Component = () => (

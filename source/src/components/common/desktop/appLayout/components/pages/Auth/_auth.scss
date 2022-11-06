@@ -75,6 +75,9 @@
 
 .login__button{
     margin: 2rem 0 1rem;
+    width: 100%;
+    line-height: 0.2rem;
+    // padding: 1rem;
 }
 
 .login__register{
@@ -92,10 +95,37 @@
 
 .login__sex-button{
     width: 47%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.login__sex-button:hover{
+    color: var(--input-color);
+    border:1px solid var(--title-color) !important;
+    border-width: 1px 1px 1px 1px !important;
 }
 
 .login__option-email{
     max-width: 18rem;
 }
 
+.ant-radio-button-wrapper:not(:first-child)::before{
+    width: 0;
+}
 
+.ant-radio-button-wrapper:focus-within{
+    box-shadow:0 0 0 3px rgba(59, 60, 61, 0.051);
+}
+
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    color: var(--input-color);
+    background: #fff;
+    border-color: var(--title-color-dark);
+}
+
+.ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child{
+    border-right-color: var(--title-color-dark);
+}

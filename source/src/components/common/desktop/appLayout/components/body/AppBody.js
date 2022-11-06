@@ -1,9 +1,10 @@
 import React from 'react'
 
-const AppBody = ({Component}) => {
+const AppBody = (props) => {
+  const {Component}= props
   return (
     <main className='main'>
-      <Component/>
+      <Component {...props}/>
     </main>
   )
 }

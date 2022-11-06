@@ -1,19 +1,12 @@
 import {
-  actions as appCommonActions,
-  actionTypes as appCommonTypes,
-} from "./appCommon";
-
-import {
-  actions as productActions,
-  actionTypes as productTypes,
-} from "./product";
+  actions as accountActions,
+  actionTypes as accountTypes,
+} from "./account";
 
 export const actions = {
-  ...appCommonActions,
-  ...productActions,
+  ...accountActions,
 };
 
 export const types = {
-  ...appCommonTypes,
-  ...productTypes,
+  ...accountTypes,
 };

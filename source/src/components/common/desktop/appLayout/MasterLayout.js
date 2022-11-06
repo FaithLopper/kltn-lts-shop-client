@@ -5,15 +5,19 @@ import AppBody from "./components/body/AppBody";
 import AppFooter from "./components/footer/AppFooter";
 import AppHeader from "./components/header/AppHeader";
 import { withTranslation } from "react-i18next";
-
+import { actions } from "../../../../actions";
+import { StorageKeys } from "../../../../constants";
+import apiConfig from "../../../../constants/apiConfig";
+const { getUserData } = actions;
 class MasterLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userData: getUserData(),
       showDetailModal: false,
       isNotEmail: false,
     };
-    const {t}= props
+    const { t } = props;
     const NavigatorMenu = [
       {
         title: t("findStore"),
@@ -36,91 +40,38 @@ class MasterLayout extends Component {
         // refValue: reviewRef,
       },
     ];
-    
-  const FooterMenu = {
-    product: {
-      title: "SẢN PHẨM",
-      refKey: "product",
-      items: [
-        {
-          title: "product1",
-          refKey: "product1",
-        },
-        {
-          title: "product2",
-          refKey: "product1",
-        },
-        {
-          title: "product3",
-          refKey: "product1",
-        },
-      ],
-    },
-    about: {
-      title: "VỀ CÔNG TY",
-      refKey: "about",
-      items: [
-        {
-          title: "Tuyển dụng",
-          refKey: "about1",
-        },
-        {
-          title: "Nhượng quyền",
-          refKey: "about1",
-        },
-        {
-          title: "Về chúng tôi",
-          refKey: "about1",
-        },
-      ],
-    },
-    support: {
-      title: "HỖ TRỢ",
-      refKey: "support",
-      items: [
-        {
-          title: "FAQs",
-          refKey: "about1",
-        },
-        {
-          title: "Bảo mật thông tin",
-          refKey: "about1",
-        },
-        {
-          title: "Chính sách chung",
-          refKey: "about1",
-        },
-        {
-          title: "Tra cứu đơn hàng",
-          refKey: "about1",
-        },
-      ],
-    },
-    contact: {
-      title: "LIÊN HỆ",
-      refKey: "contact",
-      items: [
-        {
-          title: "Email góp ý",
-          refKey: "about1",
-        },
-        {
-          title: "Hotline",
-          refKey: "about1",
-        },
-        {
-          title: "0364 521 323",
-          refKey: "about1",
-        },
-      ],
-    },
-  };
-    this.NavigatorMenu= NavigatorMenu
-    this.FooterMenu= FooterMenu
+    this.NavigatorMenu = NavigatorMenu;
     // this.setShowDetailModal = this.setShowDetailModal.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
-  
+
+  componentDidMount(){
+    this.checkPermission()
+  }
+
+  onLogout() {
+    const { logout } = this.props;
+    logout();
+    if (
+      window.localStorage &&
+      window.localStorage.getItem(StorageKeys.userData)
+    )
+      window.localStorage.removeItem(StorageKeys.userData);
+    window.location.href = "/login";
+  }
+
+  checkPermission() {
+    const { auth, history,location } = this.props;
+    if (auth) {
+      if (!this.state.userData) {
+        if(location.pathname !== '/register')
+          history.push("/login");
+      }
+    }
+  }
+
   render() {
+    const { userData } = this.state;
     const { configPageData, clientListData, Component } = this.props;
     return (
       <>
@@ -130,9 +81,11 @@ class MasterLayout extends Component {
           // ref={Utils.findRefByKey("home", NavigatorMenu)}
         >
           <AppHeader
-          NavigatorMenu={this.NavigatorMenu}
-          // configPageData={configPageData}
-          // setShowDetailModal={this.setShowDetailModal}
+            NavigatorMenu={this.NavigatorMenu}
+            userData={userData}
+            onLogout={this.onLogout}
+            // configPageData={configPageData}
+            // setShowDetailModal={this.setShowDetailModal}
           />
           <AppBody
             // configPageData={configPageData}
@@ -140,13 +93,13 @@ class MasterLayout extends Component {
             // NavigatorMenu={NavigatorMenu}
             // setShowDetailModal={this.setShowDetailModal}
             Component={Component}
+            {...this.props}
           />
           <AppFooter
-            FooterMenu={this.FooterMenu}
-            // configPageData={configPageData}
-            // setShowDetailModal={this.setShowDetailModal}
-            // showDetailModal={this.state.showDetailModal}
-            // isNotEmail={this.state.isNotEmail}
+          // configPageData={configPageData}
+          // setShowDetailModal={this.setShowDetailModal}
+          // showDetailModal={this.state.showDetailModal}
+          // isNotEmail={this.state.isNotEmail}
           />
         </div>
       </>
@@ -156,6 +109,8 @@ class MasterLayout extends Component {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(actions.logout()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MasterLayout);

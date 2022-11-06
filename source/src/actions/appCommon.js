@@ -5,3 +5,4 @@ import { createAction } from '@reduxjs/toolkit'
 export const uploadFile = createAction('appCommon/uploadFile')
 
 
+export const getAllNew = createAction('appCommon/getAllNew')

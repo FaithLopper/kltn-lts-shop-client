@@ -216,7 +216,6 @@ const CheckoutForm = () => {
     }
     scrollTop();
   };
-  console.log(active);
   return (
     <section className="checkout section">
       <div className="checkout__container page-wrapper grid">

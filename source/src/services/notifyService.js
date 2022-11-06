@@ -1,6 +1,6 @@
 import { notification } from 'antd'
 import { Toast } from 'antd-mobile'
-import Utils from '_utils/index'
+import Utils from '../utils'
 
 const isMobile = Utils.isMobileDevice()
 

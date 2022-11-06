@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../../../../../assets/svg/logo-500.svg";
 import { Form, Input, DatePicker, Radio, Button } from "antd";
-const RegisterForm = () => {
-  const handleSubmit = (values) => {};
+const RegisterForm = ({ registerUser, SubmitButton }) => {
+  const handleSubmit = (formValues) => {
+    registerUser(formValues);
+  };
   return (
     <section className="login section" id="login">
       <div className="login__container">
@@ -13,7 +15,12 @@ const RegisterForm = () => {
           Tạo tài khoản để có thể tiếp cận sớm nhất đến sản phẩm, bài viết và
           cộng đồng của chúng tôi.
         </div>
-        <Form onSubmit={handleSubmit} className="login__form">
+        <Form
+          onSubmit={handleSubmit}
+          ref="form-register"
+          className="login__form"
+          form
+        >
           <Form.Item
             name="username"
             rules={[
@@ -130,9 +137,11 @@ const RegisterForm = () => {
           </Form.Item>
 
           <Form.Item>
-            <div  className="login__sex">
-            <Button className="input login__sex-button">Nam</Button>
-            <Button className="input login__sex-button">Nữ</Button>
+            <div className="login__sex">
+              <Radio.Group>
+                <Radio.Button className="input login__sex-button" value={0}>Nam</Radio.Button>
+                <Radio.Button className="input login__sex-button" value={1}>Nữ</Radio.Button>
+              </Radio.Group>
             </div>
           </Form.Item>
 
@@ -143,7 +152,10 @@ const RegisterForm = () => {
                 id="keep-login"
                 className="login__checkbox"
               />
-              <label for="keep-login" className="login__option-email">Đăng ký email để nhận thông tin cập nhật về các sản phẩm, ưu đãi và lợi ích Hội viên của bạn</label>
+              <label for="keep-login" className="login__option-email">
+                Đăng ký email để nhận thông tin cập nhật về các sản phẩm, ưu đãi
+                và lợi ích Hội viên của bạn
+              </label>
             </div>
           </Form.Item>
           <div className="login__policy">
@@ -151,9 +163,7 @@ const RegisterForm = () => {
             <Link to="#">Chính sách bảo mật</Link> và{" "}
             <Link to="#">Điều khoản sử dụng</Link> của cửa hàng
           </div>
-          <button type="submit" className="login__button button">
-            JOIN US
-          </button>
+          <SubmitButton />
           <div className="login__register">
             Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
           </div>

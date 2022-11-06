@@ -12,7 +12,7 @@ export const LayoutConfigs = {
 }
 
 export const StorageKeys = {
-    userData: 'user-data',
+    userData: 'LTS-SHOP-USER-DATA',
     appLanguage: 'app-language'
 }
 
@@ -92,8 +92,9 @@ export const OrdersStates = [
 ]
 
 export const UserTypes = {
+    ADMIN: 1,
+    CUSTOMER: 2,
     EMPLOYEE: 3,
-    COLLABORATOR: 4,
 }
 
 export const UserStatus = [
