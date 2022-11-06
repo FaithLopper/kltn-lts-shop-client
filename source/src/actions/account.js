@@ -29,6 +29,7 @@ export const actions = {
     //     return false;
     // },
     setUserData: (data) => {
+        console.log(data);
         // Check browser to support localStorage API
         if(window.localStorage) {
             window.localStorage.setItem(
@@ -37,7 +38,6 @@ export const actions = {
             );
             return true;
         }
-
         return false;
     },
     getUserData: () => {

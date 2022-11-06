@@ -12,7 +12,7 @@ import ProductMobile from "../components/common/mobile/appLayout/components/body
 import NewMobile from "../components/common/mobile/appLayout/components/body/new/New";
 import HomeMobile from "../components/common/mobile/appLayout/components/body/home/Home";
 
-import { getAllCategoryProduct } from "../actions/appCommon";
+import { getAllCategoryProduct, getAllNew } from "../actions/appCommon";
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
 
@@ -41,9 +41,27 @@ const LandingPage = (props) => {
     );
   };
 
+  const getNewList = () => {
+    const params = {
+      page:0,
+      size:6,
+    };
+    dispatch(
+      getAllNew({
+        params,
+        onCompleted: (data) => {
+          console.log( data);
+        },
+        onError: (data) => {
+          console.log( data);
+        },
+      })
+    );
+  };
+
   useEffect(() => {
-    console.log('vao useEffect')
-    getProductCategory()
+    getProductCategory();
+    // getNewList();
     if (title) document.title = title;
   }, []);
   const Component = () => (

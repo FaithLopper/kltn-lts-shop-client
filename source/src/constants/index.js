@@ -12,7 +12,7 @@ export const LayoutConfigs = {
 }
 
 export const StorageKeys = {
-    userData: 'user-data',
+    userData: 'LTS-SHOP-USER-DATA',
     appLanguage: 'app-language'
 }
 

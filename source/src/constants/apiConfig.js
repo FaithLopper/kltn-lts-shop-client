@@ -21,6 +21,13 @@ const apiConfig = {
       headers: baseHeader,
     },
   },
+  new:{
+    getNew: {
+      path: "v1/news/list",
+      method: "GET",
+      headers: baseHeader,
+    },
+  },
   account: {
     login: {
       path: "v1/account/login",

@@ -62,7 +62,6 @@ class MasterLayout extends Component {
 
   checkPermission() {
     const { auth, history,location } = this.props;
-    console.log(auth,this.state.userData);
     if (auth) {
       if (!this.state.userData) {
         if(location.pathname !== '/register')

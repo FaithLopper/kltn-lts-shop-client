@@ -1,11 +1,10 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { getAllCategoryProduct } from "../actions/appCommon";
+import { getAllCategoryProduct, getAllNew } from "../actions/appCommon";
 import apiConfig from "../constants/apiConfig";
 import { sendRequest } from "../services/apiService";
-import { setCategoryProduct } from "../reducers/appCommon";
+import { setCategoryProduct, setNew } from "../reducers/appCommon";
 
 function* _getCategoryProduct({ payload: { params, onCompleted, onError } }) {
-  console.log("vao saga");
   try {
     let searchParams = {};
     if (params.kind) {
@@ -20,7 +19,6 @@ function* _getCategoryProduct({ payload: { params, onCompleted, onError } }) {
       searchParams
     );
     if (success && responseData.result) {
-      console.log(responseData);
       const categoryList = responseData.data;
       const data = yield all(
         [...categoryList].map((param) =>
@@ -48,6 +46,29 @@ function* _getCategoryProduct({ payload: { params, onCompleted, onError } }) {
   }
 }
 
-const sagas = [takeLatest(getAllCategoryProduct.type, _getCategoryProduct)];
+function* _getNew({ payload: { params, onCompleted, onError } }) {
+  const apiParams = apiConfig.new.getNew;
+  const searchParams = { page: params.page, size: params.size };
+  searchParams.kind = 1;
+  try {
+    const result = yield call(sendRequest, apiParams, searchParams);
+    console.log(result);
+    // yield put(
+    //   setNew({
+    //     data: {
+    //       ...result.responseData.data,
+    //     },
+    //   })
+    // );
+    // onCompleted(result.responseData)
+  } catch (error) {
+    onError(error);
+  }
+}
+
+const sagas = [
+  takeLatest(getAllCategoryProduct.type, _getCategoryProduct),
+  takeLatest(getAllNew.type, _getNew),
+];
 
 export default sagas;

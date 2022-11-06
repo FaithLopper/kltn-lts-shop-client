@@ -20,6 +20,7 @@ const initialState = {
     currentScrollY: null,
     isNotGetInitialData: false,
     categoryProduct: null,
+    new:null,
 }
 
 const appCommon = createSlice({
@@ -91,7 +92,11 @@ const appCommon = createSlice({
         setCategoryProduct(state,action)
         {
             state.categoryProduct = action.payload
-        }
+        },
+        setNew(state,action)
+        {
+            state.new = action.payload
+        },
     },
 })
 
@@ -109,6 +114,7 @@ export const {
     setCurrentScrollY,
     setIsNotGetInitialData,
     setCategoryProduct,
+    setNew,
 } =
     appCommon.actions
 export default appCommon.reducer
