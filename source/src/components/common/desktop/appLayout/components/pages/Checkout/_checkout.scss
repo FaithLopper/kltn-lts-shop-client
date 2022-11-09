@@ -82,10 +82,9 @@
     border: none;
   }
 
-
   .checkout__summary-item {
     grid-template-columns: 2fr 1fr;
-    .summary__icon{
+    .summary__icon {
       margin-left: 0.5rem;
     }
   }
@@ -110,6 +109,25 @@
 
   .round-button-white {
     // display: initial;
+  }
+
+  .checkout__part {
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 1rem;
+  }
+  .checkout__part::-webkit-scrollbar {
+    width: 0.1rem; /* width of the entire scrollbar */
+  }
+  .checkout__part::-webkit-scrollbar-track {
+    background: var(--content-color); /* color of the tracking area */
+  }
+
+  .checkout__part::-webkit-scrollbar-thumb {
+    background-color: var(--blur-color); /* color of the scroll thumb */
+    border-radius: 1.25rem; /* roundness of the scroll thumb */
+    border: 0.1875rem solid var(--blur-color); /* creates padding around scroll thumb */
   }
 
   .checkout__part-info {
@@ -139,7 +157,6 @@
     color: var(--title-color-dark);
   }
 
-  
   .big-button:focus {
     border: 2px solid var(--title-color-dark) !important;
     color: var(--title-color-dark);
@@ -200,66 +217,66 @@
     }
   }
 
-  .content__title_sub{
+  .content__title_sub {
     font-size: var(--h3-font-size);
   }
 
-  .shipping__image{
+  .shipping__image {
     background-color: white;
     width: 96px;
     height: 96px;
   }
 
-  .checkout__shipping-product{
+  .checkout__shipping-product {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 1rem;
     row-gap: 0.1rem;
   }
 
-  .content__sub-title{
+  .content__sub-title {
     color: var(--input-color);
     font-size: 1rem;
   }
 
-  .checkout__billing{
-    .checkout__checkbox{
+  .checkout__billing {
+    .checkout__checkbox {
       padding: 1rem;
       width: 1.25rem;
       height: 1.25rem;
       margin-right: 1rem;
     }
-    
-    .login__option{
-      label{
+
+    .login__option {
+      label {
         font-size: 1rem;
         color: var(--title-color-dark);
       }
     }
   }
-  
-  .summary__product{
+
+  .summary__product {
     grid-template-columns: 2fr 1fr;
   }
 
-  .summary__image{
+  .summary__image {
     width: 208px;
     height: 208px;
   }
 
-  .summary__item-info *{
+  .summary__item-info * {
     color: var(--input-color);
     font-size: 0.95rem;
   }
 
-  .summary__item-name{
+  .summary__item-name {
     color: var(--title-color-dark);
   }
 
-  .checkout__summary-preview{
+  .checkout__summary-preview {
     margin-top: 2rem;
   }
 
-  .checkout__summary-product{
+  .checkout__summary-product {
     height: 35rem;
     overflow-y: scroll;
   }
@@ -270,34 +287,33 @@
   .checkout__summary-product::-webkit-scrollbar-track {
     background: var(--content-color); /* color of the tracking area */
   }
-  
+
   .checkout__summary-product::-webkit-scrollbar-thumb {
     background-color: var(--blur-color); /* color of the scroll thumb */
     border-radius: 1.25rem; /* roundness of the scroll thumb */
     border: 0.1875rem solid var(--blur-color); /* creates padding around scroll thumb */
   }
 
-
-  .checkout__process{
-    .checkout__process-item{
+  .checkout__process {
+    .checkout__process-item {
       box-shadow: 0px -4px 2px -4px var(--blur-color);
       padding: 1.5rem 0;
     }
 
-    .checkout__process-header{
+    .checkout__process-header {
       display: flex;
       justify-content: space-between;
 
-      .content__title{
+      .content__title {
         color: var(--input-color);
       }
     }
-    
-    .active-title{
+
+    .active-title {
       color: var(--title-color-dark) !important;
     }
 
-    .process__button{
+    .process__button {
       width: auto;
       padding: 1.3rem 2rem;
       line-height: 0.1rem;
@@ -305,20 +321,19 @@
       color: var(--title-color-dark);
     }
 
-    .checkout__process-body{
+    .checkout__process-body {
       display: flex;
       flex-direction: column;
       row-gap: 0.1rem;
     }
 
-    .checkout__process-body span{
-        color: var(--input-color);
+    .checkout__process-body span {
+      color: var(--input-color);
     }
   }
-
 }
 
-.delivery__addresss-address{
+.delivery__addresss-address {
   font-size: 0.8rem;
   font-weight: var(--font-medium);
 }

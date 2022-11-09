@@ -30,7 +30,6 @@ const LoginPage = (props) => {
       onCompleted: (responseData) => {
         if (responseData && responseData.token) {
           if (setUserData(responseData)) {
-            // this.props.history.push(sitePathConfig.admin.path);
             if (responseData.kind === UserTypes.CUSTOMER)
               redirectToAuthPage();
           }

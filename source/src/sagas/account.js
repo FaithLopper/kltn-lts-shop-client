@@ -21,7 +21,6 @@ function* login({ payload: { params, onCompleted, onError } }) {
 
     const result = yield call(sendRequest, apiConfig.account.login, pageParams);
     const { success, responseData } = result;
-    console.log(success, responseData);
     if (success && responseData.result) {
       let apiParams;
       if (responseData.data?.kind === UserTypes.CUSTOMER) {

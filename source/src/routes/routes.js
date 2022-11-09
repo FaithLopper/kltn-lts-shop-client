@@ -4,6 +4,7 @@ import CartPage from "../containers/CartPage"
 import CheckoutPage from "../containers/CheckoutPage"
 import LandingPage from "../containers/LandingPage"
 import LoginPage from "../containers/LoginPage"
+import NewDetailPage from "../containers/NewDetailPage"
 import RegisterPage from "../containers/RegisterPage"
 import SummaryPage from "../containers/SummaryPage"
 const desktopRoutes = {
@@ -71,6 +72,17 @@ const desktopRoutes = {
         title: 'Thanh toán',
         routeConfig: {
             contentClass: 'summary-site'
+        },
+    },
+    newDetailPage: {
+        path: '/news/:id',
+        component: NewDetailPage,
+        auth: false, // Consider if this site need userdata
+        // exact: !isMobile ? false : true,
+        exact: false,
+        title: 'Tin tức',
+        routeConfig: {
+            contentClass: 'new-site'
         },
     },
     // pageNotAllowed: {
