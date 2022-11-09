@@ -11,9 +11,9 @@ const Product = (props) => {
   }, [data]);
 
   return (
-    <section className="product section" id="product">
-      <h2 className="section__title">SẢN PHẨM</h2>
-      <div className="product__container container">
+    <section className="product section product__category" id="product">
+      <h2 className="product-title">SẢN PHẨM</h2>
+      <div className="product_grid_container">
         {productList.map((p, index) => (
           <ParentProduct data={p} key={index} />
         ))}

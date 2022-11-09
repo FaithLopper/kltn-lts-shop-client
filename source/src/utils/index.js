@@ -182,7 +182,10 @@ const Utils = {
         while (i--)
             roman = (key[+digits.pop() + (i * 10)] || "") + roman;
         return Array(+digits.join("") + 1).join("M") + roman;
-    }
+    },
+    numberToCurency(num) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num);
+    },
 }
 
 export default Utils

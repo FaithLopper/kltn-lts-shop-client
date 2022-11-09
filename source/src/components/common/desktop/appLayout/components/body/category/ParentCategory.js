@@ -4,6 +4,7 @@ import { getProduct } from "../../../../../../../actions/product";
 import { useDispatch } from "react-redux";
 import Product from "../product/Product";
 import { AppConstants } from "../../../../../../../constants";
+import CategoryBanner from "./CategoryBanner";
 
 const ParentCategory = (props) => {
   const dispatch = useDispatch();
@@ -50,32 +51,19 @@ const ParentCategory = (props) => {
   };
   return (
     <section className="product cate-bg" id="product">
-      <div className="cate-banner">
-        <img src={categoryImg} alt="cate-img" className="cate-img-size" />
-        <h2>
-          {categoryName}
-          <h5>best clothes in town for all</h5>
-        </h2>
-      </div>
-
-      <h2 className="section__title" style={{ color: "red" }}>
-        id: {categoryId}
-      </h2>
-
-      <div
-        className="product__container container"
-        style={{ border: "2px solid purple", width: "80%" }}
-      >
-        <Product data={productList} />
-      </div>
-      <div
-        className="product__container container"
-        style={{ border: "2px solid brown", width: "90%", marginTop: 80 }}
-      >
-        {categoryChildList.map((p, index) => (
-          <ChildCategory data={p} key={index} />
-        ))}
-      </div>
+      <CategoryBanner img={categoryImg} name={categoryName} />
+      {productList.length !== 0 && (
+        <div className="product__container container product-section">
+          <Product data={productList} />
+        </div>
+      )}
+      {categoryChildList.length !== 0 && (
+        <div className="product__container container child-category">
+          {categoryChildList.map((p, index) => (
+            <ChildCategory data={p} key={index} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
