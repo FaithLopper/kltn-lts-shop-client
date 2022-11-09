@@ -66,7 +66,7 @@ const LandingPage = (props) => {
   };
 
   useEffect(() => {
-    getProductCategory();
+    // getProductCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     getNewList();
     // props.getCategoryAutoComplete({ kind: 1 }); //kind = 1 = news

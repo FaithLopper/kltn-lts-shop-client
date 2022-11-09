@@ -14,54 +14,54 @@ const isMobile = isMobileDevice();
 
 const NewDetailPage = (props) => {
   const { t, title } = props;
-  var detailId= props.match?.params?.id
-  const [isGetDetailLoading,setLoading]= useState(false)
-  const [detail,setDetail]= useState(false)
+  var detailId = props.match?.params?.id;
+  const [isGetDetailLoading, setLoading] = useState(false);
+  const [detail, setDetail] = useState(false);
   useEffect(() => {
     if (title) document.title = title;
-    getDetail(detailId)
+    getDetail(detailId);
   }, []);
   useEffect(() => {
     // Cập nhập document title sử dụng browser API
-    const hotNew= document.querySelector(".hot-new")
-    if(hotNew)
-      hotNew.classList.add("remove-hotnew")
-  });
+    const hotNew = document.querySelector(".hot-new");
+    if (hotNew) hotNew.classList.add("remove-hotnew");
+  }, []);
 
-  const  getDetail = (id) => {
+  const getDetail = (id) => {
     const { getDataById } = props;
     const params = { id };
-    setLoading(true)
+    setLoading(true);
     getDataById({
-        params,
-        onCompleted: (responseData)=>{
-            if(responseData.result){
-                setDetail(responseData.data)
-            }
-        },
-        onError: (err) => {
-           console.log(err);
+      params,
+      onCompleted: (responseData) => {
+        if (responseData.result) {
+          setDetail(responseData.data);
         }
+      },
+      onError: (err) => {
+        console.log(err);
+      },
     });
-}
+  };
   return !isMobile ? (
-    <MasterLayout {...props} t={t} Component={NewDetail} detail={detail}/>
+    <MasterLayout {...props} t={t} Component={NewDetail} dataConfig={detail} />
   ) : (
-    <MobileMasterLayout {...props} t={t} Component={NewDetail} detail={detail}/>
+    <MobileMasterLayout
+      {...props}
+      t={t}
+      Component={NewDetail}
+      detail={detail}
+    />
   );
-
-
 };
-
-
 
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-    getDataById: (payload) => dispatch(actions.getNewsById(payload)),
+  getDataById: (payload) => dispatch(actions.getNewsById(payload)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTranslation(['navigationBar','newDetailPage'])(NewDetailPage));
+)(withTranslation(["navigationBar", "newDetailPage"])(NewDetailPage));
