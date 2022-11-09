@@ -12,4 +12,6 @@ body.bd-desktop {
     @import '../../components/pages/Cart/cart';
     @import '../../components/pages/Checkout/checkout';
     @import '../../components/pages/Summary/summary';
+    @import '../../components/body/category/_category.scss';
+    @import '../../components/body/product/_product.scss';
 }

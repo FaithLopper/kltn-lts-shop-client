@@ -3,6 +3,7 @@ import ChildCategory from "../category/ChildCategory";
 import { getProduct } from "../../../../../../../actions/product";
 import { useDispatch } from "react-redux";
 import Product from "../product/Product";
+import { AppConstants } from "../../../../../../../constants";
 
 const ParentCategory = (props) => {
   const dispatch = useDispatch();
@@ -10,20 +11,23 @@ const ParentCategory = (props) => {
   const [productList, setProductList] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [categoryImg, setCategoryImg] = useState(
+    `${AppConstants.contentRootUrl}/`
+  );
 
   const { data } = props;
 
   useEffect(() => {
     if (data?.childCategories) {
-        setCategoryChildList(data.childCategories);
+      setCategoryChildList(data.childCategories);
     }
     setCategoryId(data?.id);
     setCategoryName(data?.name);
+    setCategoryImg(`${AppConstants.contentRootUrl}/` + data?.icon);
 
     if (categoryId !== 0) {
       getProductList();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);
 
@@ -45,20 +49,19 @@ const ParentCategory = (props) => {
     );
   };
   return (
-    <section
-      className="product section"
-      id="product"
-      style={{ border: "2px solid gray", marginBottom: 100 }}
-    >
-      <h2 className="section__title" style={{ color: "yellow" }}>
-        DANH MỤC CHA
-      </h2>
+    <section className="product cate-bg" id="product">
+      <div className="cate-banner">
+        <img src={categoryImg} alt="cate-img" className="cate-img-size" />
+        <h2>
+          {categoryName}
+          <h5>best clothes in town for all</h5>
+        </h2>
+      </div>
+
       <h2 className="section__title" style={{ color: "red" }}>
         id: {categoryId}
       </h2>
-      <h2 className="section__title" style={{ color: "blue" }}>
-        Name: {categoryName}
-      </h2>
+
       <div
         className="product__container container"
         style={{ border: "2px solid purple", width: "80%" }}

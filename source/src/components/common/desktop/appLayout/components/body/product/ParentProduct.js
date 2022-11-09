@@ -13,7 +13,7 @@ const ParentProduct = (props) => {
     if (data?.childProducts) setChildProductList(data?.childProducts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("childProductList", childProductList);
+  
   return (
     <section className="product section" style={{ width: "100%" }} id="product">
       <h2 className="section__title" style={{ color: "purple" }}>
