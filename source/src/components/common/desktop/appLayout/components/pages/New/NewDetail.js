@@ -10,7 +10,8 @@ const NewDetail = ({ dataConfig }) => {
   }, []);
   return (
     <section className="new__detail section" id="new__detail">
-      <div className="new__detail__container container">
+      <div className="new__detail__container container grid">
+        <div></div>
         <div
           className="new_detail-content"
           dangerouslySetInnerHTML={{ __html: dataConfig.content }}
