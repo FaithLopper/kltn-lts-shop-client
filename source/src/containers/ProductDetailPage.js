@@ -8,18 +8,19 @@ import { useEffect } from "react";
 import NewDetail from "../components/common/desktop/appLayout/components/pages/New/NewDetail";
 import { actions } from "../actions";
 import { useState } from "react";
+import ProductDetail from "../components/common/desktop/appLayout/components/pages/Product/ProductDetail";
 
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
 
-const NewDetailPage = (props) => {
+const ProductDetailPage = (props) => {
   const { t, title } = props;
   var detailId = props.match?.params?.id;
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(false);
   useEffect(() => {
     if (title) document.title = title;
-    getDetail(detailId);
+    // getDetail(detailId);
   }, []);
   useEffect(() => {
     // Cập nhập document title sử dụng browser API
@@ -46,12 +47,12 @@ const NewDetailPage = (props) => {
     });
   };
   return !isMobile ? (
-    <MasterLayout {...props} t={t} Component={NewDetail} loading={loading} dataConfig={detail} />
+    <MasterLayout {...props} t={t} Component={ProductDetail} loading={loading} dataConfig={detail} />
   ) : (
     <MobileMasterLayout
       {...props}
       t={t}
-      Component={NewDetail}
+      Component={ProductDetail}
       detail={detail}
     />
   );
@@ -60,10 +61,9 @@ const NewDetailPage = (props) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  getDataById: (payload) => dispatch(actions.getNewsById(payload)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTranslation(["navigationBar", "newDetailPage"])(NewDetailPage));
+)(withTranslation(["navigationBar", "ProductDetailPage"])(ProductDetailPage));

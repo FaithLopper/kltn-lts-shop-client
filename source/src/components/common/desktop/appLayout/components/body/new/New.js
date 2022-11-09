@@ -20,7 +20,7 @@ const New = (props) => {
                 let year = check.format("YYYY"); // => ('2012','2013' ...)
                 let date = `${month} ${day}, ${year}`;
                 return (
-                  <Link to={`/news/${id}`} className="new__item" key={title}>
+                  <a href={`/news/${id}`} className="new__item" key={title}>
                     <img
                       alt="new"
                       className="new__item-image"
@@ -29,7 +29,7 @@ const New = (props) => {
                     <div className="new__item-description">{description}</div>
                     <div className="new__item-title">{title}</div>
                     <div className="new__item-createdDate">{date}</div>
-                  </Link>
+                  </a>
                 );
               })
             ) : (
