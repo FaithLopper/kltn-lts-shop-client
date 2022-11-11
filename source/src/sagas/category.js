@@ -1,32 +1,32 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getCategory } from "../actions/category";
 import apiConfig from "../constants/apiConfig";
 import { sendRequest } from "../services/apiService";
-import { setCategoryList } from "../reducers/category";
+import { actionTypes, reduxUtil } from "../actions/category";
+import { handleApiResponse } from "../utils/apiHelper";
+import Utils from "../utils";
 
-function* _getCategory({ payload: { params, onCompleted, onError } }) {
+const { checkAllAvailableParams } = Utils;
+const { GET_CATEGORY_LIST } = actionTypes;
+const { defineActionLoading, defineActionSuccess, defineActionFailed } =
+  reduxUtil;
+
+function* _getCategoryList({ payload: { params, onCompleted, onError } }) {
+  const apiParams = apiConfig.productCategory.getAll;
+  const searchParams = checkAllAvailableParams(params);
   try {
-    let searchParams = {};
-    // if (params.kind) {
-    //   searchParams.kind = params.kind;
-    // }
-    // if (params.status) {
-    //   searchParams.status = params.status;
-    // }
-    const { success, responseData } = yield call(
-      sendRequest,
-      apiConfig.productCategory.getAll,
-      searchParams
-    );
-    if (success && responseData.result) {
-      yield put(setCategoryList([...responseData.data]));
-      onCompleted([...responseData.data]);
-    } else onError(responseData);
+    const result = yield call(sendRequest, apiParams, searchParams);
+    yield put({
+      type: defineActionSuccess(GET_CATEGORY_LIST),
+      categoryData: result.responseData && result.responseData.data,
+    });
+    handleApiResponse(result, onCompleted, onError);
   } catch (error) {
-    onError(error);
+    yield put({ type: defineActionFailed(GET_CATEGORY_LIST) });
   }
 }
 
-const sagas = [takeLatest(getCategory.type, _getCategory)];
+const sagas = [
+  takeLatest(defineActionLoading(GET_CATEGORY_LIST), _getCategoryList),
+];
 
 export default sagas;

@@ -1,18 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { actionTypes, reduxUtil } from "../actions/product";
+
+const {
+  createReducer,
+  defineActionSuccess,
+  defineActionLoading,
+  defineActionFailed,
+} = reduxUtil;
+const { GET_PRODUCT_LIST } = actionTypes;
 
 const initialState = {
   productList: [],
+  // getProductListLoading: false,
 };
 
-const product = createSlice({
-  name: "product",
-  initialState,
-  reducers: {
-    setProductList(state, action) {
-      state.productList.push(action.payload);
+const reducer = createReducer(
+  {
+    // [defineActionLoading(GET_PRODUCT_LIST)]: (state, payload) => {
+    //   return { ...state, payload };
+    // },
+    [defineActionSuccess(GET_PRODUCT_LIST)]: (state, { productData }) => {
+      // console.log({
+      //   ...state,
+      //   productList: [...state.productList, productData],
+      // });
+      return { ...state, productList: [...state.productList, productData] };
+    },
+    [defineActionFailed(GET_PRODUCT_LIST)]: (state) => {
+      return {
+        ...state,
+        getProductListLoading: [],
+      };
     },
   },
-});
+  initialState
+);
 
-export const { setProductList } = product.actions;
-export default product.reducer;
+const product = { reducer };
+
+export default product;

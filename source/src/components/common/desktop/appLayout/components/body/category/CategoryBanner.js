@@ -8,7 +8,7 @@ const CategoryBanner = (props) => {
       {/* <img src={img} alt="cate-img" width={50} className="cate-img-size" /> */}
       <h2>
         {name}
-        <h5>{note}</h5>
+        <p>{note}</p>
       </h2>
     </div>
   );

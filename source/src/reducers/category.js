@@ -1,18 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { actionTypes, reduxUtil } from "../actions/category";
+
+const {
+  createReducer,
+  defineActionSuccess,
+  defineActionLoading,
+  defineActionFailed,
+} = reduxUtil;
+const { GET_CATEGORY_LIST } = actionTypes;
 
 const initialState = {
   categoryList: null,
+  getCategoryListLoading: false,
 };
 
-const category = createSlice({
-  name: "category",
-  initialState,
-  reducers: {
-    setCategoryList(state, action) {
-      state.categoryList = action.payload;
-    },
+const reducer = createReducer({
+  [defineActionLoading(GET_CATEGORY_LIST)]: (state) => {
+    return {
+      ...state,
+      getCategoryListLoading: true,
+    };
   },
+  [defineActionSuccess(GET_CATEGORY_LIST)]: (state, { categoryData }) => {
+    return {
+      ...state,
+      categoryData,
+      getCategoryListLoading: false,
+    };
+  },
+  [defineActionFailed(GET_CATEGORY_LIST)]: (state) => {
+    return {
+      ...state,
+      getCategoryListLoading: false,
+    };
+  },
+  initialState,
 });
 
-export const { setCategoryList } = category.actions;
-export default category.reducer;
+const category = { reducer };
+
+export default category;

@@ -8,13 +8,13 @@ const Menu = (props) => {
       <div className="menu">
         <ul className="menu__list">
           <li className="menu__item">
-            <Link Link to="/store" className="menu__link">
+            <Link to="/store" className="menu__link">
               Tìm kiếm cửa hàng
             </Link>
           </li>
           <span className="menu__line"></span>
           <li className="menu__item">
-            <Link Link to="/help" className="menu__link">
+            <Link to="/help" className="menu__link">
               Trợ giúp
             </Link>
           </li>
@@ -47,13 +47,13 @@ const Menu = (props) => {
             <>
               <span className="menu__line"></span>
               <li className="menu__item">
-              <Link Link to="/login" className="menu__link">
+              <Link to="/login" className="menu__link">
                 Đăng nhập
               </Link>
               </li>
               <span className="menu__line"></span>
               <li className="menu__item">
-              <Link Link to="/register" className="menu__link">
+              <Link to="/register" className="menu__link">
                 Đăng kí
               </Link>
               </li>

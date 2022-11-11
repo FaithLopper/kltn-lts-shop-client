@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const New = (props) => {
   const { newData, pagination, handleTableChange, loading }= props
 
-  console.log(props);
   return (
     <section className="new section" id="new">
       {!loading ? (

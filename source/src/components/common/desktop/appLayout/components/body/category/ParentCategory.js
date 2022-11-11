@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ChildCategory from "../category/ChildCategory";
-import { getProduct } from "../../../../../../../actions/product";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import Product from "../product/Product";
 import { AppConstants } from "../../../../../../../constants";
 import CategoryBanner from "./CategoryBanner";
+import { withTranslation } from "react-i18next";
+import { actions } from "../../../../../../../actions";
 
 const ParentCategory = (props) => {
+  const { data } = props;
   const dispatch = useDispatch();
   const [categoryChildList, setCategoryChildList] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -17,55 +19,49 @@ const ParentCategory = (props) => {
     `${AppConstants.contentRootUrl}/`
   );
 
-  const { data } = props;
-
   useEffect(() => {
     if (data?.childCategories) {
       setCategoryChildList(data.childCategories);
     }
-    setCategoryId(data?.id);
     setCategoryName(data?.name);
     setCategoryImg(`${AppConstants.contentRootUrl}/` + data?.icon);
-    setCategoryNote(data?.note)
+    setCategoryNote(data?.note);
 
-    if (categoryId !== 0) {
-      getProductList();
-    }
+    if (data?.id) getProductList();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId]);
+  }, []);
 
   const getProductList = () => {
+    const { data } = props;
     const params = {
-      categoryId: categoryId,
+      categoryId: data?.id,
     };
-    dispatch(
-      getProduct({
-        params,
-        onCompleted: (data) => {
-          setProductList(data);
-        },
-        onError: (data) => {
-          console.log(data);
-          // dispatch(hideFullScreenLoading())
-        },
-      })
-    );
+
+    dispatch(actions.getProductList({ params }));
+
+    // getProductDataList({ params });
   };
+
   return (
     <section className="product cate-bg" id="product">
-      <CategoryBanner img={categoryImg} name={categoryName} note={categoryNote} />
+      <CategoryBanner
+        img={categoryImg}
+        name={categoryName}
+        note={categoryNote}
+      />
       {productList.length !== 0 && (
         <div className="product__container container product-section">
           <Product data={productList} />
         </div>
       )}
-      {categoryChildList.length !== 0 && (
+      {/* {categoryChildList.length !== 0 && (
         <div className="product__container container child-category">
           {categoryChildList.map((p, index) => (
-            <ChildCategory data={p} key={index} />
+            <ChildCategory data={p} key={"ChildCategory" + index} />
           ))}
         </div>
-      )}
+      )} */}
     </section>
   );
 };

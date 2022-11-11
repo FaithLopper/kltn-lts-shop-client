@@ -13,6 +13,7 @@ const ParentProduct = (props) => {
   const [parentProductPrice, setParentProductPrice] = useState(0);
   const [childProductList, setChildProductList] = useState([]);
   const { numberToCurency } = Utils;
+  
   useEffect(() => {
     setParentProductId(data?.id);
     setParentProductName(data?.name);
@@ -25,7 +26,11 @@ const ParentProduct = (props) => {
   }, []);
 
   return (
-    <section className="product product-child-container" style={{ width: "100%" }} id="product">
+    <section
+      className="product product-child-container"
+      style={{ width: "100%" }}
+      id="product"
+    >
       <ProductCard
         id={parentProductId}
         img={parentProductImage}
@@ -37,7 +42,7 @@ const ParentProduct = (props) => {
         <div className="product-child-dropdown">
           <ul className="product_child_grid_container">
             {childProductList.map((p, index) => (
-              <ChildProduct data={p} key={index} />
+              <ChildProduct data={p} key={"ChildProduct" + index} />
             ))}
           </ul>
         </div>

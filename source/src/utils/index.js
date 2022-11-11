@@ -186,6 +186,34 @@ const Utils = {
     numberToCurency(num) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num);
     },
+    checkAllAvailableParams(inputParam) {
+    const searchParams = {}
+    if (inputParam.page) {
+        searchParams.page = inputParam.page;
+    }
+
+    if (inputParam.size) {
+        searchParams.size = inputParam.size;
+    }
+
+    if (inputParam.kind) {
+        searchParams.kind = inputParam.kind;
+    }
+
+    if (inputParam.parentId) {
+        searchParams.parentId = inputParam.parentId;
+    }
+
+    if (inputParam.search) {
+        if (inputParam.search.name) {
+        searchParams.name = inputParam.search.name;
+        }
+        if (inputParam.search.status) {
+        searchParams.status = inputParam.search.status;
+        }
+    }
+    return searchParams;
+    },
 }
 
 export default Utils

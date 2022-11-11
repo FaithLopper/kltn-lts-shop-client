@@ -15,7 +15,7 @@ const Product = (props) => {
       <h2 className="product-title">SẢN PHẨM</h2>
       <div className="product_grid_container">
         {productList.map((p, index) => (
-          <ParentProduct data={p} key={index} />
+          <ParentProduct data={p} key={"ParentProduct" + index} />
         ))}
       </div>
     </section>

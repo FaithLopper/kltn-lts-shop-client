@@ -17,7 +17,7 @@ const Category = (props) => {
       </div> */}
       <div className="product__container container">
         {categoryList.map((p, index) => (
-          <ParentCategory data={p} key={index} />
+          <ParentCategory data={p} key={"ParentCategory" + index} />
         ))}
       </div>
     </section>
