@@ -25,7 +25,7 @@ const ParentProduct = (props) => {
   }, []);
 
   return (
-    <section className="product section" style={{ width: "100%" }} id="product">
+    <section className="product product-child-container" style={{ width: "100%" }} id="product">
       <ProductCard
         id={parentProductId}
         img={parentProductImage}
@@ -33,20 +33,15 @@ const ParentProduct = (props) => {
         price={parentProductPrice}
         isSold={parentProductIsSold}
       />
-      {/* <div
-        style={{
-          width: "90%",
-          border: "1px solid blue",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
-        <ul>
+      {childProductList.length !== 0 && (
+        <div className="product-child-dropdown">
+          <ul className="product_child_grid_container">
             {childProductList.map((p, index) => (
               <ChildProduct data={p} key={index} />
             ))}
           </ul>
-      </div> */}
+        </div>
+      )}
     </section>
   );
 };

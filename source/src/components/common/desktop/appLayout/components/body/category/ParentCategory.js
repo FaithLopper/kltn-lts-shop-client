@@ -12,6 +12,7 @@ const ParentCategory = (props) => {
   const [productList, setProductList] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [categoryNote, setCategoryNote] = useState("");
   const [categoryImg, setCategoryImg] = useState(
     `${AppConstants.contentRootUrl}/`
   );
@@ -25,6 +26,7 @@ const ParentCategory = (props) => {
     setCategoryId(data?.id);
     setCategoryName(data?.name);
     setCategoryImg(`${AppConstants.contentRootUrl}/` + data?.icon);
+    setCategoryNote(data?.note)
 
     if (categoryId !== 0) {
       getProductList();
@@ -51,7 +53,7 @@ const ParentCategory = (props) => {
   };
   return (
     <section className="product cate-bg" id="product">
-      <CategoryBanner img={categoryImg} name={categoryName} />
+      <CategoryBanner img={categoryImg} name={categoryName} note={categoryNote} />
       {productList.length !== 0 && (
         <div className="product__container container product-section">
           <Product data={productList} />

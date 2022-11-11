@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
   const { id, img, isSold, name, price } = props;
   return (
     <div className="product-card">
-      <a href={`/product?id=${id}`}>
+      <Link to={`/product-detail/${id}`}>
         <div className="img-container">
           <img src={img} className="product-img-size" alt="prod-img" />
           {isSold && <div>SOLD OUT</div>}
@@ -13,7 +14,7 @@ const ProductCard = (props) => {
           <div className="product-name">{name}</div>
           <div className="product-price">{price}</div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };
