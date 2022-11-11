@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../../../../assets/svg/logo-500.svg";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-  window.addEventListener("scroll", function () {
-    const nav = document.querySelector(".menu");
-    if (this.scrollY >= 36) nav.classList.add("off-nav");
-    else nav.classList.remove("off-nav");
-  });
+  useEffect(()=>{
+      window.addEventListener("scroll",function(){
+        const nav= document.querySelector(".menu")
+        if(this.scrollY >= 36) nav.classList.add("off-nav")
+          else nav.classList.remove("off-nav")
+    })
+    },[])
   const product = {
     image:
       "https://secure-images.nike.com/is/image/DotCom/DQ7658_300?align=0,1&cropN=0,0,0,0&resMode=sharp&bgc=f5f5f5&wid=150&fmt=jpg",

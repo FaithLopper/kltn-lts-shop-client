@@ -21,9 +21,19 @@ const apiConfig = {
       headers: baseHeader,
     },
   },
-  new:{
+  new: {
     getNew: {
-      path: "v1/news/list",
+      path: "v1/news/list-news",
+      method: "GET",
+      headers: baseHeader,
+    },
+    categoryAutoComplete: {
+      path: "v1/category/auto-complete",
+      method: "GET",
+      headers: baseHeader,
+    },
+    getById: {
+      path: "v1/news/get-news",
       method: "GET",
       headers: baseHeader,
     },

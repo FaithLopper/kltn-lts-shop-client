@@ -14,4 +14,6 @@ body.bd-desktop {
     @import '../../components/pages/Summary/summary';
     @import '../../components/body/category/_category.scss';
     @import '../../components/body/product/_product.scss';
+    @import '../../components/pages/New/newDetail';
+    @import '../../components/pages/Product/productDetail';
 }

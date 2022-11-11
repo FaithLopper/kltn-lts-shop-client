@@ -35,7 +35,7 @@ const Menu = (props) => {
                     <Link to="/cart">Giỏ hàng</Link>
                   </li>
                   <li className="user__option">
-                    <span onClick={()=>onLogout()}> Đăng xuất</span>
+                    <span onClick={()=>{onLogout()}}>Đăng xuất</span>
                   </li>
                 </ul>
               </li>

@@ -15,8 +15,16 @@ import HomeMobile from "../components/common/mobile/appLayout/components/body/ho
 import { getCategory } from "../actions/category";
 import Category from "../components/common/desktop/appLayout/components/body/category/Category";
 import { getAllNew } from "../actions/appCommon";
+import { actions } from "../actions";
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
+
+var pagination = {
+  pageSize: 6,
+  totalPage: 1,
+  current: 1,
+  totalElements: null,
+};
 
 const LandingPage = (props) => {
   const { t, title } = props;
@@ -46,36 +54,38 @@ const LandingPage = (props) => {
     );
   };
 
-  const getNewList = () => {
+  const getNewList = (currentPage) => {
+    const { getDataList } = props;
+    const page = currentPage ? currentPage - 1 : 0;
     const params = {
-      page:0,
-      size:6,
+      page,
+      size: pagination.pageSize,
+      kind: 1,
     };
-    dispatch(
-      getAllNew({
-        params,
-        onCompleted: (data) => {
-          console.log( data);
-        },
-        onError: (data) => {
-          console.log( data);
-        },
-      })
-    );
+    getDataList({ params });
   };
 
   useEffect(() => {
-    getProductCategory();
+    // getProductCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // getNewList();
+    getNewList();
+    // props.getCategoryAutoComplete({ kind: 1 }); //kind = 1 = news
     if (title) document.title = title;
   }, []);
 
+  const newData = props.dataList.data || [];
+  pagination.totalPage = props.dataList.totalPage || 1;
+  pagination.totalElements = props.dataList.totalElements || 1;
   const Component = () => (
     <>
       <Home />
       <Category data={categoryData} />
-      <New />
+      <New
+        newData={newData}
+        pagination={pagination}
+        handleTableChange={handleTableChange}
+        loading={props.loading}
+      />
     </>
   );
 
@@ -87,6 +97,10 @@ const LandingPage = (props) => {
     </>
   );
 
+  const handleTableChange = (page, pageSize) => {
+    getNewList(page);
+    pagination.current = page
+  };
   return !isMobile ? (
     <MasterLayout
       {...props}
@@ -107,9 +121,17 @@ const LandingPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  loading: state.news.newsListLoading,
+  dataList: state.news.newsListData || {},
+  categoryAutoCompleteNews: state.news.categoryAutoCompleteNews || {},
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getDataList: (payload) => dispatch(actions.getNewsList(payload)),
+  getCategoryAutoComplete: (payload) =>
+    dispatch(actions.getCategoryAutoComplete(payload)),
+});
 
 export default connect(
   mapStateToProps,

@@ -1,12 +1,17 @@
 import React from "react";
 import logo from "../../../../../../assets/svg/logo-500.svg";
 import {Link} from "react-router-dom"
+import { useEffect } from "react";
 const Nav = () => {
-  window.addEventListener("scroll",function(){
-    const nav= document.querySelector(".menu")
-    if(this.scrollY >= 36) nav.classList.add("off-nav")
-      else nav.classList.remove("off-nav")
-})
+  useEffect(()=>{
+  //   window.addEventListener("scroll",function(){
+  //     const nav= document.querySelector(".menu")
+  //     if(this.scrollY >= 36) nav.classList.add("off-nav")
+  //       else nav.classList.remove("off-nav")
+  // })
+  },[])
+
+  
   return (
     <nav className="nav wrapper">
       <Link to="/">

@@ -4,6 +4,8 @@ import CartPage from "../containers/CartPage"
 import CheckoutPage from "../containers/CheckoutPage"
 import LandingPage from "../containers/LandingPage"
 import LoginPage from "../containers/LoginPage"
+import NewDetailPage from "../containers/NewDetailPage"
+import ProductDetailPage from "../containers/ProductDetailPage"
 import RegisterPage from "../containers/RegisterPage"
 import SummaryPage from "../containers/SummaryPage"
 const desktopRoutes = {
@@ -13,7 +15,7 @@ const desktopRoutes = {
         auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'Trang chủ',
+        title: 'LTS Shop. Trang chủ',
         routeConfig: {
             contentClass: 'landing-site'
         }
@@ -24,7 +26,7 @@ const desktopRoutes = {
         auth: true, // Consider if this site need userdata
         // exac.t: !isMobile ? false : true,
         exact: true,
-        title: 'Đăng nhập',
+        title: 'LTS Shop. Đăng nhập',
         routeConfig: {
             contentClass: 'login-site'
         },
@@ -35,7 +37,7 @@ const desktopRoutes = {
         auth: true, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'Đăng kí',
+        title: 'LTS Shop. Đăng kí',
         routeConfig: {
             contentClass: 'register-site'
         },
@@ -46,7 +48,7 @@ const desktopRoutes = {
         auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'Giỏ hàng',
+        title: 'LTS Shop. Giỏ hàng',
         routeConfig: {
             contentClass: 'cart-site'
         },
@@ -57,7 +59,7 @@ const desktopRoutes = {
         auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'Thanh toán',
+        title: 'LTS Shop. Thanh toán',
         routeConfig: {
             contentClass: 'checkout-site'
         },
@@ -68,18 +70,33 @@ const desktopRoutes = {
         auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,
         exact: true,
-        title: 'Thanh toán',
+        title: 'LTS Shop. Thanh toán',
         routeConfig: {
             contentClass: 'summary-site'
         },
     },
-    // pageNotAllowed: {
-    //     path: '/not-allowed',
-    //     component: PageNotAllowed,
-    //     auth: null,
-    //     title: 'title.notAllowedPage',
-    // },
-    // // put this at last
+    newDetailPage: {
+        path: '/news/:id',
+        component: NewDetailPage,
+        auth: false, // Consider if this site need userdata
+        // exact: !isMobile ? false : true,
+        exact: false,
+        title: 'LTS Shop. Tin tức',
+        routeConfig: {
+            contentClass: 'new-site'
+        },
+    },
+    productDetailPage: {
+        path: '/product/:id',
+        component: ProductDetailPage,
+        auth: false, // Consider if this site need userdata
+        // exact: !isMobile ? false : true,
+        exact: false,
+        title: 'LTS Shop. Sản phẩm',
+        routeConfig: {
+            contentClass: 'new-site'
+        },
+    },
     notFound: {
         component: NotFoundPage,
         auth: false,
