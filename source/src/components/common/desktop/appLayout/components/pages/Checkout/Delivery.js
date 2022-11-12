@@ -41,13 +41,13 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop }) => {
   };
   return (
     <Form onFinish={handleSubmit} ref={formRef}>
-      <div class="checkout__delivery">
+      <div className="checkout__delivery">
         <div className="checkout__part-info">
           <div className="content__title">
             Bạn muốn nhận đơn hàng như thế nào?
           </div>
           <Button className="big-button round-button-white">
-            <i class="bx bx-package checkout__icon-big"></i>
+            <i className="bx bx-package checkout__icon-big"></i>
             <span>Giao hàng</span>
           </Button>
           <div className="checkout__redirect">

@@ -14,8 +14,8 @@ const AppFooter = (props) => {
   return (
     <footer className="footer">
       <div className="footer__container container">
-        <div class="container">
-          <div class="findstore">
+        <div className="container">
+          <div className="findstore">
             <img src={storeLogo} alt="store-svg" />
             <button className="find-store-btn">FIND STORE</button>
           </div>
@@ -23,7 +23,7 @@ const AppFooter = (props) => {
           <FooterListItemsBox item={about} />
           <FooterListItemsBox item={support} />
           <FooterListItemsBox item={contact} />
-          <div class="social px-10">
+          <div className="social px-10">
             <h4>ANANAS SOCIAL</h4>
             <div className="social-link">
               <a href="https://facebook.com">
@@ -37,7 +37,7 @@ const AppFooter = (props) => {
               </a>
             </div>
           </div>
-          <div class="mail px-10">
+          <div className="mail px-10">
             <h4>ĐĂNG KÝ NHẬN MAIL</h4>
             <div className="inputRecieveMail">
               <input type="email" id="inputRecieveMail" />
@@ -46,15 +46,15 @@ const AppFooter = (props) => {
               </button>
             </div>
           </div>
-          <div class="copyright px-10">
+          <div className="copyright px-10">
             <h5>Copyright © 2022 Long Term Shop. All rights reserved.</h5>
           </div>
-          <div class="store-logo px-10">
+          <div className="store-logo px-10">
             <a href="/">
               <img src={StoreLogo} width={200} alt="yt-svg" />
             </a>
           </div>
-          {/* <div class="verify px-10">verify</div> */}
+          {/* <div className="verify px-10">verify</div> */}
         </div>
       </div>
     </footer>

@@ -30,14 +30,14 @@ const Nav = () => {
       <div className="nav__action">
         <div className="nav__search">
          
-          <i class="uil uil-search nav__search-icon"></i>
+          <i className="uil uil-search nav__search-icon"></i>
           <input
             type="text"
             placeholder="Tìm kiếm"
             className="nav__search-input"
           />
         </div>
-        <i class='bx bx-shopping-bag nav__icon'></i>
+        <i className='bx bx-shopping-bag nav__icon'></i>
       </div>
     </nav>
   );

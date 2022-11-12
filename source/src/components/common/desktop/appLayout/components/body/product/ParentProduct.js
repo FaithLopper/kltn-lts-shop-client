@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import ChildProduct from "./ChildProduct";
 import { AppConstants } from "../../../../../../../constants";
 import Utils from "../../../../../../../utils";
@@ -24,7 +24,11 @@ const ParentProduct = (props) => {
         isSold={isSoldOut}
       />
       {childProducts && (
-        <div className="product-child-dropdown">
+        <div
+          id={`product-${id}-child`}
+          style={{ display: "none" }}
+          className="product-child-dropdown"
+        >
           <ul className="product_child_grid_container">
             {childProducts.map((p, index) => (
               <ChildProduct data={p} key={"ChildProduct" + index} />

@@ -26,16 +26,16 @@ const AppFooter = (props) => {
             </div>
 
             <div className="footer__social-nav">
-                <div className="content__nav-social"><i class='bx bxl-facebook-circle'></i></div>
-                <div className="content__nav-social"><i class='bx bxl-instagram-alt' ></i></div>
-                <div className="content__nav-social"><i class='bx bxl-youtube' ></i></div>
+                <div className="content__nav-social"><i className='bx bxl-facebook-circle'></i></div>
+                <div className="content__nav-social"><i className='bx bxl-instagram-alt' ></i></div>
+                <div className="content__nav-social"><i className='bx bxl-youtube' ></i></div>
             </div>
 
             <div className="footer__footer-nav">
-                <div className="footer__info"><i class='bx bxs-location-plus' ></i> 1 Đ. Võ Văn Ngân, Linh Chiểu, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</div>
+                <div className="footer__info"><i className='bx bxs-location-plus' ></i> 1 Đ. Võ Văn Ngân, Linh Chiểu, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</div>
             </div>
           </div>
-          <div className="footer__copyright"><i class="fa fa-copyright" aria-hidden="true"></i> 2022 - Long Term Support, All rights reserved.</div>
+          <div className="footer__copyright"><i className="fa fa-copyright" aria-hidden="true"></i> 2022 - Long Term Support, All rights reserved.</div>
       </div>
     </footer>
   );

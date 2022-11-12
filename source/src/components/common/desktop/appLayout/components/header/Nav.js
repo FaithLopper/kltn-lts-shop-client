@@ -59,7 +59,7 @@ const Nav = ({cartProduct,closeModalCart,modalStatus,cartListData}) => {
 
         <div className="nav__action">
           <div className="nav__search">
-            <i class="uil uil-search nav__search-icon"></i>
+            <i className="uil uil-search nav__search-icon"></i>
             <input
               type="text"
               placeholder="Tìm kiếm"
@@ -67,9 +67,9 @@ const Nav = ({cartProduct,closeModalCart,modalStatus,cartListData}) => {
             />
           </div>
           <Link to="/cart">
-            <i class="bx bx-shopping-bag nav__icon" value={cartListData.length !== 0 ? cartListData.length : null}></i>
+            <i className="bx bx-shopping-bag nav__icon" value={cartListData.length !== 0 ? cartListData.length : null}></i>
           </Link>
-            {/* <i class="bx bx-shopping-bag nav__icon" onClick={()=>showModal(true)} value={3}></i> */}
+            {/* <i className="bx bx-shopping-bag nav__icon" onClick={()=>showModal(true)} value={3}></i> */}
         </div>
       </nav>
 
@@ -79,7 +79,7 @@ const Nav = ({cartProduct,closeModalCart,modalStatus,cartListData}) => {
             <CheckCircleFilled style={{ color: "green" }} /> Đã thêm vào giỏ
             hàng
           </span>
-          <i class="uil uil-multiply cart__modal-icon" onClick={()=>handleClose()}></i>
+          <i className="uil uil-multiply cart__modal-icon" onClick={()=>handleClose()}></i>
         </div>
         <div className="cart__product grid">
           <img src={AppConstants.contentRootUrl+product.color.image} alt="" className="cart__item-image" />

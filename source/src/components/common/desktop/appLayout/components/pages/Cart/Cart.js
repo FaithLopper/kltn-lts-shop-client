@@ -154,7 +154,7 @@ const Cart = ({ dataList, removeCart }) => {
                         </div>
                         <div className="cart__item-action">
                           <i
-                            class="fa fa-trash-o cart__icon"
+                            className="fa fa-trash-o cart__icon"
                             aria-hidden="true"
                             onClick={() => deleteProduct(_index, color, size)}
                           ></i>

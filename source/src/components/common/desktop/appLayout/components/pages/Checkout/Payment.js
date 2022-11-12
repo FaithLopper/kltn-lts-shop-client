@@ -45,7 +45,7 @@ const Payment = ({ product, onNext, setFormData, formRef, scrollTop }) => {
             Bạn muốn thanh toán bằng hình thức nào?
           </div>
           <Button className="big-button round-button-white">
-            <i class="bx bx-package checkout__icon-big"></i>
+            <i className="bx bx-package checkout__icon-big"></i>
             <span>Thanh toán khi nhận hàng</span>
           </Button>
         </div>

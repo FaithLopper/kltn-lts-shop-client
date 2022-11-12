@@ -40,7 +40,7 @@ const Menu = (props) => {
                 </ul>
               </li>
               <Link to="/profile">
-                <i class="bx bx-user menu__icon-user"></i>
+                <i className="bx bx-user menu__icon-user"></i>
               </Link>
             </>
           ) : (

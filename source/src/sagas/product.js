@@ -14,18 +14,16 @@ function* _getProductList({ payload: { params, onCompleted, onError } }) {
   if (params.categoryId) {
     searchParams.categoryId = params.categoryId;
   }
-  console.log(searchParams.categoryId)
+
   try {
     const result = yield call(sendRequest, apiParams, searchParams);
     yield put({
       type: defineActionSuccess(GET_PRODUCT_LIST),
-      // productData: result.responseData && result.responseData.data,
       productData: result.responseData && {
         ...searchParams,
         data: result.responseData.data || [],
       },
     });
-    // handleApiResponse(result, onCompleted, onError);
   } catch (error) {
     yield put({ type: defineActionFailed(GET_PRODUCT_LIST) });
   }

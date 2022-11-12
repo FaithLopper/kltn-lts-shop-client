@@ -1,5 +1,4 @@
 .product__category {
-
   .product__item {
     height: 55.125rem;
     background-color: #f1c5c5;
@@ -123,27 +122,34 @@
 }
 
 .product-child-container:nth-of-type(3n-1) {
-  background-color: red;
   .product-child-dropdown {
     transform: translateX(-32.5%);
   }
 }
 
 .product-child-container:nth-of-type(3n-2) {
-  background-color: red;
   .product-child-dropdown {
     transform: translateX(3%);
   }
 }
 
 .product-child-container:nth-of-type(3n-3) {
-  background-color: red;
   .product-child-dropdown {
     transform: translateX(-67.9%);
   }
 }
 
 .product-child-dropdown {
+  background-color: rgb(235, 229, 229);
+  border-radius: 15px;
   width: 300%;
+  padding: 1.8rem;
   margin-top: 1.8rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.on-product-pick {
+  border: 1rem solid black;
 }

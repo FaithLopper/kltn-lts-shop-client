@@ -3,7 +3,7 @@ import React from "react";
 const FooterListItemsBox = (props) => {
   const { item } = props;
   return (
-    <div class={`${item?.refKey} px-10`}>
+    <div className={`${item?.refKey} px-10`}>
       <a href="/">
         <h4>{item?.title}</h4>
       </a>
