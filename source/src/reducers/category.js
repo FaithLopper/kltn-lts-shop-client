@@ -9,7 +9,7 @@ const {
 const { GET_CATEGORY_LIST } = actionTypes;
 
 const initialState = {
-  categoryList: null,
+  categoryList: [],
   getCategoryListLoading: false,
 };
 
@@ -23,7 +23,7 @@ const reducer = createReducer({
   [defineActionSuccess(GET_CATEGORY_LIST)]: (state, { categoryData }) => {
     return {
       ...state,
-      categoryData,
+      categoryList: categoryData,
       getCategoryListLoading: false,
     };
   },
@@ -33,8 +33,7 @@ const reducer = createReducer({
       getCategoryListLoading: false,
     };
   },
-  initialState,
-});
+},initialState);
 
 const category = { reducer };
 

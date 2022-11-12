@@ -24,11 +24,11 @@ function* _getProductList({ payload: { params, onCompleted, onError } }) {
   console.log("vao saga", searchParams);
   try {
     // const result = yield call(sendRequest, apiParams, searchParams);
-    // yield put({
-    //   type: defineActionSuccess(GET_PRODUCT_LIST),
-    //   // productData: result.responseData && result.responseData.data,
-    //   productData: searchParams,
-    // });
+    yield put({
+      type: defineActionSuccess(GET_PRODUCT_LIST),
+      // productData: result.responseData && result.responseData.data,
+      productData: searchParams,
+    });
     // handleApiResponse(result, onCompleted, onError);
   } catch (error) {
     // yield put({ type: defineActionFailed(GET_PRODUCT_LIST) });

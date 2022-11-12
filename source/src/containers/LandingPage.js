@@ -59,7 +59,7 @@ const LandingPage = (props) => {
   pagination.totalElements = props.dataList.totalElements || 1;
 
   const categoryData = props.categoryDataList || [];
-
+  console.log(categoryData)
   const Component = () => (
     <>
       <Home />
@@ -108,7 +108,7 @@ const LandingPage = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.news.newsListLoading,
   dataList: state.news.newsListData || {},
-  categoryDataList: state.category.categoryData || [],
+  categoryDataList: state.category.categoryList || [],
   categoryAutoCompleteNews: state.news.categoryAutoCompleteNews || {},
 });
 
