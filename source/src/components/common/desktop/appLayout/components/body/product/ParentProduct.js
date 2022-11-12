@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ChildProduct from "./ChildProduct";
 import { AppConstants } from "../../../../../../../constants";
 import Utils from "../../../../../../../utils";
@@ -6,42 +6,27 @@ import ProductCard from "./ProductCard";
 
 const ParentProduct = (props) => {
   const { data } = props;
-  const [parentProductName, setParentProductName] = useState("");
-  const [parentProductImage, setParentProductImage] = useState("");
-  const [parentProductIsSold, setParentProductIsSold] = useState(false);
-  const [parentProductId, setParentProductId] = useState(0);
-  const [parentProductPrice, setParentProductPrice] = useState(0);
-  const [childProductList, setChildProductList] = useState([]);
-  const { numberToCurency } = Utils;
-  
-  useEffect(() => {
-    setParentProductId(data?.id);
-    setParentProductName(data?.name);
-    setParentProductImage(`${AppConstants.contentRootUrl}/` + data?.image);
-    setParentProductIsSold(data?.isSoldOut);
-    setParentProductPrice(numberToCurency(data?.price));
+  const { id, name, image, isSoldOut, price, childProducts } = data;
 
-    if (data?.childProducts) setChildProductList(data?.childProducts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { formatMoney } = Utils;
 
   return (
     <section
       className="product product-child-container"
       style={{ width: "100%" }}
-      id="product"
+      id={`product-${id}`}
     >
       <ProductCard
-        id={parentProductId}
-        img={parentProductImage}
-        name={parentProductName}
-        price={parentProductPrice}
-        isSold={parentProductIsSold}
+        id={id}
+        img={`${AppConstants.contentRootUrl}/` + image}
+        name={name}
+        price={formatMoney(price || 0)}
+        isSold={isSoldOut}
       />
-      {childProductList.length !== 0 && (
+      {childProducts && (
         <div className="product-child-dropdown">
           <ul className="product_child_grid_container">
-            {childProductList.map((p, index) => (
+            {childProducts.map((p, index) => (
               <ChildProduct data={p} key={"ChildProduct" + index} />
             ))}
           </ul>

@@ -19,11 +19,8 @@ const reducer = createReducer(
       return { ...state, getProductListLoading: true };
     },
     [defineActionSuccess(GET_PRODUCT_LIST)]: (state, { productData }) => {
-      // console.log({
-      //   ...state,
-      //   productList: [...state.productList, productData],
-      // });
-      return { ...state, productList: [...state.productList, productData], getProductListLoading: false };
+      state.productList.push(productData);
+      return { ...state, getProductListLoading: false };
     },
     [defineActionFailed(GET_PRODUCT_LIST)]: (state) => {
       return {

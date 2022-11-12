@@ -26,40 +26,46 @@ const LandingPage = (props) => {
   const { t, title } = props;
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const stateNews = useSelector((state) => state.news);
+  const { newsListData } = stateNews;
 
-  const getProductCategory = () => {
-    const { getCategoryDataList } = props;
-    const params = {
-    };
-    getCategoryDataList({ params });
-  };
+  const newData = newsListData?.data || [];
+  pagination.totalPage = newsListData?.totalPage || 1;
+  pagination.totalElements = newsListData?.totalElements || 1;
+  // const newLoading = newsListLoading || false;
 
   const getNewList = (currentPage) => {
-    const { getDataList } = props;
     const page = currentPage ? currentPage - 1 : 0;
     const params = {
       page,
       size: pagination.pageSize,
       kind: 1,
     };
-    getDataList({ params });
+    dispatch(actions.getNewsList({ params }));
   };
 
+  const handleTableChange = (page, pageSize) => {
+    dispatch(actions.getNewsList(page));
+    pagination.current = page;
+  };
+
+  const getProductCategory = () => {
+    dispatch(actions.getCategoryList());
+  };
+
+  const stateCategory = useSelector((state) => state.category);
+  const { getCategoryListLoading, categoryList } = stateCategory;
+  const categoryData = categoryList || [];
+  const categoryLoading = getCategoryListLoading || false;
+  
   useEffect(() => {
-    getProductCategory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     getNewList();
+    getProductCategory();
     // props.getCategoryAutoComplete({ kind: 1 }); //kind = 1 = news
     if (title) document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const newData = props.dataList.data || [];
-  pagination.totalPage = props.dataList.totalPage || 1;
-  pagination.totalElements = props.dataList.totalElements || 1;
-
-  const categoryData = props.categoryDataList || [];
-  console.log(categoryData)
   const Component = () => (
     <>
       <Home />
@@ -77,14 +83,10 @@ const LandingPage = (props) => {
     <>
       <HomeMobile />
       <ProductMobile />
-      <NewMobile />
+      {/* <NewMobile /> */}
     </>
   );
 
-  const handleTableChange = (page, pageSize) => {
-    getNewList(page);
-    pagination.current = page;
-  };
   return !isMobile ? (
     <MasterLayout
       {...props}
@@ -105,21 +107,4 @@ const LandingPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.news.newsListLoading,
-  dataList: state.news.newsListData || {},
-  categoryDataList: state.category.categoryList || [],
-  categoryAutoCompleteNews: state.news.categoryAutoCompleteNews || {},
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getDataList: (payload) => dispatch(actions.getNewsList(payload)),
-  getCategoryDataList: (payload) => dispatch(actions.getCategoryList(payload)),
-  getCategoryAutoComplete: (payload) =>
-    dispatch(actions.getCategoryAutoComplete(payload)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withTranslation("navigationBar")(LandingPage));
+export default withTranslation("navigationBar")(LandingPage);

@@ -1,43 +1,38 @@
 import { call, put, takeEvery, takeLeading } from "redux-saga/effects";
 import apiConfig from "../constants/apiConfig";
 import { sendRequest } from "../services/apiService";
-import Utils from "../utils";
-import { handleApiResponse } from "../utils/apiHelper";
 import { actionTypes, reduxUtil } from "../actions/product";
 
-const { checkAllAvailableParams } = Utils;
 const { GET_PRODUCT_LIST } = actionTypes;
-const {
-  defineActionLoading,
-  defineActionSuccess,
-  defineActionFailed,
-  defineAction,
-} = reduxUtil;
+const { defineActionLoading, defineActionSuccess, defineActionFailed } =
+  reduxUtil;
 
 function* _getProductList({ payload: { params, onCompleted, onError } }) {
   const apiParams = apiConfig.product.getListByCategory;
-  const searchParams = checkAllAvailableParams(params);
+  const searchParams = {};
 
   if (params.categoryId) {
     searchParams.categoryId = params.categoryId;
   }
-  console.log("vao saga", searchParams);
+  console.log(searchParams.categoryId)
   try {
-    // const result = yield call(sendRequest, apiParams, searchParams);
+    const result = yield call(sendRequest, apiParams, searchParams);
     yield put({
       type: defineActionSuccess(GET_PRODUCT_LIST),
       // productData: result.responseData && result.responseData.data,
-      productData: searchParams,
+      productData: result.responseData && {
+        ...searchParams,
+        data: result.responseData.data || [],
+      },
     });
     // handleApiResponse(result, onCompleted, onError);
   } catch (error) {
-    // yield put({ type: defineActionFailed(GET_PRODUCT_LIST) });
-    console.log(error);
+    yield put({ type: defineActionFailed(GET_PRODUCT_LIST) });
   }
 }
 
 const sagas = [
-  takeLeading(defineActionLoading(GET_PRODUCT_LIST), _getProductList),
+  takeEvery(defineActionLoading(GET_PRODUCT_LIST), _getProductList),
 ];
 
 export default sagas;

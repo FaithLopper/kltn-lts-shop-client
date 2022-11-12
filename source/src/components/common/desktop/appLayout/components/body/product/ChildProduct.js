@@ -5,21 +5,9 @@ import ProductCard from "./ProductCard";
 
 const ChildProduct = (props) => {
   const { data } = props;
-  const [childProductName, setChildProductName] = useState("");
-  const [childProductId, setChildProductId] = useState(0);
-  const [childProductImage, setChildProductImage] = useState("");
-  const [childProductIsSold, setChildProductIsSold] = useState(false);
-  const [childProductPrice, setChildProductPrice] = useState(0);
-  const { numberToCurency } = Utils;
+  const { id, name, image, isSoldOut, price } = data;
 
-  useEffect(() => {
-    setChildProductName(data?.name);
-    setChildProductId(data?.id);
-    setChildProductImage(`${AppConstants.contentRootUrl}/` + data?.image);
-    setChildProductIsSold(data?.isSoldOut);
-    setChildProductPrice(numberToCurency(data?.price));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  const { formatMoney } = Utils;
 
   return (
     <section
@@ -28,11 +16,11 @@ const ChildProduct = (props) => {
       id="product"
     >
       <ProductCard
-        id={childProductId}
-        img={childProductImage}
-        name={childProductName}
-        price={childProductPrice}
-        isSold={childProductIsSold}
+        id={id}
+        img={`${AppConstants.contentRootUrl}/` + image}
+        name={name}
+        price={formatMoney(price || 0)}
+        isSold={isSoldOut}
       />
     </section>
   );
