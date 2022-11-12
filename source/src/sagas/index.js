@@ -3,6 +3,7 @@ import category from "./category";
 import product from "./product";
 import account from './account'
 import news from './news';
+import cart from './cart';
 // import landing from "./landing"
 const sagas = [
   // ...landing,
@@ -10,6 +11,7 @@ const sagas = [
   ...product,
   ...account,
   ...news,
+  ...cart,
 ];
 
 function* rootSaga() {

@@ -5,12 +5,14 @@ import {
 import {actions as newsActions, actionTypes as newsTypes} from './news';
 import {actions as categoryActions, actionTypes as categoryTypes} from './category';
 import {actions as productActions, actionTypes as productTypes} from './product';
+import {actions as cartActions, actionTypes as cartTypes} from './cart';
 
 export const actions = {
   ...accountActions,
   ...newsActions,
   ...categoryActions,
   ...productActions,
+  ...cartActions,
 };
 
 export const types = {
@@ -18,4 +20,5 @@ export const types = {
   ...newsTypes,
   ...categoryTypes,
   ...productTypes,
+  ...cartTypes,
 };

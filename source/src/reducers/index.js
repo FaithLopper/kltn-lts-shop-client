@@ -4,12 +4,13 @@ import account from "./account";
 import category from "./category";
 import product from "./product";
 import news from "./news";
+import cart from './cart';
 const rootReducer = combineReducers({
   category: category.reducer,
   product : product.reducer,
   account: account.reducer,
   news: news.reducer,
-  // landing: landing.reducer,
+  cart: cart.reducer,
 });
 
 export default rootReducer;

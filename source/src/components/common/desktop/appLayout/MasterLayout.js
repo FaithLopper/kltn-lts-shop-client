@@ -85,6 +85,10 @@ class MasterLayout extends Component {
               NavigatorMenu={this.NavigatorMenu}
               userData={userData}
               onLogout={this.onLogout}
+              cartProduct={this.props.cartProduct}
+              closeModalCart={this.props.closeModalCart}
+              modalStatus={this.props.modalStatus}
+              cartListData={this.props.cartListData}
             />
           ) : (
             <NewHeader dataConfig={dataConfig || {}}/>
@@ -98,10 +102,15 @@ class MasterLayout extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  cartProduct:state.cart?.cartProduct,
+  cartListData:state.cart?.cartListData,
+  modalStatus:state.cart?.modalStatus,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(actions.logout()),
+  closeModalCart: () => dispatch(actions.closeModalCart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MasterLayout);
