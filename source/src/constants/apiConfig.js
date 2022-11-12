@@ -20,6 +20,11 @@ const apiConfig = {
       method: "GET",
       headers: baseHeader,
     },
+    getById: {
+      path: "v1/product/get-details",
+      method: "GET",
+      headers: baseHeader,
+    },
   },
   new: {
     getNew: {

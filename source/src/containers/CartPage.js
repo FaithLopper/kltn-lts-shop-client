@@ -7,6 +7,7 @@ import LoginForm from "../components/common/desktop/appLayout/components/pages/A
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import Cart from "../components/common/desktop/appLayout/components/pages/Cart/Cart";
+import { actions } from "../actions";
 
 const { isMobileDevice } = Utils;
 const isMobile = isMobileDevice();
@@ -23,15 +24,19 @@ const CartPage = (props) => {
       hotNew.classList.add("remove-hotnew")
   });
   return !isMobile ? (
-    <MasterLayout {...props} t={t} Component={Cart}/>
+    <MasterLayout {...props} t={t} Component={Cart} dataList={props.dataList} removeCart={props.removeCart}/>
   ) : (
     <MobileMasterLayout {...props} t={t} Component={Cart}/>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  dataList:state.cart.cartListData
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  removeCart: (payload) => dispatch(actions.removeItemCart(payload)),
+});
 
 export default connect(
   mapStateToProps,

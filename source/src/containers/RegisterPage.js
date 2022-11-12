@@ -47,7 +47,7 @@ const RegisterPage = (props) => {
 
   const submitButton = () => {
     return (
-      <Form.Item name="keep-login">
+      <Form.Item>
         <Button
           htmlType="submit"
           className="login__button button"

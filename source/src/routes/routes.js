@@ -87,7 +87,7 @@ const desktopRoutes = {
         },
     },
     productDetailPage: {
-        path: '/product/:id',
+        path: '/product-detail/:id',
         component: ProductDetailPage,
         auth: false, // Consider if this site need userdata
         // exact: !isMobile ? false : true,

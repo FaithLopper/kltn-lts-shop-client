@@ -9,56 +9,11 @@ import Utils from "../../../../../../../utils";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-const data = [
-  {
-    image:
-      "https://secure-images.nike.com/is/image/DotCom/DH0956_001?v=a0a21517955e78b0844bdf3dfdde8b87",
-    name: `Nike Air Force 1 '07 LV8`,
-    productCategory: `Men's Shoes`,
-    description: "Malachite/Sail/White/Blue Jay",
-    variants: { size: 40, quantity: 1 },
-    price: 3239000,
-    totalPrice: 3239000,
-    quantity: 1,
-  },
-  {
-    image:
-      "https://secure-images.nike.com/is/image/DotCom/DJ9946_100?v=a0a21517955e78b0844bdf3dfdde8b87",
-    name: `Nike Air Max Flyknit Racer`,
-    productCategory: `Men's Shoes`,
-    description: "Malachite/Sail/White/Blue Jay",
-    variants: { size: 40, quantity: 1 },
-    price: 1239000,
-    totalPrice: 1239000,
-    quantity: 1,
-  },
-  {
-    image:
-      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
-    name: `Nike Air Force 1 '07 LV8`,
-    productCategory: `Men's Shoes`,
-    description: "Malachite/Sail/White/Blue Jay",
-    variants: { size: 40, quantity: 1 },
-    price: 2699000,
-    totalPrice: 2699000,
-    quantity: 1,
-  },
-  {
-    image:
-      "	https://secure-images.nike.com/is/image/DotCom/DO9387_001?v=a0a21517955e78b0844bdf3dfdde8b87",
-    name: `Nike Court Borough Low 2`,
-    productCategory: `Men's Shoes`,
-    description: "Malachite/Sail/White/Blue Jay",
-    variants: { size: 40, quantity: 1 },
-    price: 4239000,
-    totalPrice: 4239000,
-    quantity: 1,
-  },
-];
-const Cart = () => {
-  const [product, setProduct] = useState(data);
+import { AppConstants } from "../../../../../../../constants";
+const Cart = ({ dataList, removeCart }) => {
+  const [product, setProduct] = useState([]);
   const [isDelete, setDetele] = useState(null);
-  const [productId, setProductId] = useState(null);
+  const [productId, setProductId] = useState({});
   const [total, setTotal] = useState(() => {
     let total = 0;
     product.map((item) => {
@@ -66,21 +21,42 @@ const Cart = () => {
     });
     return total;
   });
-  const deleteProduct = (productId) => {
-    setProductId(productId);
+  const deleteProduct = (id, color, size) => {
+    setProductId({ id, color, size });
+
     showCartModal(true);
   };
+
+  useEffect(() => {
+    if (dataList.length !== 0)
+      setProduct(
+        dataList.map((item) => {
+          return { ...item, totalPrice: item.price,quantity:1 };
+        })
+      );
+  }, [dataList]);
 
   useEffect(() => {
     if (isDelete === true) {
       setProduct(
         product.filter((item, _index) => {
-          if (_index !== productId) {
+          if (_index !== productId.id) {
             return item;
           }
           return false;
         })
       );
+      removeCart({
+        params: {
+          product: {
+            id: productId.id,
+            color: productId.color,
+            size: productId.size,
+          },
+        },
+        onCompleted:(data)=>{console.log(data);},
+        onError:(error)=>{console.log(error);}
+      });
       showCartModal(false);
     } else if (isDelete === false) {
       showCartModal(false);
@@ -92,7 +68,7 @@ const Cart = () => {
     if (show) cart.classList.add("active-modal-cart");
     else {
       cart.classList.remove("active-modal-cart");
-      setDetele(null)
+      setDetele(null);
     }
   };
 
@@ -100,7 +76,7 @@ const Cart = () => {
     setTotal(() => {
       let total = 0;
       product.map((item) => {
-        total = total + item.price * item.quantity;
+        total = total + item.finalPrice * item.quantity;
       });
       return total;
     });
@@ -125,64 +101,74 @@ const Cart = () => {
         <div className="cart__bag">
           <div className="content__title">Giỏ hàng</div>
           <div className="cart__list">
-            {product.map(
-              (
-                {
-                  image,
-                  name,
-                  productCategory,
-                  description,
-                  variants,
-                  totalPrice,
-                  quantity,
-                },
-                _index
-              ) => (
-                <>
-                  <div className="cart__item grid">
-                    <img src={image} alt="" className="cart__item-image" />
-                    <div className="cart__item-info">
-                      <div className="cart__item-name">{name}</div>
-                      <div className="cart__item-category">
-                        {productCategory}
+            {product.length !== 0 ? (
+              product.map(
+                (
+                  {
+                    image,
+                    name,
+                    size,
+                    color,
+                    // variants,
+                    totalPrice,
+                    finalPrice,
+                    // quantity,
+                  },
+                  _index
+                ) => (
+                  <>
+                    <div className="cart__item grid">
+                      <img
+                        src={AppConstants.contentRootUrl + color.image}
+                        alt=""
+                        className="cart__item-image"
+                      />
+                      <div className="cart__item-info">
+                        <div className="cart__item-name">{name}</div>
+                        <div className="cart__item-category">{color.name}</div>
+                        {/* <div className="cart__item-description">
+                          {color.name}
+                        </div> */}
+                        <div className="cart__item-variants">
+                          <span className="cart__item-size">
+                            Size {size.name}
+                          </span>
+                          {/* <span className="cart__item-quantity">
+                            Số lượng
+                            <select
+                              name="quantity"
+                              className="cart__quantity-select"
+                              onChange={(e) =>
+                                changeQuantity(e.target.value, _index)
+                              }
+                              value={quantity}
+                            >
+                              {[...Array(10)].map((item, _index) => (
+                                <option value={_index + 1}>
+                                  {" "}
+                                  {_index + 1}
+                                </option>
+                              ))}
+                            </select>
+                          </span> */}
+                        </div>
+                        <div className="cart__item-action">
+                          <i
+                            class="fa fa-trash-o cart__icon"
+                            aria-hidden="true"
+                            onClick={() => deleteProduct(_index, color, size)}
+                          ></i>
+                        </div>
                       </div>
-                      <div className="cart__item-description">
-                        {description}
-                      </div>
-                      <div className="cart__item-variants">
-                        <span className="cart__item-size">
-                          Size {variants.size}
-                        </span>
-                        <span className="cart__item-quantity">
-                          Số lượng
-                          <select
-                            name="quantity"
-                            className="cart__quantity-select"
-                            onChange={(e) =>
-                              changeQuantity(e.target.value, _index)
-                            }
-                            value={quantity}
-                          >
-                            {[...Array(10)].map((item, _index) => (
-                              <option value={_index + 1}> {_index + 1}</option>
-                            ))}
-                          </select>
-                        </span>
-                      </div>
-                      <div className="cart__item-action">
-                        <i
-                          class="fa fa-trash-o cart__icon"
-                          aria-hidden="true"
-                          onClick={() => deleteProduct(_index)}
-                        ></i>
+                      <div className="cart__item-price">
+                        {Utils.formatMoney(finalPrice || 0)}
                       </div>
                     </div>
-                    <div className="cart__item-price">
-                      {Utils.formatMoney(totalPrice || 0)}
-                    </div>
-                  </div>
-                </>
+                  </>
+                )
               )
+            ) : (
+              <>Không có sản phẩm nào trong giỏ hàng</>
             )}
           </div>
         </div>
@@ -191,9 +177,9 @@ const Cart = () => {
           <div className="cart__summary-content">
             <div className="cart__summary-item grid">
               <div className="summary__name">
-                Giá trị{" "}
+                Giá trị
                 <QuestionCircleFilled
-                  style={{ fontSize: "14px", cursor: "pointer" }}
+                  style={{ fontSize: "14px", cursor: "pointer",marginLeft:"10px" }}
                 />
               </div>
               <div className="summary__price">

@@ -20,7 +20,7 @@ const ProductDetailPage = (props) => {
   const [detail, setDetail] = useState(false);
   useEffect(() => {
     if (title) document.title = title;
-    // getDetail(detailId);
+    getDetail(detailId);
   }, []);
   useEffect(() => {
     // Cập nhập document title sử dụng browser API
@@ -36,18 +36,26 @@ const ProductDetailPage = (props) => {
       params,
       onCompleted: (responseData) => {
         if (responseData.result) {
-          setLoading(false)
+          setLoading(false);
           setDetail(responseData.data);
         }
       },
       onError: (err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err);
       },
     });
   };
   return !isMobile ? (
-    <MasterLayout {...props} t={t} Component={ProductDetail} loading={loading} dataConfig={detail} />
+    <MasterLayout
+      {...props}
+      t={t}
+      Component={ProductDetail}
+      addCart={props.addCart}
+      showModalCart={props.showModalCart}
+      loading={loading}
+      dataConfig={detail}
+    />
   ) : (
     <MobileMasterLayout
       {...props}
@@ -61,6 +69,9 @@ const ProductDetailPage = (props) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
+  getDataById: (payload) => dispatch(actions.getProductById(payload)),
+  addCart: (payload) => dispatch(actions.addItemCart(payload)),
+  showModalCart: (payload) => dispatch(actions.showModalCart(payload)),
 });
 
 export default connect(
