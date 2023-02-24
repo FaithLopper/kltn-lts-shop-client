@@ -4,6 +4,7 @@ import BussinessLandingPage from '@modules/business/containers/landing';
 import Bussiness2LandingPage from '@modules/business_2/containers/landing';
 import PublicLayout from '@modules/business/theme-default/layout/PublicLayout';
 import PageNotFound from '@components/common/page/PageNotFound';
+import LoginContainer from '@modules/business/containers/login';
 /*
 	auth
 		+ null: access login and not login
@@ -28,7 +29,7 @@ const routes = {
     },
     loginPage: {
         path: '/login',
-        component: LoginPage,
+        component: LoginContainer,
         auth: false,
         title: 'Login page',
         layout: PublicLayout,
