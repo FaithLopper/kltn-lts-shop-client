@@ -1,0 +1,6 @@
+@import "@assets/scss/variables.scss";
+
+.content-left {
+    flex-shrink: 0;
+    width: $leftContentWidth;
+}

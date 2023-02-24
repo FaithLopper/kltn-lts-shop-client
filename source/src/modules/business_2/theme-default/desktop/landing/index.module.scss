@@ -1,0 +1,57 @@
+@import '@assets/scss/global';
+
+.landing-page {
+    .process-board {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 24px;
+
+        > * {
+            flex: 0 0 calc(50% - 12px);
+        }
+    }
+
+    .dailyTask {
+        padding: 20px 0;
+        
+        .title {
+            display: flex;
+            justify-content: space-around;
+            .name {
+                font-size: 32px;
+                color: #b70027;
+            }
+
+            .button {
+                border: 4px solid white;
+                border-radius: 14px;
+                background-color: #3f5294;
+                color: white;
+                padding: 6px 40px;
+                font-size: 20px;
+            }
+        }
+
+        .process {
+            display: flex;
+            margin-top: 20px;
+            column-gap: 100px;
+            .game {
+                img {
+                    max-width: 740px;
+                }
+            }
+
+            .interactive {
+                display: flex;
+                align-items: center;
+                .robotBlue {
+                    object-fit: contain;
+                    max-width: 245px;
+                }
+            }
+        }
+    }
+}

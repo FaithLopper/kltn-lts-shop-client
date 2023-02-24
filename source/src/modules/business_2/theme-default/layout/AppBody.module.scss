@@ -1,0 +1,20 @@
+@import "../../../../assets//scss/variables.scss";
+
+.content-center {
+    // flex-shrink: 0;
+    // width: calc(100% - $leftContentWidth - $gap);
+    // margin-left: $gap;
+    overflow-x: hidden;
+
+    .process-board {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 24px;
+
+        > * {
+            flex: 0 0 calc(50% - 12px);
+        }
+    }
+}

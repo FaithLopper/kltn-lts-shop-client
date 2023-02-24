@@ -1,0 +1,7 @@
+REACT_APP_API = https://api.cyberplusplus.io/
+REACT_APP_ENV = staging
+GENERATE_SOURCEMAP = false
+CI = false
+IMAGE_INLINE_SIZE_LIMIT = 0
+REACT_APP_ENABLE_EXPOSURE = true
+REACT_APP_GAME_API = https://beta.game.cyberplusplus.io/

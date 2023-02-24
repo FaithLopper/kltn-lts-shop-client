@@ -1,0 +1,14 @@
+@import '@assets/scss/global';
+
+.landing-page {
+    .process-board {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 24px;
+        > * {
+            flex: 0 0 calc(50% - 12px);
+        }
+    }
+}
