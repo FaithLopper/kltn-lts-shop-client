@@ -5,7 +5,6 @@ import PageNotFound from '../page/PageNotFound';
 const RenderContext = ({ layout, components, ...props }) => {
     const { isMobile } = useDevices();
     const ComponentLayout = layout?.defaultTheme;
-    console.log(ComponentLayout);
     const ComponentRender = (isMobile ? components?.mobile?.defaultTheme : components?.desktop?.defaultTheme) || PageNotFound;
     return (
         <ComponentLayout>

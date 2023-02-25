@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import logo from '@assets/svg/logo-500.svg';
 import BasicForm from '@components/common/form/BasicForm';
 import InputField from '@components/common/form/InputField';
@@ -26,7 +26,10 @@ const message = defineMessages({
 const LoginComponent = () => {
     const navigate = useNavigate();
     const intl = useIntl();
+    const form = useRef();
     const handleSubmit = (values) => {
+        console.log(values);
+        console.log("adadad");
         // navigate(routes.homePage.path);
     };
     return (
@@ -40,7 +43,8 @@ const LoginComponent = () => {
                     initialValues={{ email: '' }}
                     onSubmit={handleSubmit}
                     validationSchema={schema}
-                    id="loginForm"
+                    id="login-form"
+                    ref={form}
                 >
                     <InputField
                         name="email"
@@ -67,9 +71,11 @@ const LoginComponent = () => {
                         <Link to="#">Điều khoản sử dụng</Link> của cửa hàng
                     </div>
                     <div className={styles.actions}>
-                        <button className="button full">Sign in</button>
+                        <button type="submit" key="submit" form="login-form" className="button full">
+                            Sign in
+                        </button>
                     </div>
-                    <div className="login__register">
+                    <div className="login__register" >
                         Chưa có tài khoản? <Link to="/register">Đăng kí</Link>
                     </div>
                 </BasicForm>
