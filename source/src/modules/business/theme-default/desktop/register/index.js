@@ -24,7 +24,7 @@ const message = defineMessages({
     loginSuccess: 'Đăng nhập thành công !',
 });
 
-const LoginComponent = () => {
+const RegisterComponent = () => {
     const intl = useIntl();
     const { execute, loading } = useFetch(apiConfig.account.login, {});
     const { execute: executeGetProfile, isLoading } = useFetchAction(accountActions.getProfile, {
@@ -100,6 +100,33 @@ const LoginComponent = () => {
                         classNameInput={styles.inputBox}
                         type="password"
                     />
+                    <InputField
+                        name="email"
+                        className={styles.inputField}
+                        placeholder="Email"
+                        classNameInput={styles.inputBox}
+                        type="email"
+                    />
+                    <InputField
+                        name="phone"
+                        className={styles.inputField}
+                        placeholder="Số điện thoại"
+                        classNameInput={styles.inputBox}
+                        type="number"
+                    />
+                    <InputField
+                        name="fullName"
+                        className={styles.inputField}
+                        placeholder="Họ và Tên"
+                        classNameInput={styles.inputBox}
+                    />
+                    <InputField
+                        name="birthday"
+                        className={styles.inputField}
+                        placeholder="Ngày sinh"
+                        classNameInput={styles.inputBox}
+                        type="date"
+                    />
                     <div className={styles.save}>
                         <div className="login__option">
                             <input type="checkbox" id="keep-login" className="login__checkbox" />
@@ -131,4 +158,4 @@ const LoginComponent = () => {
     );
 };
 
-export default LoginComponent;
+export default RegisterComponent;

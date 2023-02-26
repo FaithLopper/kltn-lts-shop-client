@@ -1,0 +1,69 @@
+.login__logo {
+    width: 75px;
+    height: 75px;
+}
+
+.section {
+    padding: 1rem 0 9rem;
+}
+
+.login__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: var(--mb-1-5);
+}
+
+.login__title {
+    font-family: Montreal;
+    font-size: 1.625rem;
+    letter-spacing: 0.0063rem;
+    word-spacing: -0.625rem;
+    line-height: 1.75rem;
+    text-align: center;
+}
+
+.login__subtitle {
+    color: var(--input-color);
+    font-size: var(--small-font-size);
+    max-width: 17rem;
+    text-align: center;
+}
+
+.login__option{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    label, a{
+        font-size: 0.75rem;
+        color: var(--input-color);
+    }
+    label{
+        flex-grow: 1;
+    }
+    .login__checkbox{
+        width: 18px;
+        height: 18px;
+        margin: 3px 10px 0 0;
+    }
+}
+
+
+.login__register,
+.login__policy{
+    font-size: 0.75rem;
+    padding: 0 1.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--input-color);
+    a{
+        color: var(--input-color);
+        text-decoration: underline;
+    }
+}
+
+.login__register{
+    margin-top: 2rem;
+}

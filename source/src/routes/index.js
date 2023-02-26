@@ -1,10 +1,10 @@
 import PageNotAllowed from '@components/common/page/PageNotAllowed';
-import LoginPage from '@components/common/page/login';
 import BussinessLandingPage from '@modules/business/containers/landing';
 import Bussiness2LandingPage from '@modules/business_2/containers/landing';
 import PublicLayout from '@modules/business/theme-default/layout/PublicLayout';
 import PageNotFound from '@components/common/page/PageNotFound';
 import LoginContainer from '@modules/business/containers/login';
+import RegisterContainer from '@modules/business/containers/register';
 /*
 	auth
 		+ null: access login and not login
@@ -32,6 +32,13 @@ const routes = {
         component: LoginContainer,
         auth: false,
         title: 'Login page',
+        layout: PublicLayout,
+    },
+    registerPage: {
+        path: '/register',
+        component: RegisterContainer,
+        auth: false,
+        title: 'Register page',
         layout: PublicLayout,
     },
     notFound: {
