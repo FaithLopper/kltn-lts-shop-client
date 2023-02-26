@@ -1,4 +1,4 @@
-REACT_APP_API = https://beta.api.cyberplusplus.io/
+REACT_APP_API = https://shop-api.developteam.net/
 REACT_APP_ENV = dev
 GENERATE_SOURCEMAP = false
 CI = false

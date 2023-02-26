@@ -5,8 +5,6 @@ export const hideAppLoading = createAction('app/HIDE_LOADING');
 export const toggleActionLoading = createAction('app/ACTION_LOADING');
 export const changeLanguage = createAction('app/CHANGE_LANGUAGE');
 export const uploadFile = createAction('app/UPLOAD_FILE');
-export const setSiteSlug = createAction('app/SET_SITE_SLUG');
-export const setSiteInfo = createAction('app/SET_SITE_INFO');
 
 export const actions = {
     showAppLoading,
@@ -14,6 +12,4 @@ export const actions = {
     toggleActionLoading,
     changeLanguage,
     uploadFile,
-    setSiteSlug,
-    setSiteInfo,
 };

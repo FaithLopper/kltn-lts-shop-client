@@ -24,7 +24,7 @@ const routes = {
             bussiness: BussinessLandingPage,
             bussiness_2: Bussiness2LandingPage,
         },
-        auth: true,
+        auth: null,
         title: 'Home',
     },
     loginPage: {

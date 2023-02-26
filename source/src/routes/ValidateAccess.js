@@ -34,9 +34,9 @@ const ValidateAccess = ({
 
     const redirect = getRedirect(authRequire);
 
-    // if (redirect) {
-    //     return <Navigate state={{ from: location }} key={redirect} to={redirect} replace />;
-    // }
+    if (redirect) {
+        return <Navigate state={{ from: location }} key={redirect} to={redirect} replace />;
+    }
 
     return (
         <Component {...(componentProps || {})}>

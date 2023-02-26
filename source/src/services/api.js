@@ -82,6 +82,11 @@ const sendRequest = (options, payload, cancelToken) => {
         headers.Authorization = `Bearer ${userAccessToken}`;
     }
 
+    if (params.token) {
+        headers.Authorization = `Bearer ${params.token}`;
+        delete params.token;
+    }
+
     // update path params
     for (let key of Object.keys(pathParams)) {
         const keyCompare = `:${key}`;

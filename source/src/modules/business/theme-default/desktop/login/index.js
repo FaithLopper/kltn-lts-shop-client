@@ -9,29 +9,71 @@ import routes from '@routes';
 import styles from './index.module.scss';
 import classNames from 'classnames';
 import './index.scss';
-let schema = yup.object().shape({
-    email: yup.string().email('Not a proper email').required('Required'), // pass your error message string
-    password: yup.string().required('Required'), // pass your error message string
-});
+import { toast } from 'react-toastify';
+import Button from '@components/common/form/Button';
+import useFetch from '@hooks/useFetch';
+import apiConfig from '@constants/apiConfig';
+import useFetchAction from '@hooks/useFetchAction';
+import { accountActions } from '@store/actions';
+import { setCacheAccessToken } from '@services/userService';
 
 const message = defineMessages({
-    username: 'Username',
-    password: 'Password',
-    login: 'Login',
-    email: 'Email',
-    error: 'Wrong email, please try again !',
-    date: 'Birdthday',
+    username: 'Vui lòng nhập tên đăng nhập',
+    password: 'Vui lòng nhập mật khẩu',
+    loginFail: 'Đăng nhập thất bại !',
+    loginSuccess: 'Đăng nhập thành công !',
 });
 
 const LoginComponent = () => {
     const navigate = useNavigate();
     const intl = useIntl();
-    const form = useRef();
-    const handleSubmit = (values) => {
-        console.log(values);
-        console.log("adadad");
-        // navigate(routes.homePage.path);
+    const { execute, loading } = useFetch(apiConfig.account.login, {});
+    const { execute: executeGetProfile, isLoading } = useFetchAction(accountActions.getProfile, {
+        loading: useFetchAction.LOADING_TYPE.APP,
+    });
+    let schema = yup.object().shape({
+        password: yup.string().required(intl.formatMessage(message.password)), // pass your error message string
+        username: yup.string().required(intl.formatMessage(message.username)), // pass your error message string
+    });
+    const submit = (value) => {
+        // console.log(value);
+        schema
+            .validate(value, { abortEarly: false })
+            .then(() => {
+                onLogin(value);
+            })
+            .catch((errors) => {
+                errors.inner.forEach((error) => {
+                    toast.error(`${error.path}: ${error.message}`);
+                });
+            });
     };
+
+    const onLogin = (values) => {
+        execute({
+            data: {
+                username: values.username,
+                password: values.password,
+                app: 'APP_WEB_CUSTOMER',
+            },
+            onCompleted: (res) => {
+                try {
+                    const { result, data } = res;
+                    if (result && data) {
+                        setCacheAccessToken(data.token);
+                        executeGetProfile({ params: { token: data.token } });
+                        toast.success(intl.formatMessage(message.loginSuccess));
+                    }
+                } catch (error) {
+                    toast.error(intl.formatMessage(message.loginFail));
+                }
+            },
+            onError: ({ message }) => {
+                toast.error(message);
+            },
+        });
+    };
+
     return (
         <section className="login section" id="login">
             <div className="login__container">
@@ -40,14 +82,14 @@ const LoginComponent = () => {
                     long term support <br /> your account
                 </div>
                 <BasicForm
-                    initialValues={{ email: '' }}
-                    onSubmit={handleSubmit}
-                    validationSchema={schema}
+                    initialValues={{ username: '', password: '' }}
+                    onSubmit={submit}
+                    // validationSchema={schema}
                     id="login-form"
-                    ref={form}
+                    // ref={form}
                 >
                     <InputField
-                        name="email"
+                        name="username"
                         placeholder="Tên đăng nhập"
                         className={styles.inputField}
                         classNameInput={styles.inputBox}
@@ -71,11 +113,17 @@ const LoginComponent = () => {
                         <Link to="#">Điều khoản sử dụng</Link> của cửa hàng
                     </div>
                     <div className={styles.actions}>
-                        <button type="submit" key="submit" form="login-form" className="button full">
+                        <Button
+                            loading={loading || isLoading}
+                            type="submit"
+                            key="submit"
+                            form="login-form"
+                            className="button full"
+                        >
                             Sign in
-                        </button>
+                        </Button>
                     </div>
-                    <div className="login__register" >
+                    <div className="login__register">
                         Chưa có tài khoản? <Link to="/register">Đăng kí</Link>
                     </div>
                 </BasicForm>

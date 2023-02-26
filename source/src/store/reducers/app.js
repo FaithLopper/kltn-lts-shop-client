@@ -7,14 +7,12 @@ const {
     showAppLoading,
     toggleActionLoading,
     changeLanguage,
-    setSiteSlug,
     setSiteInfo,
 } = appActions;
 
 const initialState = {
     appLoading: 0,
     locale: defaultLocale,
-    siteSlug: '',
     siteInfo: null,
 };
 
@@ -42,12 +40,6 @@ const appReducer = createReducer(
         },
         [changeLanguage.type]: (state, { payload }) => {
             state.locale = payload;
-        },
-        [setSiteSlug.type]: (state, { payload }) => {
-            state.siteSlug = payload;
-        },
-        [setSiteInfo.type]: (state, { payload }) => {
-            state.siteInfo = payload;
         },
     },
 );

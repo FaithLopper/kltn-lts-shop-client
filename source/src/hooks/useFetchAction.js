@@ -42,7 +42,6 @@ const useFetchAction = (action, {
 } = {}) => {
     const dispatch = useDispatch();
     const isLoading = useActionLoading(action.type);
-
     const execute = async (payload = {}) => {
         handleByType(loading, {
             [LOADING_TYPE.REDUX]: () => dispatch(toggleActionLoading({ type: action.type, isLoading: true })),
@@ -51,6 +50,7 @@ const useFetchAction = (action, {
 
         try {
             const response = await new Promise((resolve, reject) => {
+
                 dispatch(
                     action({
                         ...payload,

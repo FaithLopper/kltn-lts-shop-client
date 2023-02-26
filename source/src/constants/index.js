@@ -7,15 +7,14 @@ export const fixedPath = {
     aboutUs: `${apiUrl}${process.env.REACT_APP_ABOUT_US_PATH}`,
 };
 
-//Cyber++ Vista
+//LTS SHOP
 
-export const brandName = 'Cyber++';
+export const brandName = 'LTS-shop';
 
-export const appName = 'cyber-fe';
+export const appName = 'LTS-fe';
 
-export const appType ='cyber-fe-type';
+export const appType ='lts-shop-fe-type';
 
-export const tempSlug ='cyber-fe-temp-slug';
 
 
 export const storageKeys = {

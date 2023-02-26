@@ -15,6 +15,8 @@ const routesArray = Object.values(routes);
 const AppRoutes = () => {
     const { isAuthenticated, loading: loadingProfile, profile } = useAuth();
 
+
+    console.log(profile);
     const renderRoute = (route) => {
         const type = getData('lts-fe-type') || 'bussiness';
         // TODO: handle render component by site config

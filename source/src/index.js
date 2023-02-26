@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 
 import store from '@store';
 import reportWebVitals from './reportWebVitals';
-import { setSiteSlug } from '@store/actions/app';
 import { ensureArray } from '@utils';
 
 import App from './App';
@@ -12,7 +11,6 @@ import LanguageProvider from '@locales/LanguageProvider';
 
 import '@assets/scss/index.scss';
 
-store.dispatch(setSiteSlug(ensureArray(window.location.pathname.split('/'))[1]));
 
 render(
     <React.StrictMode>
