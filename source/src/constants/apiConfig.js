@@ -15,6 +15,11 @@ const apiConfig = {
             method: 'POST',
             headers: baseHeader,
         },
+        logout: {
+            baseURL: `${apiUrl}v1/account/logout`,
+            method: 'GET',
+            headers: baseHeader,
+        },
         getProfile: {
             baseURL: `${apiUrl}v1/customer/profile`,
             method: 'GET',
