@@ -31,39 +31,85 @@
     text-align: center;
 }
 
-.login__option{
+.login__option {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1.5rem;
-    label, a{
+    label,
+    a {
         font-size: 0.75rem;
         color: var(--input-color);
     }
-    label{
+    label {
         flex-grow: 1;
     }
-    .login__checkbox{
+    .login__checkbox {
         width: 18px;
         height: 18px;
         margin: 3px 10px 0 0;
     }
 }
 
-
 .login__register,
-.login__policy{
+.login__policy {
     font-size: 0.75rem;
     padding: 0 1.5rem;
     text-align: center;
     margin-top: 1.5rem;
     color: var(--input-color);
-    a{
+    a {
         color: var(--input-color);
         text-decoration: underline;
     }
 }
 
-.login__register{
+.login__register {
     margin-top: 2rem;
+}
+
+.switch-field {
+    display: flex;
+    margin: 1rem 0;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+.switch-field label {
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 1;
+    text-align: center;
+    padding: 1rem 2rem;
+    width: 50%;
+    // margin-right: -1px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked + label {
+    border: 1px solid #5d5d5d;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.switch-field label:first-of-type {
+    border-radius: 5px;
+}
+
+.switch-field label:last-of-type {
+    border-radius: 5px;
 }

@@ -20,6 +20,11 @@ const apiConfig = {
             method: 'GET',
             headers: baseHeader,
         },
+        register: {
+            baseURL: `${apiUrl}v1/customer/register`,
+            method: 'POST',
+            headers: baseHeader,
+        },
         updateProfile: {
             baseURL: `${apiUrl}v1/users/me`,
             method: 'PUT',

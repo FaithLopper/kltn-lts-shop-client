@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Menu = (props) => {
     const { userData, onLogout } = props;
+    
     return (
         <div className="menu wrapper">
             <div className="menu">
@@ -24,7 +25,7 @@ const Menu = (props) => {
                             <span className="menu__line"></span>
                             <li className="menu__item drop__down-hover ">
                                 <Link to="/profile" className="menu__link">
-                                    <span>Xin chào, {userData.username}</span>
+                                    <span>Xin chào, {userData.account?.username}</span>
                                 </Link>
                                 <ul className="user__dropdown">
                                     <li className="user__option-header">Tài khoản</li>
