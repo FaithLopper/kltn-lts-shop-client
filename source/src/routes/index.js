@@ -5,6 +5,7 @@ import PublicLayout from '@modules/business/theme-default/layout/PublicLayout';
 import PageNotFound from '@components/common/page/PageNotFound';
 import LoginContainer from '@modules/business/containers/login';
 import RegisterContainer from '@modules/business/containers/register';
+import ProductDetailContainer from '@modules/business/containers/product/ProductDetailContainer';
 /*
 	auth
 		+ null: access login and not login
@@ -32,14 +33,18 @@ const routes = {
         component: LoginContainer,
         auth: false,
         title: 'Login page',
-        layout: PublicLayout,
     },
     registerPage: {
         path: '/register',
         component: RegisterContainer,
         auth: false,
         title: 'Register page',
-        layout: PublicLayout,
+    },
+    productDetailPage: {
+        path: '/product-detail/:id',
+        component: ProductDetailContainer,
+        auth: null,
+        title: 'Product page',
     },
     notFound: {
         component: PageNotFound,

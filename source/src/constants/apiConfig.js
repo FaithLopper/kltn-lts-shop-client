@@ -46,6 +46,35 @@ const apiConfig = {
             headers: baseHeader,
         },
     },
+    news: {
+        getList: {
+            baseURL: `${apiUrl}v1/news/list-news`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/news/get-news`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        categoryAutoComplete: {
+            baseURL: `${apiUrl}v1/category/auto-complete`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
+    product: {
+        getList: {
+            baseURL: `${apiUrl}v1/product/get-by-category`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/product/get-details/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
 };
 
 export default apiConfig;
