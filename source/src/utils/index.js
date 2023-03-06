@@ -1,6 +1,14 @@
 import qs from 'query-string';
-import { DATE_FORMAT_DISPLAY, DATE_SHORT_MONTH_FORMAT, DEFAULT_LANGUAGE_ID, THEMES } from '@constants';
+import {
+    CurrentcyPositions,
+    DATE_FORMAT_DISPLAY,
+    DATE_SHORT_MONTH_FORMAT,
+    DEFAULT_LANGUAGE_ID,
+    THEMES,
+    KEYS,
+} from '@constants';
 import dayjs from 'dayjs';
+import { getObjectData } from './localStorage';
 var utc = require('dayjs/plugin/utc');
 dayjs.extend(utc);
 
@@ -149,6 +157,38 @@ export const convertUtcToLocalTime = (utcTime, format = DATE_FORMAT_DISPLAY) => 
     } catch (error) {
         return '';
     }
+};
+
+export const formatMoney = (value, setting = {}) => {
+    if (Object.keys(setting) <= 0) setting = getObjectData(KEYS.USER_DATA)?.settings?.['Money and Number'] || {};
+    if ((value || value === 0) && !isNaN(value)) {
+        const groupSeparator = setting.groupSeparator || ',';
+        const decimalSeparator = setting.decimalSeparator || '.';
+        const currentcy = setting.currencySymbol || '₫';
+        const currencySymbolPosition = setting.currencySymbolPosition;
+        const moneyRatio = setting.moneyRatio || 1;
+        const decimal = Number(setting.decimal) || 0;
+        if (value.toString().indexOf(decimalSeparator) === -1) {
+            value = value / moneyRatio;
+            value = value.toFixed(decimal);
+            const decimalIndex = value.toString().lastIndexOf('.');
+            if (decimalIndex > -1) {
+                value =
+                    value.toString().substring(0, decimalIndex) +
+                    decimalSeparator +
+                    value.toString().substring(decimalIndex + 1);
+            }
+        } else {
+            value = value.toFixed(Number(setting.decimal) || 0);
+        }
+        value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, groupSeparator);
+        if (currencySymbolPosition === CurrentcyPositions.FRONT) {
+            return `${currentcy} ${value}`;
+        } else {
+            return `${value} ${currentcy}`;
+        }
+    }
+    return '';
 };
 
 /**

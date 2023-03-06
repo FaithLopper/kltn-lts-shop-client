@@ -13,9 +13,10 @@ export const brandName = 'LTS-shop';
 
 export const appName = 'LTS-fe';
 
-export const appType ='lts-shop-fe-type';
+export const appType = 'lts-shop-fe-type';
 
 
+export const appCart = `${appName}-cart`;
 
 export const storageKeys = {
     USER_ACCESS_TOKEN: `${appName}-user-access-token`,
@@ -95,3 +96,15 @@ export const commonStatusColor = {
     [commonStatus.LOCK]: 'red',
 };
 
+export const CurrentcyPositions = {
+    FRONT: 0,
+    BACK: 1,
+};
+
+export const USER_DATA = 'user-data';
+export const LANGUAGE = 'language';
+
+export const KEYS = {
+    USER_DATA,
+    LANGUAGE,
+};

@@ -21,3 +21,16 @@ export const removeItem = (key) => {
         window.localStorage.removeItem(key);
     }
 };
+
+export const getObjectData = (key) => {
+    let result = false,
+        jsonData;
+    if (window.localStorage && (jsonData = window.localStorage.getItem(key))) {
+        try {
+            result = JSON.parse(jsonData);
+        } catch {
+            console.log("error");
+        }
+    }
+    return result;
+};
