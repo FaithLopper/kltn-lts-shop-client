@@ -1,27 +1,25 @@
-import { put, select, takeLatest } from 'redux-saga/effects';
-import { cartActions } from '@store/actions';
-import { processAction } from '@store/utils';
 import apiConfig from '@constants/apiConfig';
-
-function* addItemCart({ payload: { params, onCompleted, onError } }) {
+import { sendRequest } from '@services/api';
+import { handleApiResponse } from '@utils/apiHelper';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { addProduct } from '@store/actions/cart';
+import { createSuccessActionType } from '@store/utils';
+import useAuth from '@hooks/useAuth';
+function* _addProduct({ payload: { product, userId, onCompleted, onError } }) {
     const getItems = (state) => state.cart.cartListData;
-    // console.log(params);
+    console.log(userId);
     try {
-        // const itemsBefore = yield select(getItems);
+        // console.log(product, onCompleted, onError);
+        const itemsBefore = yield select(getItems);
         yield put({
-            type: cartActions.addProduct.type,
-            product: params.product,
+            type: createSuccessActionType(addProduct.type),
+            product: product,
         });
-        // const items = yield select(getItems);
-        // localStorage.setItem('cartItems', JSON.stringify(items));
-        // if (itemsBefore.length !== items.length) {
-        //     onCompleted(params.product);
-        // }
     } catch (error) {
         onError(error);
     }
 }
 
-const sagas = [ takeLatest(cartActions.addProduct.type, addItemCart) ];
+const sagas = [ takeLatest(addProduct.type, _addProduct) ];
 
 export default sagas;

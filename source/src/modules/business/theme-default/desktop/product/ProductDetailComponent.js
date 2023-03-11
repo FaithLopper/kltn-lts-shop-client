@@ -2,6 +2,7 @@ import Button from '@components/common/elements/Button';
 import BasicForm from '@components/common/form/BasicForm';
 import LoadingComponent from '@components/common/loading/LoadingComponent';
 import { AppConstants } from '@constants';
+import useAuth from '@hooks/useAuth';
 import { actions } from '@store/actions/cart';
 import { formatMoney } from '@utils';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +13,7 @@ import './ProductDetail.scss';
 const ProductDetailComponent = ({ detail, loading }) => {
     const [ price, setPrice ] = useState(0);
     const [ image, setImage ] = useState(null);
+    const { profile } = useAuth();
     const dispatch = useDispatch();
     const handleChange = (item) => {
         // if(ite)
@@ -37,11 +39,11 @@ const ProductDetailComponent = ({ detail, loading }) => {
         dispatch(
             actions.addProduct({
                 product: { ...detail, selectedVariants },
+                userId: profile?.id ? profile?.id : null,
                 onCompleted: () => console.log('completed'),
                 onError: (err) => console.log(err),
             }),
         );
-
     };
     return (
         <section className="product__detail section" id="product__detail">

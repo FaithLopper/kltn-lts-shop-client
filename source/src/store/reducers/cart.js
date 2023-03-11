@@ -1,11 +1,17 @@
 import { createReducer } from '@store/utils';
 import { cartActions } from '@store/actions';
-import { appCart, defaultLocale } from '@constants';
-
+import { appCart } from '@constants';
+import { createSuccessActionType } from '@store/utils';
+import { current } from '@reduxjs/toolkit';
 const { addProduct } = cartActions;
-const cartListData = localStorage.getItem(appCart) ? JSON.parse(localStorage.getItem(appCart)) : [];
+const cartData = localStorage.getItem(appCart)
+    ? JSON.parse(localStorage.getItem(appCart))
+    : {
+        cartListData: [],
+        userData: null,
+    };
 const initialState = {
-    cartListData,
+    cartData,
 };
 
 const appReducer = createReducer(
@@ -14,17 +20,32 @@ const appReducer = createReducer(
         initialState,
     },
     {
-        [addProduct.type]: (state, { payload: { product, onCompleted } }) => {
-            console.log(product);
-            const existItem = state.cartListData.find((x) => {
+        [createSuccessActionType(addProduct.type)]: (state, { product }) => {
+            const cartList = current(state.cartData.cartListData);
+            const existItem = cartList.find((x) => {
                 if (x.id === product.id) {
-                    if (product.color?.id === x.color?.id && product.size?.id === x.size?.id) {
-                        return x;
-                    }
-                    return undefined;
+                    let exist = 0;
+                    x.selectedVariants.map((item, index) => {
+                        if (item.id === product.selectedVariants[index].id) exist++;
+                    });
+                    if (exist === 2) return x;
+                    else return undefined;
                 } else return undefined;
             });
-            onCompleted();
+            if (!existItem) state.cartData.cartListData = [ ...state.cartData.cartListData, { ...product, quantity: 1 } ];
+            else
+                state.cartData.cartListData = cartList.map((item) => {
+                    if (item.id === product.id) {
+                        let exist = 0;
+                        item.selectedVariants.map((x, index) => {
+                            if (x.id === product.selectedVariants[index].id) exist++;
+                        });
+                        console.log(item);
+                        if (exist === 2) return { ...item, quantity: item.quantity + 1 };
+                        else return item;
+                    } else return item;
+                });
+            // localStorage.setItem(appCart, JSON.stringify(state.cartListData));
         },
     },
 );
