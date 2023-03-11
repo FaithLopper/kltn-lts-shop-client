@@ -4,7 +4,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 
 import ValidateAccess from './ValidateAccess';
 
-import { MasterLayoutTypes, routes } from '.';
+import routes from '.';
 import useAuth from '@hooks/useAuth';
 import Loading from '@components/common/loading';
 import { getData } from '@utils/localStorage';
@@ -19,7 +19,6 @@ const AppRoutes = () => {
         const type = getData('lts-fe-type') || 'bussiness';
         // TODO: handle render component by site config
         const component = route.component || route.type?.[type] || PageNotFound;
-        const MasterLayout = MasterLayoutTypes['bussiness'] || <></>;
 
         return (
             <Route
@@ -30,16 +29,13 @@ const AppRoutes = () => {
                     // loadingProfile ? (
                     //     <Loading show />
                     // ) : (
-                    <MasterLayout>
-                        <ValidateAccess
-                            authRequire={route.auth}
-                            component={component}
-                            componentProps={route.componentProps}
-                            isAuthenticated={isAuthenticated}
-                            profile={profile}
-                        />
-                    </MasterLayout>
-
+                    <ValidateAccess
+                        authRequire={route.auth}
+                        component={component}
+                        componentProps={route.componentProps}
+                        isAuthenticated={isAuthenticated}
+                        profile={profile}
+                    />
                     // )
                 }
             />

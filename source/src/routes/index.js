@@ -6,12 +6,6 @@ import PageNotFound from '@components/common/page/PageNotFound';
 import LoginContainer from '@modules/business/containers/login';
 import RegisterContainer from '@modules/business/containers/register';
 import ProductDetailContainer from '@modules/business/containers/product/ProductDetailContainer';
-
-import MasterBussinessDefaultLayout from '@modules/business/theme-default/layout/MasterBussinessDefaultLayout';
-
-const MasterLayoutTypes = {
-    bussiness: MasterBussinessDefaultLayout,
-};
 /*
 	auth
 		+ null: access login and not login
@@ -61,4 +55,4 @@ const routes = {
     },
 };
 
-export { MasterLayoutTypes, routes };
+export default routes;

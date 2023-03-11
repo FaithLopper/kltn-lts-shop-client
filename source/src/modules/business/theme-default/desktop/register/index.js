@@ -5,7 +5,7 @@ import InputField from '@components/common/form/InputField';
 import * as yup from 'yup';
 import { defineMessages, useIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { routes } from '@routes';
+import routes from '@routes';
 import styles from './index.module.scss';
 import classNames from 'classnames';
 import './index.scss';

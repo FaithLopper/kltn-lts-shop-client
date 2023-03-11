@@ -1,7 +1,7 @@
 import apiConfig from '@constants/apiConfig';
 import useAuth from '@hooks/useAuth';
 import useFetch from '@hooks/useFetch';
-import { routes } from '@routes';
+import routes from '@routes';
 import { removeCacheAccessToken } from '@services/userService';
 import { accountActions } from '@store/actions';
 import React from 'react';
@@ -54,6 +54,7 @@ const AppHeader = () => {
             // refValue: reviewRef,
         },
     ];
+
     return (
         <header className="header">
             <div className="header__container">

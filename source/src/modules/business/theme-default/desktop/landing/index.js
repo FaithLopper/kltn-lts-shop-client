@@ -1,13 +1,13 @@
 import React from 'react';
+import NewsContainer from '@modules/business/containers/landing/contents/NewsContainer';
 import styles from './index.module.scss';
 
-
-function LandingPageDesktop({ children }) {
-    return <div className={styles.landingPage}>{children}</div>;
+function LandingPageDesktop() {
+    return (
+        <div className={styles.landingPage}>
+            <NewsContainer />
+        </div>
+    );
 }
 
-function LandingPageMobile({ children }) {
-    return <div className={styles.landingPage}>{children}</div>;
-}
-
-export { LandingPageDesktop, LandingPageMobile };
+export default LandingPageDesktop;
