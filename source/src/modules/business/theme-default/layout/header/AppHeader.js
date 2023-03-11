@@ -1,7 +1,7 @@
 import apiConfig from '@constants/apiConfig';
 import useAuth from '@hooks/useAuth';
 import useFetch from '@hooks/useFetch';
-import routes from '@routes';
+import { routes } from '@routes';
 import { removeCacheAccessToken } from '@services/userService';
 import { accountActions } from '@store/actions';
 import React from 'react';
@@ -23,10 +23,10 @@ const AppHeader = () => {
                 try {
                     removeCacheAccessToken();
                     dispatch(accountActions.logout());
-                    toast.success("Đăng xuất thành công !");
+                    toast.success('Đăng xuất thành công !');
                     navigate(routes.loginPage.path);
                 } catch (error) {
-                    toast.error("Đăng xuất thất bại !");
+                    toast.error('Đăng xuất thất bại !');
                 }
             },
         });

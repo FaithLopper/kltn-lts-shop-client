@@ -3,7 +3,7 @@ import React from 'react';
 import { accessRouteTypeEnum } from '@constants';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import routes from '.';
+import { routes } from '.';
 import { useDispatch } from 'react-redux';
 
 const ValidateAccess = ({
@@ -14,7 +14,6 @@ const ValidateAccess = ({
     profile,
     layout: Layout,
 }) => {
-
     const location = useLocation();
     const dispatch = useDispatch();
 

@@ -1,14 +1,13 @@
 import React from 'react';
-import Home from './home';
 import styles from './index.module.scss';
-import New from './new/New';
-function LandingPageDesktop({ dataNew, loading }) {
-    return (
-        <div className={styles.landingPage}>
-            <Home />
-            <New dataNew={dataNew} loading={loading} />
-        </div>
-    );
+
+
+function LandingPageDesktop({ children }) {
+    return <div className={styles.landingPage}>{children}</div>;
 }
 
-export default LandingPageDesktop;
+function LandingPageMobile({ children }) {
+    return <div className={styles.landingPage}>{children}</div>;
+}
+
+export { LandingPageDesktop, LandingPageMobile };

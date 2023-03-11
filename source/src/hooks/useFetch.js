@@ -34,7 +34,7 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
         if (immediate) {
             execute();
         }
-    }, [ execute, immediate ]);
+    }, [ execute, immediate  ]);
 
     return { loading, execute, data, error, setData };
 };
