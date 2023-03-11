@@ -76,7 +76,7 @@ const RegisterComponent = () => {
     };
 
     return (
-        <section className="login section" id="login">
+        <section className={classNames("login section", styles.login)} id="login">
             <div className="login__container">
                 <img src={logo} alt="" className="login__logo" />
                 <div className="login__title">
