@@ -46,7 +46,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
                     dispatch(hideAppLoading());
                 },
                 onError: (err) => {
-                    console.log(err);
                     toast.error('Thêm sản phẩm không thành công !!!');
                     dispatch(hideAppLoading());
                 },

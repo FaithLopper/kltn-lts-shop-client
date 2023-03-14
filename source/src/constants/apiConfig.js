@@ -45,6 +45,16 @@ const apiConfig = {
             method: 'POST',
             headers: baseHeader,
         },
+        requestForgetPass: {
+            baseURL: `${apiUrl}v1/account/request_forget_password`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        forgetPassword: {
+            baseURL: `${apiUrl}v1/account/forget_password`,
+            method: 'POST',
+            headers: baseHeader,
+        },
     },
     news: {
         getList: {

@@ -3,7 +3,6 @@ import { cartActions } from '@store/actions';
 import { appCart, appSession, shopVariantKey } from '@constants';
 import { createSuccessActionType } from '@store/utils';
 import { current } from '@reduxjs/toolkit';
-import useAuth from '@hooks/useAuth';
 import { getData } from '@utils/localStorage';
 const { addProduct, initCart, destroyCart, removeProduct } = cartActions;
 const currentUser = getData(appSession);
@@ -55,7 +54,6 @@ const appReducer = createReducer(
                 });
             if (userId || state.cartData.userData) state.cartData.userData = userId;
             onCompleted(current(state.cartData));
-            // localStorage.setItem(appCart, JSON.stringify(state.cartListData));
         },
         [initCart.type]: (state, { payload }) => {
             state.cartData = payload.cartData;
@@ -69,7 +67,6 @@ const appReducer = createReducer(
         [createSuccessActionType(removeProduct.type)]: (state, { product, onCompleted }) => {
             const cartData = current(state.cartData);
             state.cartData.cartListData = cartData.cartListData.filter((x, index) => index !== product.index);
-            // console.log(current(state.cartData).cartListData);
             onCompleted(current(state.cartData), current(state.cartData).userData);
         },
     },

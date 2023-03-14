@@ -111,7 +111,7 @@ const LoginComponent = () => {
                         <div className="login__option">
                             <input type="checkbox" id="keep-login" className="login__checkbox" />
                             <label htmlFor="keep-login"> Giữ đăng nhập</label>
-                            <Link to="/forget-password">Quên mật khẩu</Link>
+                            <Link to={routes.forgetPage.path}>Quên mật khẩu</Link>
                         </div>
                     </div>
                     <div className="login__policy">

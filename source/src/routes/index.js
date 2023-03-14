@@ -7,6 +7,7 @@ import LoginContainer from '@modules/business/containers/login';
 import RegisterContainer from '@modules/business/containers/register';
 import ProductDetailContainer from '@modules/business/containers/product/ProductDetailContainer';
 import CartContainer from '@modules/business/containers/cart';
+import ForgetPasswordContainer from '@modules/business/containers/login/ForgetPass';
 /*
 	auth
 		+ null: access login and not login
@@ -32,6 +33,12 @@ const routes = {
     loginPage: {
         path: '/login',
         component: LoginContainer,
+        auth: false,
+        title: 'Login page',
+    },
+    forgetPage: {
+        path: '/login/forget',
+        component: ForgetPasswordContainer,
         auth: false,
         title: 'Login page',
     },
