@@ -1,11 +1,15 @@
 import { createReducer } from '@store/utils';
 import { cartActions } from '@store/actions';
-import { appCart } from '@constants';
+import { appCart, appSession, shopVariantKey } from '@constants';
 import { createSuccessActionType } from '@store/utils';
 import { current } from '@reduxjs/toolkit';
-const { addProduct } = cartActions;
-const cartData = localStorage.getItem(appCart)
-    ? JSON.parse(localStorage.getItem(appCart))
+import useAuth from '@hooks/useAuth';
+import { getData } from '@utils/localStorage';
+const { addProduct, initCart, destroyCart, removeProduct } = cartActions;
+const currentUser = getData(appSession);
+const currentUserCart = currentUser ? getData(`${appCart}-${currentUser}`) : getData(appCart);
+const cartData = currentUserCart
+    ? currentUserCart
     : {
         cartListData: [],
         userData: null,
@@ -20,7 +24,7 @@ const appReducer = createReducer(
         initialState,
     },
     {
-        [createSuccessActionType(addProduct.type)]: (state, { product }) => {
+        [createSuccessActionType(addProduct.type)]: (state, { product, userId, onCompleted }) => {
             const cartList = current(state.cartData.cartListData);
             const existItem = cartList.find((x) => {
                 if (x.id === product.id) {
@@ -40,12 +44,33 @@ const appReducer = createReducer(
                         item.selectedVariants.map((x, index) => {
                             if (x.id === product.selectedVariants[index].id) exist++;
                         });
-                        console.log(item);
-                        if (exist === 2) return { ...item, quantity: item.quantity + 1 };
+                        if (exist === 2)
+                            return {
+                                ...item,
+                                quantity: item.quantity + 1,
+                                selectedPrice: (item.quantity + 1) * item.selectedPrice,
+                            };
                         else return item;
                     } else return item;
                 });
+            if (userId || state.cartData.userData) state.cartData.userData = userId;
+            onCompleted(current(state.cartData));
             // localStorage.setItem(appCart, JSON.stringify(state.cartListData));
+        },
+        [initCart.type]: (state, { payload }) => {
+            state.cartData = payload.cartData;
+        },
+        [destroyCart.type]: (state) => {
+            state.cartData = {
+                cartListData: [],
+                userData: null,
+            };
+        },
+        [createSuccessActionType(removeProduct.type)]: (state, { product, onCompleted }) => {
+            const cartData = current(state.cartData);
+            state.cartData.cartListData = cartData.cartListData.filter((x, index) => index !== product.index);
+            // console.log(current(state.cartData).cartListData);
+            onCompleted(current(state.cartData), current(state.cartData).userData);
         },
     },
 );

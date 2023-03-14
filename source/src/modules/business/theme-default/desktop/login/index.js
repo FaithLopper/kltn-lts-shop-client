@@ -16,6 +16,11 @@ import useFetchAction from '@hooks/useFetchAction';
 import { accountActions } from '@store/actions';
 import { setCacheAccessToken } from '@services/userService';
 import Button from '@components/common/elements/Button';
+import { useDispatch } from 'react-redux';
+import { actions } from '@store/actions/cart';
+import { getData } from '@utils/localStorage';
+import { appCart, appSession } from '@constants';
+import useAuth from '@hooks/useAuth';
 
 const message = defineMessages({
     username: 'Vui lòng nhập tên đăng nhập',
@@ -26,6 +31,8 @@ const message = defineMessages({
 
 const LoginComponent = () => {
     const intl = useIntl();
+    const dispatch = useDispatch();
+    const { profile } = useAuth();
     const { execute, loading } = useFetch(apiConfig.account.login, {});
     const { execute: executeGetProfile, isLoading } = useFetchAction(accountActions.getProfile, {
         loading: useFetchAction.LOADING_TYPE.APP,
@@ -74,7 +81,7 @@ const LoginComponent = () => {
     };
 
     return (
-        <section className={classNames("login section", styles.login)} id="login">
+        <section className={classNames('login section', styles.login)} id="login">
             <div className="login__container">
                 <img src={logo} alt="" className="login__logo" />
                 <div className="login__title">

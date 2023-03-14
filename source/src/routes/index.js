@@ -6,6 +6,7 @@ import PageNotFound from '@components/common/page/PageNotFound';
 import LoginContainer from '@modules/business/containers/login';
 import RegisterContainer from '@modules/business/containers/register';
 import ProductDetailContainer from '@modules/business/containers/product/ProductDetailContainer';
+import CartContainer from '@modules/business/containers/cart';
 /*
 	auth
 		+ null: access login and not login
@@ -43,6 +44,12 @@ const routes = {
     productDetailPage: {
         path: '/product-detail/:id',
         component: ProductDetailContainer,
+        auth: null,
+        title: 'Product page',
+    },
+    cartPage: {
+        path: '/cart',
+        component: CartContainer,
         auth: null,
         title: 'Product page',
     },

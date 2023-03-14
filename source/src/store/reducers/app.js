@@ -8,12 +8,16 @@ const {
     toggleActionLoading,
     changeLanguage,
     setSiteInfo,
+    showAppCartModal,
+    hideAppCartModal,
 } = appActions;
 
 const initialState = {
     appLoading: 0,
     locale: defaultLocale,
     siteInfo: null,
+    cartModal:false,
+    cartProduct:{},
 };
 
 const appReducer = createReducer(
@@ -40,6 +44,14 @@ const appReducer = createReducer(
         },
         [changeLanguage.type]: (state, { payload }) => {
             state.locale = payload;
+        },
+        [showAppCartModal.type]: (state, { product }) => {
+            state.cartModal = true;
+            state.cartProduct= product;
+        },
+        [hideAppCartModal.type]: (state) => {
+            state.cartModal = false;
+            state.cartProduct= {};
         },
     },
 );

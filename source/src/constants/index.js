@@ -15,8 +15,8 @@ export const appName = 'LTS-fe';
 
 export const appType = 'lts-shop-fe-type';
 
-
 export const appCart = `${appName}-cart`;
+export const appSession = `${appName}-session`;
 
 export const storageKeys = {
     USER_ACCESS_TOKEN: `${appName}-user-access-token`,
@@ -107,4 +107,9 @@ export const LANGUAGE = 'language';
 export const KEYS = {
     USER_DATA,
     LANGUAGE,
+};
+
+export const shopVariantKey = {
+    color: 0,
+    size: 1,
 };

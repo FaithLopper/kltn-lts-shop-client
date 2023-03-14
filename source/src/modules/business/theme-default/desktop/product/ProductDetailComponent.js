@@ -3,11 +3,13 @@ import BasicForm from '@components/common/form/BasicForm';
 import LoadingComponent from '@components/common/loading/LoadingComponent';
 import { AppConstants } from '@constants';
 import useAuth from '@hooks/useAuth';
+import { hideAppLoading, showAppCartModal, showAppLoading } from '@store/actions/app';
 import { actions } from '@store/actions/cart';
 import { formatMoney } from '@utils';
 import React, { useEffect, useState } from 'react';
 import LoadingSpin from 'react-loading-spin';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import './ProductDetail.scss';
 
 const ProductDetailComponent = ({ detail, loading }) => {
@@ -16,7 +18,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
     const { profile } = useAuth();
     const dispatch = useDispatch();
     const handleChange = (item) => {
-        // if(ite)
         if (item.price || item.price !== 0) setPrice(item.price);
         if (item.image) setImage(item.image);
     };
@@ -29,6 +30,7 @@ const ProductDetailComponent = ({ detail, loading }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(showAppLoading());
         const selectedVariants = [];
         if (detail.productConfigs)
             detail.productConfigs.map((item) => {
@@ -38,10 +40,16 @@ const ProductDetailComponent = ({ detail, loading }) => {
             });
         dispatch(
             actions.addProduct({
-                product: { ...detail, selectedVariants },
+                product: { ...detail, selectedVariants, selectedPrice: price },
                 userId: profile?.id ? profile?.id : null,
-                onCompleted: () => console.log('completed'),
-                onError: (err) => console.log(err),
+                onCompleted: () => {
+                    dispatch(hideAppLoading());
+                },
+                onError: (err) => {
+                    console.log(err);
+                    toast.error('Thêm sản phẩm không thành công !!!');
+                    dispatch(hideAppLoading());
+                },
             }),
         );
     };
@@ -81,7 +89,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                                     <div className="switch-field" key={index}>
                                                         {item.variants.map((variant, index_1) => (
                                                             <div className="product__variant" key={variant.id}>
-                                                                {/* {index_1 === 0 && setPrice(variant.price)} */}
                                                                 <input
                                                                     type="radio"
                                                                     id={variant.id}
@@ -112,8 +119,13 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                             );
                                         })}
                                 </form>
-                                <Button form="product-form" htmlType="submit" className="round-button">
-                                    Thêm vào giỏ hàng
+                                <Button
+                                    disabled={detail.isSoldOut ? true : false}
+                                    form="product-form"
+                                    htmlType="submit"
+                                    className="round-button"
+                                >
+                                    {detail.isSoldOut ? 'Hết hàng' : 'Thêm vào giỏ hàng'}
                                 </Button>
                             </div>
                         </div>

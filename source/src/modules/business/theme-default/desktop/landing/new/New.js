@@ -6,7 +6,6 @@ import './New.scss';
 import Pagination from 'react-js-pagination';
 const New = (props) => {
     const { dataNew, pagination, handleTableChange, loading } = props;
-    console.log(dataNew);
     return (
         <section className="new section" id="new">
             <div className="container">
