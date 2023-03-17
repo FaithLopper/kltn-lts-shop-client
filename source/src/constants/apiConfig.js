@@ -31,7 +31,7 @@ const apiConfig = {
             headers: baseHeader,
         },
         updateProfile: {
-            baseURL: `${apiUrl}v1/users/me`,
+            baseURL: `${apiUrl}v1/customer/update`,
             method: 'PUT',
             headers: baseHeader,
         },

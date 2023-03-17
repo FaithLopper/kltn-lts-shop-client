@@ -186,7 +186,7 @@
         height: auto;
         border-radius: 0.25rem;
         font-size: 1rem;
-        color: var(--title-color-dark);
+        color: var(--title-color-dark) !important;
     }
 
     .checkout__dot {

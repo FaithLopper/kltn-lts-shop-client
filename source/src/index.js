@@ -10,13 +10,15 @@ import App from './App';
 import LanguageProvider from '@locales/LanguageProvider';
 
 import '@assets/scss/index.scss';
-import 'antd/dist/antd.css';
-
+import 'antd/dist/antd.variable.min.css';
+import { ConfigProvider } from 'antd';
 render(
     <React.StrictMode>
         <Provider store={store}>
             <LanguageProvider>
-                <App />
+                <ConfigProvider>
+                    <App />
+                </ConfigProvider>
             </LanguageProvider>
         </Provider>
     </React.StrictMode>,
