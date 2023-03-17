@@ -55,8 +55,4 @@ const NewsTableDesktop = (props) => {
     );
 };
 
-const NewsTableMobile = () => {
-    return <div>NewsTable</div>;
-};
-
-export { NewsTableMobile, NewsTableDesktop };
+export default NewsTableDesktop;

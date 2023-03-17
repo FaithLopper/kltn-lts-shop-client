@@ -64,13 +64,20 @@ const apiConfig = {
         },
     },
     product: {
-        getList: {
-            baseURL: `${apiUrl}v1/product/get-by-category`,
+        getById: {
+            baseURL: `${apiUrl}v1/product/get-details/:id`,
             method: 'GET',
             headers: baseHeader,
         },
-        getById: {
-            baseURL: `${apiUrl}v1/product/get-details/:id`,
+        getAll: {
+            baseURL: `${apiUrl}v1/product/get-all`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
+    productCategories: {
+        getAll: {
+            baseURL: `${apiUrl}v1/product-category/get-all`,
             method: 'GET',
             headers: baseHeader,
         },

@@ -151,6 +151,14 @@ export const convertUtcToLocalTime = (utcTime, format = DATE_FORMAT_DISPLAY) => 
     }
 };
 
+export const formatCurrency = (local, style, currencyType) => {
+    let currency = new Intl.NumberFormat(local, {
+        style: style,
+        currency: currencyType,
+    });
+    return currency;
+};
+
 /**
  * Valid input is an Array
  * @param {Any} arr

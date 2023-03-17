@@ -2,7 +2,7 @@ import RenderContext from '@components/common/elements/RenderContext';
 import apiConfig from '@constants/apiConfig';
 import useFetch from '@hooks/useFetch';
 import React, { useEffect, useState } from 'react';
-import { NewsTableDesktop } from '@modules/business/theme-default/desktop/landing/news/NewsTable';
+import NewsTableDesktop from '@modules/business/theme-default/desktop/landing/news/NewsTable';
 
 const NewsContainer = () => {
     const [ currentPage, setCurrentPage ] = useState(1);
