@@ -1,6 +1,6 @@
 const handleApiResponse = (result, onCompleted, onError) => {
-    const { success, responseData } = result;
-    if (success && responseData.result) onCompleted(responseData);
+    const { data: responseData } = result;
+    if (responseData && responseData.result) onCompleted(responseData);
     else onError(responseData);
 };
 

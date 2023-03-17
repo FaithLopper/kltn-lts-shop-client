@@ -74,7 +74,7 @@ axiosInstance.interceptors.response.use(
     },
 );
 
-const sendRequest = (options, payload, cancelToken) => {
+const sendRequest = (options, payload, cancelType) => {
     const { params = {}, pathParams = {}, data = {} } = payload;
     let { method, baseURL, headers, ignoreAuth } = options;
     const userAccessToken = getCacheAccessToken();
@@ -124,7 +124,7 @@ const sendRequest = (options, payload, cancelToken) => {
         headers,
         params,
         data,
-        cancelToken,
+        cancelType,
     });
 };
 

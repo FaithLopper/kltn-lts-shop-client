@@ -159,6 +159,14 @@ export const convertUtcToLocalTime = (utcTime, format = DATE_FORMAT_DISPLAY) => 
     }
 };
 
+export const formatCurrency = (local, style, currencyType) => {
+    let currency = new Intl.NumberFormat(local, {
+        style: style,
+        currency: currencyType,
+    });
+    return currency;
+};
+
 export const formatMoney = (value, setting = {}) => {
     if (Object.keys(setting) <= 0) setting = getObjectData(KEYS.USER_DATA)?.settings?.['Money and Number'] || {};
     if ((value || value === 0) && !isNaN(value)) {

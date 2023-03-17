@@ -62,3 +62,9 @@ export const statusOptions = [
     { value: STATUS_PENDING, label: commonMessage.pending, color: 'warning' },
     { value: STATUS_LOCK, label: commonMessage.lock, color: 'red' },
 ];
+
+export const productKinds = {
+    SINGLE: 1,
+    COLLECTION: 2,
+};
+

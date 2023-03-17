@@ -79,7 +79,7 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                     {detail.productConfigs &&
                                         detail.productConfigs.map((item, index) => {
                                             return (
-                                                <>
+                                                <div key={`${detail.id}-${index}`}>
                                                     {index === 1 && (
                                                         <div className="product__variant-title">
                                                             <div>Chọn size</div>
@@ -91,7 +91,7 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                                     )}
                                                     <div className="switch-field" key={index}>
                                                         {item.variants.map((variant, index_1) => (
-                                                            <div className="product__variant" key={variant.id}>
+                                                            <div className="product__variant" key={`${detail.id}-${index}-variant_${variant.id}`}>
                                                                 <input
                                                                     type="radio"
                                                                     id={variant.id}
@@ -118,14 +118,14 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                                             </div>
                                                         ))}
                                                     </div>
-                                                </>
+                                                </div>
                                             );
                                         })}
                                 </form>
                                 <Button
                                     disabled={detail.isSoldOut ? true : false}
                                     form="product-form"
-                                    htmlType="submit"
+                                    htmltype="submit"
                                     className="round-button"
                                 >
                                     {detail.isSoldOut ? 'Hết hàng' : 'Thêm vào giỏ hàng'}

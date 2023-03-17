@@ -40,7 +40,7 @@ const Payment = ({ loading, product, onNext, setFormData, formRef, scrollTop, ha
                     <Form.Item>
                         <Button
                             className="button"
-                            htmlType="submit"
+                            htmltype="submit"
                             loading={loading}
                             style={{ fontFamily: 'sans-serif', width: '100%' }}
                         >

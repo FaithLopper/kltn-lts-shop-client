@@ -1,12 +1,15 @@
 import React from 'react';
-import Home from './home';
+import NewsContainer from '@modules/business/containers/landing/contents/NewsContainer';
 import styles from './index.module.scss';
-import New from './new/New';
-function LandingPageDesktop({ dataNew, loading }) {
+import BannerContainer from '@modules/business/containers/landing/contents/BannerContainer';
+import ProductsPerCategoryContainer from '@modules/business/containers/landing/contents/ProductsPerCategoryContainer';
+
+function LandingPageDesktop() {
     return (
         <div className={styles.landingPage}>
-            <Home />
-            <New dataNew={dataNew} loading={loading} />
+            <BannerContainer />
+            <ProductsPerCategoryContainer />
+            <NewsContainer />
         </div>
     );
 }

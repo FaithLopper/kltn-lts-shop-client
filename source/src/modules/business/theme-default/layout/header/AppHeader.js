@@ -36,7 +36,7 @@ const AppHeader = () => {
                     toast.success("Đăng xuất thành công !");
                     navigate(routes.loginPage.path);
                 } catch (error) {
-                    toast.error("Đăng xuất thất bại !");
+                    toast.error('Đăng xuất thất bại !');
                 }
             },
         });
@@ -64,6 +64,7 @@ const AppHeader = () => {
             // refValue: reviewRef,
         },
     ];
+
     return (
         <header className="header">
             <div className="header__container">

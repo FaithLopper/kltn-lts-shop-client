@@ -1,37 +1,26 @@
-.new.section{
+.new.section {
     // background-color: #E1DCA8;
     padding-bottom: 0 !important;
-    h1{
-      margin-bottom: .5rem;
+    h1 {
+        margin-bottom: 0.5rem;
     }
 }
 
 .new__container {
-    // background-color: #ECDE5D;
-    // height: 50rem;
+
+    min-height: 55rem;
     overflow-y: hidden;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 6rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .new__pagination {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    // ul{
-    //     display: flex;
-    //     color: black;
-    //     font-size: 20px;
-    //     column-gap: 20px;
-
-    //     a{
-    //         color: black;
-    //     }
-
-    //     a:active{
-    //         color: var(--input-color);
-    //     }
-    // }
+    height: 8rem;
+    align-items: center;
+    background-color: #f4f4f1;
 }
 
 .new__item-title {
@@ -64,12 +53,6 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical; // -> line-height: 22px;
     overflow: hidden;
-}
-
-.new__pagination {
-    height: 8.5625rem;
-    background-color: rgb(240, 240, 240);
-    align-items: center;
 }
 
 .ant-pagination-item {

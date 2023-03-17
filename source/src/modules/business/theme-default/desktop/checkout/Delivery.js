@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import TextArea from 'antd/lib/input/TextArea';
 import LocationField from '@components/common/form/LocationField';
 import { useEffect } from 'react';
+import useAuth from '@hooks/useAuth';
 
 const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation, formData }) => {
     const [ province, setProvince ] = useState([]);
     const [ district, setDistrict ] = useState([]);
     const [ ward, setWard ] = useState([]);
+    const { profile } = useAuth();
+
     useEffect(() => {
         executeGetLocation({
             params: {
@@ -21,8 +24,7 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
     }, []);
 
     useEffect(() => {
-        if(Object.keys(formData).length !==0)
-            formRef.current.setFieldsValue(formData);
+        if (Object.keys(formData).length !== 0) formRef.current.setFieldsValue(formData);
     }, [ formData ]);
 
     const handleLocationChange = (type, key) => {
@@ -119,14 +121,16 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                         <i className="bx bx-package checkout__icon-big"></i>
                         <span>Giao hàng</span>
                     </Button>
-                    <div className="checkout__redirect">
-                        <Link to="/register" className="round-button-white">
-                            Trở thành thành viên
-                        </Link>
-                        <Link to="/login" className="round-button-white">
-                            Đăng nhập
-                        </Link>
-                    </div>
+                    {!profile && (
+                        <div className="checkout__redirect">
+                            <Link to="/register" className="round-button-white">
+                                Trở thành thành viên
+                            </Link>
+                            <Link to="/login" className="round-button-white">
+                                Đăng nhập
+                            </Link>
+                        </div>
+                    )}
                 </div>
 
                 <div className="checkout__part-info">
@@ -192,7 +196,7 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                         </Row>
                     </div>
 
-                    {/* 
+                    {/*
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item

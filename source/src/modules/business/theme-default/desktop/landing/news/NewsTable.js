@@ -2,10 +2,12 @@ import React from 'react';
 import { AppConstants } from '@constants';
 import LoadingSpin from 'react-loading-spin';
 import dayjs from 'dayjs';
-import './New.scss';
-import Pagination from 'react-js-pagination';
-const New = (props) => {
-    const { dataNew, pagination, handleTableChange, loading } = props;
+import './NewsTable.scss';
+import Pagination from '@components/common/elements/Pagination/Pagination';
+
+const NewsTableDesktop = (props) => {
+    const { data, loading, currentPage, setCurrentPage, pageLimit, totalElements } = props;
+
     return (
         <section className="new section" id="new">
             <div className="container">
@@ -14,15 +16,15 @@ const New = (props) => {
             {!loading ? (
                 <>
                     <div className="new__container container grid">
-                        {!!dataNew.data?.length &&
-                            dataNew.data.map(({ banner, title, description, createdDate, id }) => {
+                        {data?.length &&
+                            data.map(({ banner, title, description, createdDate, id }) => {
                                 let check = dayjs(createdDate);
                                 let day = check.format('DD'); // => ('Monday' , 'Tuesday' ----)
                                 let month = check.format('MMMM'); // => ('January','February.....)
                                 let year = check.format('YYYY'); // => ('2012','2013' ...)
                                 let date = `${month} ${day}, ${year}`;
                                 return (
-                                    <a href={`/news/${id}`} className="new__item" key={title}>
+                                    <a href={`/news/${id}`} className="new__item" key={check + id}>
                                         <img
                                             alt="new"
                                             className="new__item-image"
@@ -43,15 +45,14 @@ const New = (props) => {
             )}
             <div className="new__pagination">
                 <Pagination
-                    activePage={2}
-                    itemsCountPerPage={10}
-                    totalItemsCount={450}
-                    pageRangeDisplayed={5}
-                    // onChange={this.handlePageChange.bind(this)}
+                    currentPage={currentPage}
+                    total={totalElements}
+                    limit={pageLimit}
+                    onPageChange={(page) => setCurrentPage(page)}
                 />
             </div>
         </section>
     );
 };
 
-export default New;
+export default NewsTableDesktop;

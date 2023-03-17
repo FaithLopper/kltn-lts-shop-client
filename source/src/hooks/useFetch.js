@@ -7,24 +7,23 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
     const [ error, setError ] = useState(null);
 
     const execute = useCallback(
-        async ({ onCompleted, onError, ...payload } = {}) => {
+        async ({ onCompleted, onError, ...payload } = {}, cancelType) => {
             setLoading(true);
             setError(null);
             try {
-                const { data } = await sendRequest(apiConfig, { params, pathParams, ...payload });
+                const { data } = await sendRequest(apiConfig, { params, pathParams, ...payload }, cancelType);
                 if (!data.result && data.statusCode !== 200) {
                     throw data;
                 }
-
-                setData(mappingData ? mappingData(data) : data);
+                !cancelType && setData(mappingData ? mappingData(data) : data);
                 onCompleted && onCompleted(data);
                 return data;
             } catch (error) {
-                setError(error);
+                !cancelType && setError(error);
                 onError && onError(error);
                 return error;
             } finally {
-                setLoading(false);
+                !cancelType && setLoading(false);
             }
         },
         [ apiConfig ],
@@ -34,7 +33,7 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
         if (immediate) {
             execute();
         }
-    }, [ execute, immediate ]);
+    }, [ execute, immediate  ]);
 
     return { loading, execute, data, error, setData };
 };

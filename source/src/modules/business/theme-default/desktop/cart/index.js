@@ -65,7 +65,7 @@ const CartComponent = ({ cartListData }) => {
                         {product.length !== 0 ? (
                             product.map(({ selectedVariants, name, quantity, selectedPrice, id }, _index) => {
                                 return (
-                                    <>
+                                    <div key={`${_index}-item-${id}`}>
                                         <div className="cart__item grid">
                                             <img
                                                 src={
@@ -96,7 +96,7 @@ const CartComponent = ({ cartListData }) => {
                                             </div>
                                             <div className="cart__item-price">{formatMoney(selectedPrice || 0)}</div>
                                         </div>
-                                    </>
+                                    </div>
                                 );
                             })
                         ) : (
