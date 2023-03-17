@@ -45,6 +45,16 @@ const apiConfig = {
             method: 'POST',
             headers: baseHeader,
         },
+        requestForgetPass: {
+            baseURL: `${apiUrl}v1/account/request_forget_password`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        forgetPassword: {
+            baseURL: `${apiUrl}v1/account/forget_password`,
+            method: 'POST',
+            headers: baseHeader,
+        },
     },
     news: {
         getList: {
@@ -53,7 +63,7 @@ const apiConfig = {
             headers: baseHeader,
         },
         getById: {
-            baseURL: `${apiUrl}v1/news/get-news`,
+            baseURL: `${apiUrl}v1/news/get-news/:id`,
             method: 'GET',
             headers: baseHeader,
         },
@@ -79,6 +89,30 @@ const apiConfig = {
         getAll: {
             baseURL: `${apiUrl}v1/product-category/get-all`,
             method: 'GET',
+            headers: baseHeader,
+        },
+    },
+    location: {
+        getList: {
+            baseURL: `${apiUrl}v1/locations/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
+    order: {
+        getList: {
+            baseURL: `${apiUrl}v1/order/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/order/get`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/order/create`,
+            method: 'POST',
             headers: baseHeader,
         },
     },

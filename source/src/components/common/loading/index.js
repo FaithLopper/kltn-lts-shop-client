@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom';
 import React, { useEffect, useState } from 'react';
-import LoadingSpin from "react-loading-spin";
+import LoadingSpin from 'react-loading-spin';
 import styles from './index.module.scss';
+import LoadingComponent from './LoadingComponent';
 
 const Loading = ({ show }) => {
     const [ node ] = useState(document.createElement('div'));
@@ -14,7 +15,7 @@ const Loading = ({ show }) => {
 
     return ReactDOM.createPortal(
         <div className={styles.loadingContainer}>
-            <LoadingSpin size="large" />
+            <LoadingComponent />
         </div>,
         node,
     );

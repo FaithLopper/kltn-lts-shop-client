@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import styles from './product.module.scss';
 import Slider from 'react-slick';
 import { formatCurrency } from '@utils';
+import { Link } from 'react-router-dom';
 const { contentRootUrl } = AppConstants;
 
 const moneyFormatter = formatCurrency('vi-VN', 'currency', 'VND');
@@ -87,9 +88,12 @@ const SingleProduct = ({ data, style }) => {
                     <img src={contentRootUrl + currentProduct.image} alt="product image" />
                 </div>
                 <div className={styles['product-btns']}>
-                    <button type="button" className={styles['btn-buy']}>
+                    <Link
+                        to={`/product-detail/${productId}`}
+                        className={styles['btn-buy']}
+                    >
                         More Details
-                    </button>
+                    </Link>
                 </div>
                 <div className={styles['off-info']}>
                     {currentProduct.isSoldOut && <h2 className={styles['sm-title sold-out-product']}>Sold Out</h2>}

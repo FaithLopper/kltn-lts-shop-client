@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { accessRouteTypeEnum } from '@constants';
+import { accessRouteTypeEnum, appCart, appSession } from '@constants';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import routes from '.';
 import { useDispatch } from 'react-redux';
+import { getData } from '@utils/localStorage';
+import { actions } from '@store/actions/cart';
 
 const ValidateAccess = ({
     authRequire,
@@ -16,9 +18,13 @@ const ValidateAccess = ({
 }) => {
     const location = useLocation();
     const dispatch = useDispatch();
-
     const getRedirect = (authRequire) => {
         if (authRequire === accessRouteTypeEnum.NOT_LOGIN && isAuthenticated) {
+            const current = getData(appSession);
+            const cartData = getData(`${appCart}-${current}`)
+                ? getData(`${appCart}-${current}`)
+                :  getData(appCart);
+            dispatch(actions.initCart({ cartData }));
             return routes.homePage.path;
         }
 

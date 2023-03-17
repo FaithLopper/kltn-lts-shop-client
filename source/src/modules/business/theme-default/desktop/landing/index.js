@@ -9,7 +9,7 @@ function LandingPageDesktop() {
         <div className={styles.landingPage}>
             <BannerContainer />
             <ProductsPerCategoryContainer />
-            {/* <NewsContainer /> */}
+            <NewsContainer />
         </div>
     );
 }

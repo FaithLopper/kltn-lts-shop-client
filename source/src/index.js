@@ -10,7 +10,7 @@ import App from './App';
 import LanguageProvider from '@locales/LanguageProvider';
 
 import '@assets/scss/index.scss';
-
+import 'antd/dist/antd.css';
 
 render(
     <React.StrictMode>

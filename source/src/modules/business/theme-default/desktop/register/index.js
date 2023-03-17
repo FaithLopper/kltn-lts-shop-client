@@ -10,13 +10,13 @@ import styles from './index.module.scss';
 import classNames from 'classnames';
 import './index.scss';
 import { toast } from 'react-toastify';
-import Button from '@components/common/form/Button';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import useFetchAction from '@hooks/useFetchAction';
 import { accountActions } from '@store/actions';
 import { setCacheAccessToken } from '@services/userService';
 import { formatDateString } from '@utils';
+import Button from '@components/common/elements/Button';
 
 const message = defineMessages({
     username: 'Vui lòng nhập tên đăng nhập',
@@ -76,7 +76,7 @@ const RegisterComponent = () => {
     };
 
     return (
-        <section className="login section" id="login">
+        <section className={classNames("login section", styles.login)} id="login">
             <div className="login__container">
                 <img src={logo} alt="" className="login__logo" />
                 <div className="login__title">
