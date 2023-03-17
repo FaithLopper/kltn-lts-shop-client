@@ -32,17 +32,17 @@ const AppRoutes = () => {
                 path={route.path}
                 index={route.index}
                 element={
-                    // loadingProfile ? (
-                    //     <Loading show />
-                    // ) : (
-                    <ValidateAccess
-                        authRequire={route.auth}
-                        component={component}
-                        componentProps={route.componentProps}
-                        isAuthenticated={isAuthenticated}
-                        profile={profile}
-                    />
-                    // )
+                    loadingProfile ? (
+                        <Loading show />
+                    ) : (
+                        <ValidateAccess
+                            authRequire={route.auth}
+                            component={component}
+                            componentProps={route.componentProps}
+                            isAuthenticated={isAuthenticated}
+                            profile={profile}
+                        />
+                    )
                 }
             />
         );

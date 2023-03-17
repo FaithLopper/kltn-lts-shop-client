@@ -35,7 +35,11 @@ const ProductDetailComponent = ({ detail, loading }) => {
         if (detail.productConfigs)
             detail.productConfigs.map((item) => {
                 let selected = null;
-                if (item.variants) selected = item.variants.find((element) => element.id == e.target[item.name].value);
+                if (item.variants)
+                    selected = {
+                        ...item.variants.find((element) => element.id == e.target[item.name].value),
+                        configId: item.id,
+                    };
                 if (selected) selectedVariants.push(selected);
             });
         dispatch(

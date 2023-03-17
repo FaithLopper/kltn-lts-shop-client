@@ -1,11 +1,14 @@
 import Button from '@components/common/elements/Button';
 import { AppConstants, shopVariantKey } from '@constants';
+import routes from '@routes';
 import { actions } from '@store/actions/cart';
 import { formatMoney } from '@utils';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './cart.scss';
 const CartComponent = ({ cartListData }) => {
+    const navigate = useNavigate();
     const [ product, setProduct ] = useState(cartListData);
     const [ isDelete, setDetele ] = useState(null);
     const [ productId, setProductId ] = useState({});
@@ -133,7 +136,7 @@ const CartComponent = ({ cartListData }) => {
                     <div className="cart__summary-button">
                         <Button
                             className="round-button"
-                            // onClick={handleCheckout}
+                            onClick={() => navigate(routes.checkoutPage.path)}
                             style={{ lineHeight: '1px', padding: '30px 0' }}
                         >
                             Thanh toán

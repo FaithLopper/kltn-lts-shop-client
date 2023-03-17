@@ -113,3 +113,14 @@ export const shopVariantKey = {
     color: 0,
     size: 1,
 };
+
+export const FieldTypes = {
+    STRING: 'STRING_TYPE',
+    NUMBER: 'NUMBER_TYPE',
+    SELECT: 'SELECT',
+    AUTOCOMPLETE: 'AUTOCOMPLETE',
+    DATE: 'DATE',
+    DATE_RANGE: 'DATE_RANGE',
+};
+
+export const COD_PAYMENT = 3;
