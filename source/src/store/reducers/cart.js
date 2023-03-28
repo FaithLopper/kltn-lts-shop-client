@@ -23,7 +23,7 @@ const appReducer = createReducer(
         initialState,
     },
     {
-        [createSuccessActionType(addProduct.type)]: (state, { product, userId, onCompleted }) => {
+        [addProduct.success.type]: (state, { product, userId, onCompleted }) => {
             const cartList = current(state.cartData.cartListData);
             const existItem = cartList.find((x) => {
                 if (x.id === product.id) {
@@ -64,7 +64,7 @@ const appReducer = createReducer(
                 userData: null,
             };
         },
-        [createSuccessActionType(removeProduct.type)]: (state, { product, onCompleted }) => {
+        [removeProduct.success.type]: (state, { product, onCompleted }) => {
             const cartData = current(state.cartData);
             state.cartData.cartListData = cartData.cartListData.filter((x, index) => index !== product.index);
             onCompleted(current(state.cartData), current(state.cartData).userData);

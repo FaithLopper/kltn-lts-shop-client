@@ -1,4 +1,3 @@
-import RenderContext from '@components/common/elements/RenderContext';
 import apiConfig from '@constants/apiConfig';
 import useFetch from '@hooks/useFetch';
 import CollectionProduct from '@modules/business/theme-default/desktop/product/CollectionProduct';
@@ -40,21 +39,11 @@ const CollectionProductContainer = (props) => {
     }, []);
 
     return (
-        <CollectionProduct
-            layout={{
-                defaultTheme: ({ children }) => <>{children}</>,
-            }}
-            components={{
-                desktop: {
-                    defaultTheme: CollectionProduct,
-                },
-                mobile: {
-                    defaultTheme: CollectionProduct,
-                },
-            }}
-            collection={data || {}}
-            products={collectionProductData || []}
-        />
+        <div>
+            {collectionProductData.length !== 0 && (
+                <CollectionProduct collection={data || {}} products={collectionProductData || []} />
+            )}
+        </div>
     );
 };
 

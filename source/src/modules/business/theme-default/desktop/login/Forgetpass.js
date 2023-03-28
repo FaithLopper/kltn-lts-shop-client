@@ -102,7 +102,7 @@ const Forgetpass = ({ executeForgetPassword, executeRequestForget }) => {
                         </Form.Item>
                         <Form.Item name="keep-login">
                             <Button
-                                htmltype="submit"
+                                htmlType="submit"
                                 className="login__button button"
                                 style={{ width: '100%' }}
                                 loading={loading}
@@ -158,7 +158,7 @@ const Forgetpass = ({ executeForgetPassword, executeRequestForget }) => {
                                 />
                             </Form.Item>
                             <Button
-                                htmltype="submit"
+                                htmlType="submit"
                                 style={{ width: '100%' }}
                                 className="login__button button"
                                 loading={loading}

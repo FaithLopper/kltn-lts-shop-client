@@ -114,6 +114,11 @@ export const shopVariantKey = {
     size: 1,
 };
 
+export const ProductConfigKinds = {
+    SINGLE_CHOICE: 1,
+    MULTI_CHOICE: 2,
+};
+
 export const FieldTypes = {
     STRING: 'STRING_TYPE',
     NUMBER: 'NUMBER_TYPE',

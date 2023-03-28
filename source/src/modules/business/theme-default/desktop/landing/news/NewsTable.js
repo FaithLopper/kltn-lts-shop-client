@@ -11,11 +11,11 @@ const NewsTableDesktop = (props) => {
     return (
         <section className="new section" id="new">
             <div className="container">
-                <h1>TIN TỨC & BÀI VIẾT</h1>
+                <h1 className="news_title">TIN TỨC & BÀI VIẾT</h1>
             </div>
             {!loading ? (
                 <>
-                    <div className="new__container container grid">
+                    <div className="new__container grid">
                         {data?.length &&
                             data.map(({ banner, title, description, createdDate, id }) => {
                                 let check = dayjs(createdDate);

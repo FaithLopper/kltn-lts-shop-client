@@ -9,16 +9,18 @@ const { contentRootUrl } = AppConstants;
 const CollectionProduct = ({ products = [], collection = {} }) => {
     return (
         <div className={styles['collection']}>
-            <div
-                style={collection.image && { backgroundImage: `url(${contentRootUrl + collection.image})` }}
-                className={styles['banner']}
-            >
-                <h1 className={styles['md-title']}>{collection.name}</h1>
-                <p className={styles['text-light']}>{collection.description}</p>
-            </div>
-
             <div className={styles['products-per-collection']}>
                 <SingleProductsGridLayout>
+                    <div
+                        // style={collection.image && { backgroundImage: `url(${contentRootUrl + collection.image})` }}
+                        className={styles['banner']}
+                    >
+                        <img src={contentRootUrl + collection.image} alt="banner-img" />
+                        <div className={styles['banner-info']}>
+                            <h1 className={styles['md-title']}>{collection.name}</h1>
+                            <p className={styles['text-light']}>{collection.description}</p>
+                        </div>
+                    </div>
                     {products.map((prod, index) => {
                         if (prod.kind === productKinds.SINGLE) {
                             return (
