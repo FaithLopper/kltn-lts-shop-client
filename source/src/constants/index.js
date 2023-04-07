@@ -16,6 +16,7 @@ export const appName = 'LTS-fe';
 export const appType = 'lts-shop-fe-type';
 
 export const appCart = `${appName}-cart`;
+export const appUserCarts = `${appName}-user-carts`;
 export const appSession = `${appName}-session`;
 
 export const storageKeys = {

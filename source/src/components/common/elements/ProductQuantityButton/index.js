@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProductQuantityButton.scss';
 
-const index = ({ minQuantity = 1, maxQuantity = 10, quantity = 1, setQuantity = () => {} }) => {
+const ProductQuantityButton = ({ minQuantity = 1, maxQuantity = 10, quantity = 1, setQuantity = () => {} }) => {
     const increase = (e) => {
         e.preventDefault();
         if (quantity + 1 <= maxQuantity) setQuantity(quantity + 1);
@@ -56,4 +56,4 @@ const index = ({ minQuantity = 1, maxQuantity = 10, quantity = 1, setQuantity = 
     );
 };
 
-export default index;
+export default ProductQuantityButton;

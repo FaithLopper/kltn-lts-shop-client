@@ -116,6 +116,20 @@ const ProductDetailComponent = ({ detail, loading }) => {
         [configsImages],
     );
 
+    const getNewPrices = (selectedConfigs = []) => {
+        let newPrice = 0;
+        for (let i = 0; i < selectedConfigs.length; i++) {
+            if (selectedConfigs[i].isRequired && !selectedConfigs[i].variants.length) {
+                newPrice = firstPrice;
+                break;
+            }
+            selectedConfigs[i].variants.map((variant) => {
+                newPrice += variant.price;
+            });
+        }
+        setCurrentPrice(newPrice);
+    };
+
     const validateConfigField = useCallback(
         (configId, isError) => {
             setErrorList((prevState) => {
@@ -130,20 +144,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
         },
         [errorList],
     );
-
-    const getNewPrices = (selectedConfigs = []) => {
-        let newPrice = 0;
-        for (let i = 0; i < selectedConfigs.length; i++) {
-            if (selectedConfigs[i].isRequired && !selectedConfigs[i].variants.length) {
-                newPrice = firstPrice;
-                break;
-            }
-            selectedConfigs[i].variants.map((variant) => {
-                newPrice += variant.price;
-            });
-        }
-        setCurrentPrice(newPrice);
-    };
 
     const validateForm = useCallback(
         (selectedConfigs = []) => {
@@ -162,11 +162,26 @@ const ProductDetailComponent = ({ detail, loading }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm(selectedConfigs)) {
-            console.log({ ...detail, productConfigs: JSON.parse(JSON.stringify(selectedConfigs)) });
-            console.log(currentPrice);
-            console.log(quantity);
+            dispatch(showAppLoading());
+            dispatch(
+                actions.addProduct({
+                    product: {
+                        ...detail,
+                        productConfigs: JSON.parse(JSON.stringify(selectedConfigs)),
+                    },
+                    quantity,
+                    price: currentPrice,
+                    userId: profile?.id || null,
+                    onCompleted: () => {
+                        dispatch(hideAppLoading());
+                    },
+                    onError: () => {
+                        toast.error('Thêm sản phẩm không thành công !!!');
+                        dispatch(hideAppLoading());
+                    },
+                }),
+            );
         }
-        // dispatch(showAppLoading());
         // const selectedVariants = [];
         // console.log();
         // if (detail.productConfigs)
@@ -180,19 +195,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
         //             };
         //         if (selected) console.log(selected);
         //     });
-        // dispatch(
-        //     actions.addProduct({
-        //         product: { ...detail, selectedVariants, selectedPrice: price },
-        //         userId: profile?.id ? profile?.id : null,
-        //         onCompleted: () => {
-        //             dispatch(hideAppLoading());
-        //         },
-        //         onError: (err) => {
-        //             toast.error('Thêm sản phẩm không thành công !!!');
-        //             dispatch(hideAppLoading());
-        //         },
-        //     }),
-        // );
     };
 
     return (

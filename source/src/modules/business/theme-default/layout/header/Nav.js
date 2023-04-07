@@ -7,7 +7,7 @@ import { AppConstants, shopVariantKey } from '@constants';
 const Nav = () => {
     const modal = useSelector((state) => state.app.cartModal);
     const showModalProduct = useSelector((state) => state.app.cartProduct);
-    const cartListData = useSelector((state) => state.cart.cartData.cartListData) || [];
+    const cartListData = useSelector((state) => state.cart.currentCart);
     const dispatch = useDispatch();
     useEffect(() => {
         window.addEventListener('scroll', function () {
@@ -20,7 +20,7 @@ const Nav = () => {
     useEffect(() => {
         if (modal) showModal(true);
         else showModal(false);
-    }, [ modal ]);
+    }, [modal]);
 
     const showModal = (show) => {
         const cart = document.querySelector('.cart__modal');
@@ -71,29 +71,28 @@ const Nav = () => {
                 </div>
                 {Object.keys(showModalProduct).length !== 0 && (
                     <div className="cart__product grid">
-                        <img
+                        {/* <img
                             src={
                                 AppConstants.contentRootUrl +
                                 showModalProduct.selectedVariants[shopVariantKey.color]?.image
                             }
                             alt=""
                             className="cart__item-image"
-                        />
+                        /> */}
                         <div className="cart__item-info">
-                            <div className="cart__item-name">{showModalProduct.name}</div>
+                            {/* <div className="cart__item-name">{showModalProduct.name}</div> */}
                             <div className="cart__item-category">
-                                {showModalProduct.selectedVariants[shopVariantKey.size]?.name}
+                                {/* {showModalProduct.selectedVariants[shopVariantKey.size]?.name} */}
                             </div>
                             {/* <div className="cart__item-description">{product.description}</div> */}
                             <div className="cart__item-variants">
                                 <span className="cart__item-size">
-                                    Size {showModalProduct.selectedVariants[shopVariantKey.size]?.name}
+                                    {/* Size {showModalProduct.selectedVariants[shopVariantKey.size]?.name} */}
                                 </span>
                             </div>
                         </div>
                     </div>
                 )}
-
                 <div className="card__modal-action">
                     <Link to="/cart" className="round-button">
                         Giỏ hàng
