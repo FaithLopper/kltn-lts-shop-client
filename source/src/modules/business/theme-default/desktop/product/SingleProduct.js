@@ -1,6 +1,7 @@
 import { AppConstants } from '@constants';
 import React, { useState, useCallback } from 'react';
 import styles from './product.module.scss';
+import './cusomReactSlick.css';
 import Slider from 'react-slick';
 import { formatCurrency } from '@utils';
 import { Link } from 'react-router-dom';
@@ -37,16 +38,9 @@ const settings = {
     ],
 };
 
-const getPriceAndConfigs = ({ productConfigs = [], id, image, isSoldOut, name }) => {
+const getPriceAndConfigs = ({ productConfigs = [] }) => {
     let maxPrice = 0;
-    let productConfigsData = [
-        {
-            id,
-            name,
-            image,
-            isSoldOut,
-        },
-    ];
+    let productConfigsData = [];
     productConfigs.map((config) => {
         if (config.variants) {
             config.variants.map((variant) => {
@@ -71,7 +65,7 @@ const SingleProduct = ({ data, style }) => {
     const { name, id: productId, tags } = data;
 
     const { price, productConfigsData } = getPriceAndConfigs(data && data);
-    const [ currentProduct, setCurrentProduct ] = useState(productConfigsData[0] || {}); //change the index to show first config
+    const [currentProduct, setCurrentProduct] = useState(productConfigsData[0] || {}); //change the index to show first config
 
     const setConfigData = useCallback((e) => {
         e.preventDefault();
@@ -88,10 +82,7 @@ const SingleProduct = ({ data, style }) => {
                     <img src={contentRootUrl + currentProduct.image} alt="product image" />
                 </div>
                 <div className={styles['product-btns']}>
-                    <Link
-                        to={`/product-detail/${productId}`}
-                        className={styles['btn-buy']}
-                    >
+                    <Link to={`/product-detail/${productId}`} className={styles['btn-buy']}>
                         More Details
                     </Link>
                 </div>
@@ -103,10 +94,10 @@ const SingleProduct = ({ data, style }) => {
 
             <div className={styles['product-info']}>
                 <div className={styles['product-info-tags']}>
-                    <h2 className={styles['sm-title']}>#{tags}</h2>
+                    {tags && <h2 className={styles['sm-title']}>#{tags}</h2>}
                 </div>
                 <span className={styles['product-name']}>{name}</span>
-                <p className={styles['product-price']}>{moneyFormatter.format(price)}</p>
+                <span className={styles['product-price']}>{moneyFormatter.format(price)}</span>
                 <div className={styles['product-info-configs']}>
                     <Slider {...settings}>
                         {productConfigsData.map((config, index) => {

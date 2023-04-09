@@ -7,12 +7,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './cart.scss';
+import CartItem from './CartItem';
 const CartComponent = ({ cartListData }) => {
     const navigate = useNavigate();
-    const [ product, setProduct ] = useState(cartListData);
-    const [ isDelete, setDetele ] = useState(null);
-    const [ productId, setProductId ] = useState({});
-    const [ totalPrice, setTotalPrice ] = useState(0);
+    const [product, setProduct] = useState(cartListData);
+    const [isDelete, setDetele] = useState(null);
+    const [productId, setProductId] = useState({});
+    const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useDispatch();
 
     const showCartModal = (show) => {
@@ -48,17 +49,17 @@ const CartComponent = ({ cartListData }) => {
         } else if (isDelete === false) {
             showCartModal(false);
         }
-    }, [ isDelete ]);
+    }, [isDelete]);
 
     useEffect(() => {
         let total = 0;
         if (product.length !== 0) product.map((item) => (total = total + item.selectedPrice));
         setTotalPrice(total);
-    }, [ product ]);
+    }, [product]);
 
     return (
-        <section className="cart section">
-            <div className="cart__container page-wrapper grid">
+        <section className="cart">
+            <div className="cart__container grid">
                 <div className="cart__bag">
                     <div className="content__title">Giỏ hàng</div>
                     <div className="cart__list">
@@ -66,36 +67,7 @@ const CartComponent = ({ cartListData }) => {
                             product.map(({ selectedVariants, name, quantity, selectedPrice, id }, _index) => {
                                 return (
                                     <div key={`${_index}-item-${id}`}>
-                                        <div className="cart__item grid">
-                                            <img
-                                                src={
-                                                    AppConstants.contentRootUrl +
-                                                    selectedVariants[shopVariantKey.color].image
-                                                }
-                                                alt="color-img"
-                                                className="cart__item-image"
-                                            />
-                                            <div className="cart__item-info">
-                                                <div className="cart__item-name">{name}</div>
-                                                <div className="cart__item-description">
-                                                    {selectedVariants[shopVariantKey.color].name}
-                                                </div>
-                                                <div className="cart__item-variants">
-                                                    <span className="cart__item-size">
-                                                        Size {selectedVariants[shopVariantKey.size].name}
-                                                    </span>
-                                                    <span className="cart__item-quantity">Số lượng {quantity}</span>
-                                                </div>
-                                                <div className="cart__item-action">
-                                                    <i
-                                                        className="fa fa-trash-o cart__icon"
-                                                        aria-hidden="true"
-                                                        onClick={() => deleteProduct(_index, selectedVariants, id)}
-                                                    ></i>
-                                                </div>
-                                            </div>
-                                            <div className="cart__item-price">{formatMoney(selectedPrice || 0)}</div>
-                                        </div>
+                                        <CartItem />
                                     </div>
                                 );
                             })

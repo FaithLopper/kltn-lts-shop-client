@@ -8,23 +8,21 @@ import useAuth from '@hooks/useAuth';
 import { appCart } from '@constants';
 import { getData, setData } from '@utils/localStorage';
 import { showAppCartModal } from '@store/actions/app';
-function* _addProduct({ payload: { product, userId, onCompleted, onError } }) {
-    if (userId) {
-        if (!getData(`${appCart}-${userId}`))
-            setData(`${appCart}-${userId}`, {
-                cartListData: [],
-                userData: null,
-            });
-    }
+function* _addProduct({ payload: { product, userId, quantity, price, onCompleted, onError } }) {
+    // if (userId) {
+    //     if (!getData(`${appCart}-${userId}`))
+    //         setData(`${appCart}-${userId}`, {
+    //             cartListData: [],
+    //             userData: null,
+    //         });
+    // }
     try {
         yield put({
-            type: createSuccessActionType(addProduct.type),
+            type: addProduct.success.type,
             product: product,
             userId: userId,
-            onCompleted: (cart) => {
-                if (cart && userId) setData(`${appCart}-${userId}`, cart);
-                else setData(appCart, cart);
-            },
+            quantity: quantity,
+            price: price,
         });
     } catch (error) {
         onError(error);
@@ -55,6 +53,6 @@ function* _removeProduct({ payload: { product } }) {
     }
 }
 
-const sagas = [ takeLatest(addProduct.type, _addProduct), takeLatest(removeProduct.type, _removeProduct) ];
+const sagas = [takeLatest(addProduct.type, _addProduct), takeLatest(removeProduct.type, _removeProduct)];
 
 export default sagas;

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import CartComponent from '@modules/business/theme-default/desktop/cart';
 import { useSelector } from 'react-redux';
 const CartContainer = () => {
-    const cartListData = useSelector((state) => state.cart.cartData.cartListData) || [];
+    const cartListData = useSelector((state) => state.cart.currentCart) || [];
     return (
         <RenderContext
             layout={{
@@ -21,7 +21,7 @@ const CartContainer = () => {
                     defaultTheme: CartComponent,
                 },
             }}
-            cartListData={cartListData || []}
+            cartListData={cartListData}
         />
     );
 };

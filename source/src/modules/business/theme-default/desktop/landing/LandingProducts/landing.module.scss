@@ -13,7 +13,7 @@
 }
 
 .container {
-    width: 88vw;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -21,9 +21,9 @@
     background: var(--alice-blue);
     padding: 3.2rem 0;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
-    background-position: center;
+    background-position: 50% 0;
+    background-attachment: fixed;
     border-bottom: 1rem solid white;
     font-family: 'Quicksand', sans-serif;
 

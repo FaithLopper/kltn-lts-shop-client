@@ -27,7 +27,7 @@ export const convertGlobImportToArray = (modules) =>
     modules.filter((module) => !!module.default).map((module) => module.default);
 
 export const destructCamelCaseString = (string) => {
-    const arrString = [ ...string ];
+    const arrString = [...string];
     const newArrString = [];
     arrString.forEach((char, index) => {
         if (char.charCodeAt(0) > 90) {
@@ -207,6 +207,12 @@ export const convertStringToLowerCase = (str) => {
             .join(' ');
     }
     return '';
+};
+
+export const compare2Obj = (a, b) => {
+    console.log("a", a);
+    console.log("b", b);
+    return JSON.stringify(a) === JSON.stringify(b) ;
 };
 
 /**

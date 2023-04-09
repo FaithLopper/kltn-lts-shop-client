@@ -1,0 +1,8 @@
+.slick-disabled {
+    opacity: 0;
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: black;
+}

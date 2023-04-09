@@ -30,29 +30,13 @@ const ProductsPerCategoryContainer = (props) => {
         );
     }, []);
     return prodsPerCategoriesLoading || prodCategoriesLoading ? (
-        <>loading</>
+        <div>loading</div>
     ) : (
-        <>
+        <div>
             {prodsPerCategoriesData.map((cateAndProds, index) => {
-                return (
-                    <RenderContext
-                        layout={{
-                            defaultTheme: ({ children }) => <div>{children}</div>,
-                        }}
-                        components={{
-                            desktop: {
-                                defaultTheme: LandingProducts,
-                            },
-                            mobile: {
-                                defaultTheme: LandingProducts,
-                            },
-                        }}
-                        data={cateAndProds}
-                        key={`${index}-${cateAndProds.category.id}`}
-                    />
-                );
+                return <LandingProducts data={cateAndProds} key={`${index}-${cateAndProds.category.id}`} />;
             })}
-        </>
+        </div>
     );
 };
 const mapStateToProps = (state) => ({
