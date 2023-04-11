@@ -1,6 +1,5 @@
 import { put, select, takeLatest } from 'redux-saga/effects';
-import { addProduct, removeProduct, updateCart, updateLocalCart } from '@store/actions/cart';
-import { createSuccessActionType } from '@store/utils';
+import { addProduct, updateCart, updateLocalCart } from '@store/actions/cart';
 import { appCart, appUserCarts } from '@constants';
 import { getData, setData } from '@utils/localStorage';
 import { showAppCartModal } from '@store/actions/app';
@@ -17,7 +16,7 @@ function* _updateLocalCart({ userId = null }) {
 
     //set user cart
     let currentUserId = null;
-    account.profile ? currentUserId = account.profile.id : currentUserId = userId;
+    account.profile ? (currentUserId = account.profile.id) : (currentUserId = userId);
     if (currentUserId) {
         let usersCartData = getData(appUserCarts) || [];
         let foundedCart = usersCartData.findIndex((userCart) => userCart.userId === currentUserId);
@@ -46,26 +45,14 @@ function* _addProduct({ payload: { product, quantity, price, image, onCompleted,
         });
         yield put({
             type: showAppCartModal.type,
-            product: product,
+            product: { ...product },
+            quantity,
+            price,
+            image,
         });
         onCompleted();
     } catch (error) {
         onError(error);
-    }
-}
-
-function* _removeProduct({ payload: { product } }) {
-    try {
-        yield put({
-            type: createSuccessActionType(removeProduct.type),
-            product: product,
-            onCompleted: (cartData, userId) => {
-                if (userId) setData(`${appCart}-${userId}`, cartData);
-                else setData(appCart, cartData);
-            },
-        });
-    } catch (error) {
-        console.log(error);
     }
 }
 
@@ -97,7 +84,7 @@ function* _updateCart({ payload: { type = '', updateData = {} } }) {
                             break;
                         case 'GET_USER_CART':
                             {
-                                if(userId) {
+                                if (userId) {
                                     let usersCartData = getData(appUserCarts) || [];
                                     const { cart: foundedCart } = usersCartData.find((cart) => (cart.userId = userId));
                                     if (foundedCart && foundedCart.length) {
@@ -113,7 +100,6 @@ function* _updateCart({ payload: { type = '', updateData = {} } }) {
                                         updatedCart.push(...foundedCart);
                                     }
                                 }
-
                             }
                             break;
                         default:
@@ -134,7 +120,6 @@ function* _updateCart({ payload: { type = '', updateData = {} } }) {
 
 const sagas = [
     takeLatest(addProduct.type, _addProduct),
-    takeLatest(removeProduct.type, _removeProduct),
     takeLatest(updateCart.type, _updateCart),
     takeLatest(updateLocalCart.type, _updateLocalCart),
 ];

@@ -3,11 +3,10 @@ import ProductQuantityButton from '@components/common/elements/ProductQuantityBu
 import LoadingComponent from '@components/common/loading/LoadingComponent';
 import { AppConstants } from '@constants';
 import useAuth from '@hooks/useAuth';
-import { hideAppLoading, showAppCartModal, showAppLoading } from '@store/actions/app';
+import { hideAppLoading, showAppLoading } from '@store/actions/app';
 import { actions } from '@store/actions/cart';
 import { formatMoney } from '@utils';
 import React, { useCallback, useEffect, useState } from 'react';
-import LoadingSpin from 'react-loading-spin';
 import { useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 import { toast } from 'react-toastify';
@@ -25,7 +24,12 @@ const settings = {
     arrows: false,
 };
 
-const getPricesAndImages = ({ productConfigs = [], image = '', price = 0, isSoldOut = false }) => {
+const getPricesAndImages = ({
+    productConfigs = [],
+    // image = '',
+    price = 0,
+    // isSoldOut = false,
+}) => {
     let prices = price,
         maxConfigsPrice = 0,
         minConfigsPrice = 0,
@@ -184,19 +188,6 @@ const ProductDetailComponent = ({ detail, loading }) => {
                 }),
             );
         }
-        // const selectedVariants = [];
-        // console.log();
-        // if (detail.productConfigs)
-        //     detail.productConfigs.map((item) => {
-        //         let selected = null;
-        //         console.log(e.target[item.name]);
-        //         if (item.variants)
-        //             selected = {
-        //                 ...item.variants.find((element) => element.id == e.target[item.name].value),
-        //                 configId: item.id,
-        //             };
-        //         if (selected) console.log(selected);
-        //     });
     };
 
     return (

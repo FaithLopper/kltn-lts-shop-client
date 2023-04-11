@@ -110,11 +110,6 @@ export const KEYS = {
     LANGUAGE,
 };
 
-export const shopVariantKey = {
-    color: 0,
-    size: 1,
-};
-
 export const ProductConfigKinds = {
     SINGLE_CHOICE: 1,
     MULTI_CHOICE: 2,

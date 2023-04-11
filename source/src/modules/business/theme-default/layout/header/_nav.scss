@@ -92,6 +92,14 @@
   margin-right: var(--mb-1);
 }
 
+.fix-ellip {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-transform: capitalize;
+    width: 100%;
+}
 
 .cart__modal{
   position:absolute;
@@ -102,10 +110,12 @@
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
+  border-radius: 5px;
   transition:opacity 0.3s linear;
   transition:visibility 0.3s;
   opacity:0;
   visibility: hidden;
+
   .card__modal-header{
     display: flex;
     justify-content: space-between;
@@ -115,7 +125,7 @@
     width: 88px;
     height: 88px;
   }
-  
+
   .cart__product{
     grid-template-columns: 6.25rem 1fr;
   }
@@ -127,7 +137,7 @@
   .round-button{
     color: var(--content-color);
   }
-  
+
   .card__modal-action{
     display: grid;
     grid-template-columns: 1fr 1fr;

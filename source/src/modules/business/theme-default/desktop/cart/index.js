@@ -1,13 +1,12 @@
 import Button from '@components/common/elements/Button';
-import { AppConstants, shopVariantKey } from '@constants';
 import routes from '@routes';
 import { actions } from '@store/actions/cart';
 import { formatMoney } from '@utils';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './cart.scss';
-import CartItem from './CartItem';
+import { CartItem } from './CartItem';
 const CartComponent = ({ cartListData, updateCartItem }) => {
     const navigate = useNavigate();
     let productIndexInCart = -1;

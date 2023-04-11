@@ -50,4 +50,4 @@ const CartItem = ({
     );
 };
 
-export default CartItem;
+export { concatAllConfigs, CartItem } ;

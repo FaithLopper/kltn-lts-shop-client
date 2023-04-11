@@ -7,7 +7,7 @@ const {
     showAppLoading,
     toggleActionLoading,
     changeLanguage,
-    setSiteInfo,
+    // setSiteInfo,
     showAppCartModal,
     hideAppCartModal,
 } = appActions;
@@ -16,8 +16,8 @@ const initialState = {
     appLoading: 0,
     locale: defaultLocale,
     siteInfo: null,
-    cartModal:false,
-    cartProduct:{},
+    cartModal: false,
+    cartProduct: {},
 };
 
 const appReducer = createReducer(
@@ -25,7 +25,7 @@ const appReducer = createReducer(
         reducerName: 'app',
         initialState,
         storage: {
-            whiteList: [ 'theme', 'locale' ],
+            whiteList: ['theme', 'locale'],
         },
     },
     {
@@ -45,13 +45,13 @@ const appReducer = createReducer(
         [changeLanguage.type]: (state, { payload }) => {
             state.locale = payload;
         },
-        [showAppCartModal.type]: (state, { product }) => {
+        [showAppCartModal.type]: (state, { product, image, price, quantity }) => {
             state.cartModal = true;
-            state.cartProduct= product;
+            state.cartProduct = JSON.parse(JSON.stringify({ product, image, price, quantity }));
         },
         [hideAppCartModal.type]: (state) => {
             state.cartModal = false;
-            state.cartProduct= {};
+            state.cartProduct = {};
         },
     },
 );

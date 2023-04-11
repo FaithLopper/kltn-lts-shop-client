@@ -71,7 +71,7 @@ const ProductConfig = ({
     return (
         <fieldset className="checkbox-group">
             <legend className="checkbox-group-legend">
-                {title} {isReq && <span className='required-field'>*</span>}
+                {title} {isReq && <span className="required-field">*</span>}
             </legend>
             <div className="checkbox">
                 {options.map((opt) => {
@@ -88,8 +88,11 @@ const ProductConfig = ({
                                 onChange={(e) => changeHandler(e)}
                             />
                             <span className="checkbox-tile">
-                                {!opt.image && <span className="checkbox-label">{opt.name}</span>}
-                                <img className="config-image" id={opt.id} alt="" src={contentRootUrl + opt.image} />
+                                {opt.image ? (
+                                    <img className="config-image" id={opt.id} alt="" src={contentRootUrl + opt.image} />
+                                ) : (
+                                    <span className="checkbox-label">{opt.name}</span>
+                                )}
                             </span>
                         </label>
                     );
