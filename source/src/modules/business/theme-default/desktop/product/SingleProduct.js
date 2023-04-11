@@ -3,11 +3,12 @@ import React, { useState, useCallback } from 'react';
 import styles from './product.module.scss';
 import './cusomReactSlick.css';
 import Slider from 'react-slick';
-import { formatCurrency } from '@utils';
+import { formatMoney } from '@utils';
 import { Link } from 'react-router-dom';
+import { getPricesAndImages } from './ProductDetailComponent';
 const { contentRootUrl } = AppConstants;
 
-const moneyFormatter = formatCurrency('vi-VN', 'currency', 'VND');
+//const moneyFormatter = formatCurrency('vi-VN', 'currency', 'VND');
 
 const settings = {
     className: 'center',
@@ -38,33 +39,10 @@ const settings = {
     ],
 };
 
-const getPriceAndConfigs = ({ productConfigs = [] }) => {
-    let maxPrice = 0;
-    let productConfigsData = [];
-    productConfigs.map((config) => {
-        if (config.variants) {
-            config.variants.map((variant) => {
-                if (variant.price > maxPrice) {
-                    maxPrice = variant.price;
-                }
-                if (variant.image) {
-                    productConfigsData.push({
-                        id: variant.id,
-                        name: variant.name,
-                        image: variant.image,
-                        isSoldOut: variant.isSoldOut,
-                    });
-                }
-            });
-        }
-    });
-    return { price: maxPrice, productConfigsData };
-};
-
 const SingleProduct = ({ data, style }) => {
-    const { name, id: productId, tags } = data;
+    const { name, id: productId, tags, image } = data;
 
-    const { price, productConfigsData } = getPriceAndConfigs(data && data);
+    const { prices: price, configsImages: productConfigsData } = getPricesAndImages(data || {});
     const [currentProduct, setCurrentProduct] = useState(productConfigsData[0] || {}); //change the index to show first config
 
     const setConfigData = useCallback((e) => {
@@ -79,7 +57,7 @@ const SingleProduct = ({ data, style }) => {
         <div className={styles['product']} style={{ ...style }}>
             <div className={styles['product-content']}>
                 <div className={styles['product-img']}>
-                    <img src={contentRootUrl + currentProduct.image} alt="product image" />
+                    <img src={contentRootUrl + `${currentProduct.image ? currentProduct.image : image}`} alt="product image" />
                 </div>
                 <div className={styles['product-btns']}>
                     <Link to={`/product-detail/${productId}`} className={styles['btn-buy']}>
@@ -97,7 +75,7 @@ const SingleProduct = ({ data, style }) => {
                     {tags && <h2 className={styles['sm-title']}>#{tags}</h2>}
                 </div>
                 <span className={styles['product-name']}>{name}</span>
-                <span className={styles['product-price']}>{moneyFormatter.format(price)}</span>
+                <span className={styles['product-price']}>{formatMoney(price) || price}</span>
                 <div className={styles['product-info-configs']}>
                     <Slider {...settings}>
                         {productConfigsData.map((config, index) => {

@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 import useAuth from '@hooks/useAuth';
 
 const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation, formData }) => {
-    const [ province, setProvince ] = useState([]);
-    const [ district, setDistrict ] = useState([]);
-    const [ ward, setWard ] = useState([]);
+    const [province, setProvince] = useState([]);
+    const [district, setDistrict] = useState([]);
+    const [ward, setWard] = useState([]);
     const { profile } = useAuth();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
 
     useEffect(() => {
         if (Object.keys(formData).length !== 0) formRef.current.setFieldsValue(formData);
-    }, [ formData ]);
+    }, [formData]);
 
     const handleLocationChange = (type, key) => {
         if (key !== undefined) {
@@ -116,11 +116,11 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
         <Form onFinish={handleSubmit} ref={formRef}>
             <div className="checkout__delivery">
                 <div className="checkout__part-info">
-                    <div className="content__title">Bạn muốn nhận đơn hàng như thế nào?</div>
-                    <Button className="big-button round-button-white">
+                    <div className="content__title">Thông tin người nhận và địa chỉ nhận hàng</div>
+                    {/* <Button className="big-button round-button-white">
                         <i className="bx bx-package checkout__icon-big"></i>
                         <span>Giao hàng</span>
-                    </Button>
+                    </Button> */}
                     {!profile && (
                         <div className="checkout__redirect">
                             <Link to="/register" className="round-button-white">
@@ -134,17 +134,19 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                 </div>
 
                 <div className="checkout__part-info">
-                    <div className="content__title">Nhập tên và địa chỉ</div>
+                    <div className="content__title">
+                        Nhập tên và địa chỉ <span className="required-field">*</span>
+                    </div>
                     <Form.Item
                         name="receiverName"
                         rules={[
                             {
                                 type: 'text',
-                                message: 'The input is not valid first name!',
+                                message: 'Họ và tên người nhận không hợp lệ',
                             },
                             {
                                 required: true,
-                                message: 'Please input your first name!',
+                                message: 'Vui lòng nhập họ và tên người nhận',
                             },
                         ]}
                     >
@@ -159,11 +161,11 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                         rules={[
                             {
                                 type: 'text',
-                                message: 'The input is not select address!',
+                                message: 'Địa chỉ không hợp lệ',
                             },
                             {
                                 required: true,
-                                message: 'Please input select address!',
+                                message: 'Vui lòng nhập địa chỉ cụ thể',
                             },
                         ]}
                     >
@@ -171,10 +173,13 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                     </Form.Item>
 
                     <div className="location-field">
-                        <Row gutter={16}>
+                        <Row gutter={[16, 0]}>
                             <Col span={8}>
                                 <LocationField
                                     fieldName="provinceId"
+                                    required
+                                    labelCol={{ span: 24 }}
+                                    label="Tỉnh"
                                     placeholder="Tỉnh"
                                     allowClear={true}
                                     options={province}
@@ -184,14 +189,25 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                             <Col span={8}>
                                 <LocationField
                                     fieldName="districtId"
+                                    required
+                                    labelCol={{ span: 24 }}
                                     allowClear={true}
                                     placeholder="Huyện"
+                                    label="Quận"
                                     options={district}
                                     onChange={(e) => handleLocationChange(3, e)}
                                 />
                             </Col>
                             <Col span={8}>
-                                <LocationField fieldName="wardId" placeholder="Xã" allowClear={true} options={ward} />
+                                <LocationField
+                                    required
+                                    labelCol={{ span: 24 }}
+                                    fieldName="wardId"
+                                    label="Huyện/Xã"
+                                    placeholder="Xã"
+                                    allowClear={true}
+                                    options={ward}
+                                />
                             </Col>
                         </Row>
                     </div>
@@ -250,17 +266,19 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                 </div>
 
                 <div className="checkout__part-info">
-                    <div className="content__title">Thông tin liên hệ</div>
+                    <div className="content__title">
+                        Thông tin liên hệ <span className="required-field">*</span>
+                    </div>
                     <Form.Item
                         name="email"
                         rules={[
                             {
                                 type: 'email',
-                                message: 'The input is not valid E-mail!',
+                                message: 'email không hợp lệ',
                             },
                             {
                                 required: true,
-                                message: 'Please input your E-mail!',
+                                message: 'Vui lòng nhập email',
                             },
                         ]}
                     >
@@ -271,12 +289,12 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                         name="receiverPhone"
                         rules={[
                             {
-                                // type: "number",
-                                message: 'The input is not valid phone number!',
+                                pattern: new RegExp(/(84|0[3|5|7|8|9])+([0-9]{8})\b/gu),
+                                message: 'Số điện thoại không hợp lệ',
                             },
                             {
                                 required: true,
-                                message: 'Please input your phone number!',
+                                message: 'Vui lòng nhập số điện thoại',
                             },
                         ]}
                     >

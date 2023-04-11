@@ -152,7 +152,7 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
     };
 
     const clearCartData = (userId) => {
-        dispatch(actions.destroyCart());
+        dispatch(actions.updateCart({ type: "EMPTY_CART" }));
         let storagePath = '';
         if (userId) {
             storagePath = `${appCart}-${userId}`;
@@ -311,7 +311,7 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                                         <></>
                                     )}
                                 </div>
-                                {/* 
+                                {/*
             <div className="checkout__process-item">
               <div className="checkout__process-header">
                 <div
@@ -449,7 +449,7 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                             <div className="summary__price">{formatMoney(totalPrice || 0)}</div>
                         </div>
                     </div>
-                    {/* <div className="checkout__summary-preview">
+                    <div className="checkout__summary-preview">
                         <div className="content__title">Dự kiến giao Tue, Nov 8 - Tue, Nov 15 </div>
                         <div className="checkout__summary-product">
                             {product.map(({ image, name, quantity, variants, price, id }) => (
@@ -457,14 +457,14 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                                     <img src={image} alt="" className="summary-image" />
                                     <div className="summary__item-info">
                                         <div className="summary__item-name">{name}</div>
-                                        <div className="summary__item-quantity">Qty {quantity}</div>
-                                        <div className="summary__item-size">Size EU {variants.size}</div>
+                                        <div className="summary__item-quantity">Qty </div>
+                                        <div className="summary__item-size">Size EU </div>
                                         <div className="summary__item-name"> {formatMoney(price) || 0}</div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </section>

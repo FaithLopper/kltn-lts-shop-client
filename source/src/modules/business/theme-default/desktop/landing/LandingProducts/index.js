@@ -27,6 +27,7 @@ const LandingProducts = ({ data }) => {
                     <h1
                         style={{
                             marginBottom: 0,
+                            textTransform: "capitalize",
                         }}
                         className={styles['lg-title']}
                     >

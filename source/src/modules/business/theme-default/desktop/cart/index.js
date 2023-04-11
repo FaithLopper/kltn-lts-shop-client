@@ -8,54 +8,30 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './cart.scss';
 import CartItem from './CartItem';
-const CartComponent = ({ cartListData }) => {
+const CartComponent = ({ cartListData, updateCartItem }) => {
     const navigate = useNavigate();
-    const [product, setProduct] = useState(cartListData);
-    const [isDelete, setDetele] = useState(null);
-    const [productId, setProductId] = useState({});
-    const [totalPrice, setTotalPrice] = useState(0);
+    let productIndexInCart = -1;
     const dispatch = useDispatch();
 
-    const showCartModal = (show) => {
-        const cart = document.querySelector('.section__modal');
-        if (show) cart.classList.add('active-modal-cart');
-        else {
-            cart.classList.remove('active-modal-cart');
-            setDetele(null);
+    const showCartModal = (e) => {
+        const itemRemoveModal = document.querySelector('.section__modal');
+        if (e) {
+            productIndexInCart = e.target.id;
+            itemRemoveModal.classList.add('active-modal-cart');
+        } else {
+            itemRemoveModal.classList.remove('active-modal-cart');
         }
     };
 
-    const deleteProduct = (index, selectedVariants, id) => {
-        setProductId({ index, selectedVariants, id });
-        showCartModal(true);
+    const deleteProduct = () => {
+        dispatch(
+            actions.updateCart({
+                type: 'REMOVE_ITEM',
+                updateData: { indexInCart: productIndexInCart },
+            }),
+        );
+        showCartModal(false);
     };
-
-    useEffect(() => {
-        if (isDelete === true) {
-            setProduct(
-                product.filter((item, _index) => {
-                    if (_index !== productId.index) {
-                        return item;
-                    }
-                    return false;
-                }),
-            );
-            dispatch(
-                actions.removeProduct({
-                    product: productId,
-                }),
-            );
-            showCartModal(false);
-        } else if (isDelete === false) {
-            showCartModal(false);
-        }
-    }, [isDelete]);
-
-    useEffect(() => {
-        let total = 0;
-        if (product.length !== 0) product.map((item) => (total = total + item.selectedPrice));
-        setTotalPrice(total);
-    }, [product]);
 
     return (
         <section className="cart">
@@ -63,16 +39,21 @@ const CartComponent = ({ cartListData }) => {
                 <div className="cart__bag">
                     <div className="content__title">Giỏ hàng</div>
                     <div className="cart__list">
-                        {product.length !== 0 ? (
-                            product.map(({ selectedVariants, name, quantity, selectedPrice, id }, _index) => {
+                        {cartListData.length !== 0 ? (
+                            cartListData.map((prod, _index) => {
                                 return (
-                                    <div key={`${_index}-item-${id}`}>
-                                        <CartItem />
+                                    <div key={`item-${_index}`}>
+                                        <CartItem
+                                            {...prod}
+                                            indexInCart={_index}
+                                            showRemoveItemModal={showCartModal}
+                                            updateCartItem={updateCartItem}
+                                        />
                                     </div>
                                 );
                             })
                         ) : (
-                            <>Không có sản phẩm nào trong giỏ hàng</>
+                            <div>Không có sản phẩm nào trong giỏ hàng</div>
                         )}
                     </div>
                 </div>
@@ -91,7 +72,7 @@ const CartComponent = ({ cartListData }) => {
                                     }}
                                 ></i>
                             </div>
-                            <div className="summary__price">{formatMoney(totalPrice || 0)}</div>
+                            <div className="summary__price">{formatMoney(0)}</div>
                         </div>
 
                         <div className="cart__summary-item grid">
@@ -102,7 +83,7 @@ const CartComponent = ({ cartListData }) => {
                     <div className="cart__summary-content">
                         <div className="cart__summary-item grid">
                             <div className="summary__name">Tổng</div>
-                            <div className="summary__price">{formatMoney(totalPrice || 0)}</div>
+                            <div className="summary__price">{formatMoney(0)}</div>
                         </div>
                     </div>
                     <div className="cart__summary-button">
@@ -128,10 +109,10 @@ const CartComponent = ({ cartListData }) => {
 
                     <div className="modal__body">Xoá sản phẩm khỏi giỏ hàng ?</div>
                     <div className="modal__action">
-                        <Button className="round-button" onClick={() => setDetele(true)}>
+                        <Button className="round-button" onClick={() => deleteProduct()}>
                             Xoá
                         </Button>
-                        <Button className="round-button-white" onClick={() => setDetele(false)}>
+                        <Button className="round-button-white" onClick={() => showCartModal(false)}>
                             Huỷ
                         </Button>
                     </div>

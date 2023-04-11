@@ -26,7 +26,7 @@ const ProductQuantityButton = ({ minQuantity = 1, maxQuantity = 10, quantity = 1
     return (
         <div className="qty-input">
             <button
-                disabled={quantity === minQuantity}
+                disabled={quantity <= minQuantity}
                 className="qty-count qty-count--minus"
                 data-action="minus"
                 type="button"
@@ -44,7 +44,7 @@ const ProductQuantityButton = ({ minQuantity = 1, maxQuantity = 10, quantity = 1
                 onChange={(e) => handleChange(e)}
             />
             <button
-                disabled={quantity === maxQuantity}
+                disabled={quantity >= maxQuantity}
                 className="qty-count qty-count--add"
                 data-action="add"
                 type="button"

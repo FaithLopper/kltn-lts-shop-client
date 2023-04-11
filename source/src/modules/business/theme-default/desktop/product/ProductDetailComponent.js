@@ -25,13 +25,13 @@ const settings = {
     arrows: false,
 };
 
-const getPricesAndImages = ({ productConfigs = [] }) => {
-    let maxConfigsPrice = 0,
+const getPricesAndImages = ({ productConfigs = [], image = '', price = 0, isSoldOut = false }) => {
+    let prices = price,
+        maxConfigsPrice = 0,
         minConfigsPrice = 0,
         maxPrice = 0,
         minPrice = 0,
-        configsImages = [],
-        price = 0;
+        configsImages = [];
 
     productConfigs.map((config) => {
         if (config.isRequired && config.variants) {
@@ -49,20 +49,21 @@ const getPricesAndImages = ({ productConfigs = [] }) => {
                     configsImages.push({
                         id: variant.id,
                         image: variant.image,
+                        isSoldOut: variant.isSoldOut,
                     });
                 }
             });
             maxConfigsPrice = maxConfigsPrice + maxPrice;
             minConfigsPrice = minConfigsPrice + minPrice;
 
-            if (minConfigsPrice === 0) price = formatMoney(maxConfigsPrice);
-            else if (maxConfigsPrice === 0) price = formatMoney(minConfigsPrice);
-            else if (maxConfigsPrice === minConfigsPrice) price = formatMoney(maxConfigsPrice);
+            if (minConfigsPrice === 0) prices = formatMoney(maxConfigsPrice);
+            else if (maxConfigsPrice === 0) prices = formatMoney(minConfigsPrice);
+            else if (maxConfigsPrice === minConfigsPrice) prices = formatMoney(maxConfigsPrice);
             else if (maxConfigsPrice && minConfigsPrice)
-                price = `${formatMoney(minConfigsPrice)} ~ ${formatMoney(maxConfigsPrice)}`;
+                prices = `${formatMoney(minConfigsPrice)} ~ ${formatMoney(maxConfigsPrice)}`;
         }
     });
-    return { price, configsImages };
+    return { prices, configsImages };
 };
 
 const generateErrorList = (productConfigs = []) => {
@@ -77,7 +78,7 @@ const generateErrorList = (productConfigs = []) => {
 const ProductDetailComponent = ({ detail, loading }) => {
     const { profile } = useAuth(),
         dispatch = useDispatch(),
-        { price: firstPrice, configsImages } = getPricesAndImages(detail || {});
+        { prices: firstPrice, configsImages } = getPricesAndImages(detail || {});
 
     const [currentImage, setCurrentImage] = useState({}),
         [currentPrice, setCurrentPrice] = useState(0),
@@ -86,9 +87,9 @@ const ProductDetailComponent = ({ detail, loading }) => {
         [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
+        setCurrentPrice(firstPrice);
+        setCurrentImage(configsImages[0] || { image: detail?.image });
         if (detail?.productConfigs) {
-            setCurrentPrice(firstPrice);
-            setCurrentImage(configsImages[0] || {});
             let productConfigsCopy = JSON.parse(JSON.stringify(detail.productConfigs));
             //generate error list
             setErrorList(generateErrorList(productConfigsCopy));
@@ -169,6 +170,7 @@ const ProductDetailComponent = ({ detail, loading }) => {
                         ...detail,
                         productConfigs: JSON.parse(JSON.stringify(selectedConfigs)),
                     },
+                    image: currentImage,
                     quantity,
                     price: currentPrice,
                     userId: profile?.id || null,
@@ -243,10 +245,12 @@ const ProductDetailComponent = ({ detail, loading }) => {
                                     <div className="product__name">{detail.name}</div>
                                     <div className="product__price">{formatMoney(currentPrice) || currentPrice}</div>
                                 </div>
-                                <div className="product__info">
-                                    <span>Mô tả sản phẩn</span>
-                                    <p>{detail.description}</p>
-                                </div>
+                                {detail.description && (
+                                    <div className="product__info">
+                                        <span>Mô tả sản phẩn</span>
+                                        <p>{detail.description}</p>
+                                    </div>
+                                )}
                                 <form onSubmit={handleSubmit} id="product-form">
                                     {detail?.productConfigs &&
                                         detail.productConfigs.map((config) => {
@@ -294,4 +298,4 @@ const ProductDetailComponent = ({ detail, loading }) => {
     );
 };
 
-export default ProductDetailComponent;
+export { ProductDetailComponent, getPricesAndImages };

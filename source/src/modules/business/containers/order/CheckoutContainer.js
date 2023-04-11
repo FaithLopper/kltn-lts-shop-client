@@ -6,9 +6,9 @@ import CheckoutForm from '@modules/business/theme-default/desktop/checkout/Check
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 const CheckoutContainer = () => {
-    const { execute: executeGetLocation } = useFetch(apiConfig.location.getList, { immediate:false });
-    const { execute: executeCreateOrder } = useFetch(apiConfig.order.create, { immediate:false });
-    const cartListData = useSelector((state) => state.cart.cartData.cartListData) || [];
+    const { execute: executeGetLocation } = useFetch(apiConfig.location.getList);
+    const { execute: executeCreateOrder } = useFetch(apiConfig.order.create);
+    const cartListData = useSelector((state) => state.cart.currentCart) || [];
     return (
         <RenderContext
             layout={{

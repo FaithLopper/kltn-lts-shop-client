@@ -8,13 +8,14 @@ class LocationField extends BaseField {
     }
 
     render() {
-        const { label, fieldName, allowClear, options, onChange } = this.props;
+        const { label, fieldName, allowClear, options, onChange , labelCol } = this.props;
         return (
             <Form.Item
                 label={label}
                 name={fieldName}
                 rules={this.getRules()}
                 shouldUpdate={false}
+                labelCol={labelCol}
                 // noStyle={noStyle}
             >
                 <Select
