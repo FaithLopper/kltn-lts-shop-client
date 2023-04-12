@@ -300,9 +300,10 @@ const Delivery = ({ formRef, onNext, setFormData, scrollTop, executeGetLocation,
                     >
                         <Input
                             type="number"
-                            className="checkout__input input"
+                            className="checkout__input input phone_input"
                             placeholder="Số điện thoại"
                             maxLength={10}
+                            min={0}
                         />
                     </Form.Item>
 

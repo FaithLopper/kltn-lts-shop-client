@@ -22,6 +22,13 @@ const CartComponent = ({ cartListData, updateCartItem }) => {
         }
     };
 
+    const sumCartPrice = () => {
+        let total = 0;
+        if (cartListData.length !== 0) cartListData.map((item) => (total = total + item.quantity * item.price));
+
+        return total;
+    };
+
     const deleteProduct = () => {
         dispatch(
             actions.updateCart({
@@ -71,7 +78,7 @@ const CartComponent = ({ cartListData, updateCartItem }) => {
                                     }}
                                 ></i>
                             </div>
-                            <div className="summary__price">{formatMoney(0)}</div>
+                            <div className="summary__price">{formatMoney(sumCartPrice())}</div>
                         </div>
 
                         <div className="cart__summary-item grid">
@@ -82,7 +89,7 @@ const CartComponent = ({ cartListData, updateCartItem }) => {
                     <div className="cart__summary-content">
                         <div className="cart__summary-item grid">
                             <div className="summary__name">Tổng</div>
-                            <div className="summary__price">{formatMoney(0)}</div>
+                            <div className="summary__price">{formatMoney(sumCartPrice())}</div>
                         </div>
                     </div>
                     <div className="cart__summary-button">

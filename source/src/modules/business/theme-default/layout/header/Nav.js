@@ -12,11 +12,16 @@ const Nav = () => {
     const cartListData = useSelector((state) => state.cart.currentCart);
     const dispatch = useDispatch();
     useEffect(() => {
-        window.addEventListener('scroll', function () {
+        function scrollEvent() {
             const nav = document.querySelector('.menu');
-            if (this.scrollY >= 36) nav.classList.add('off-nav');
+            if (window.scrollY >= 36) nav.classList.add('off-nav');
             else nav.classList.remove('off-nav');
-        });
+        }
+        window.addEventListener('scroll', scrollEvent);
+
+        return () => {
+            window.removeEventListener('scroll', scrollEvent);
+        };
     }, []);
 
     useEffect(() => {

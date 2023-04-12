@@ -35,7 +35,7 @@ const SummaryComponent = () => {
                         </div>,
                         <div className="content__title" key={2}>Tổng: {formatMoney(location.state.totalPrice) || 0}</div>,
                         <div key={3}>Đơn hàng: {location.state.id}</div>,
-                        <div key={4}>Dự kiến giao từ 9 đến ngày 7 tháng 11 2022.</div>,
+                        // <div key={4}>Dự kiến giao từ 9 đến ngày 7 tháng 11 2022.</div>,
                     ]}
                     extra={[
                         <Link to="/" className="login__button round-button" key={5}>

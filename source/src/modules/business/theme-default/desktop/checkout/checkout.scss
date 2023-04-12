@@ -1,6 +1,12 @@
 .checkout {
     padding-top: 4rem;
 
+    input.phone_input::-webkit-outer-spin-button,
+    input.phone_input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     .checkout__list {
         height: 70vh;
         overflow-y: scroll;

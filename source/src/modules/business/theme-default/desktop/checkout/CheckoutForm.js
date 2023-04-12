@@ -5,42 +5,40 @@ import React from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { generatePath, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import Billing from './Billing';
 import Delivery from './Delivery';
 import Payment from './Payment';
 import './checkout.scss';
-import { appCart, appSession, COD_PAYMENT } from '@constants';
+import { COD_PAYMENT } from '@constants';
 import routes from '@routes';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { actions } from '@store/actions/cart';
-import { getData, setData } from '@utils/localStorage';
 // import Shipping from './Shipping';
 const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) => {
     const deliveryRef = useRef();
     const shippingRef = useRef();
     const billingRef = useRef();
     const navigate = useNavigate();
-    const [ product, setProduct ] = useState(cartListData);
-    const [ totalPrice, setTotalPrice ] = useState(0);
-    const [ avaible, setAvaible ] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [avaible, setAvaible] = useState(false);
     const dispatch = useDispatch();
-    const [ active, setActive ] = useState({
+    const [active, setActive] = useState({
         delivery: { active: true, isEdited: false },
         shipping: { active: false, isEdited: false },
         // billing: { active: false, isEdited: false },
         payment: { active: false, isEdited: false },
     });
 
-    const [ form, setForm ] = useState({
+    const [form, setForm] = useState({
         delivery: {},
         shipping: {},
         billing: {},
         payment: {},
     });
     const { delivery, shipping, billing, payment } = form;
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         if (form.billing.delivery) {
             setForm({
@@ -52,17 +50,18 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                 ...form,
                 billing: form.billing,
             });
-    }, [ form.billing ]);
+    }, [form.billing]);
 
     useEffect(() => {
         if (cartListData.length !== 0) setAvaible(true);
     }, []);
 
-    useEffect(() => {
+    const sumCartPrice = () => {
         let total = 0;
-        if (product.length !== 0) product.map((item) => (total = total + item.selectedPrice));
-        setTotalPrice(total);
-    }, [ product ]);
+        if (cartListData.length !== 0) cartListData.map((item) => (total = total + item.price * item.quantity));
+
+        return total;
+    };
 
     const onNext = (current) => {
         switch (current) {
@@ -126,6 +125,13 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
 
     const handleSubmit = (formValues) => {
         setLoading(true);
+        console.log({
+            ...delivery,
+            ...payment,
+            ...formValues,
+            orderItems: mappingProductData(),
+            paymentMethod: COD_PAYMENT,
+        });
         executeCreateOrder({
             data: {
                 ...delivery,
@@ -137,47 +143,40 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
             onCompleted: (responseData) => {
                 if (responseData.result) {
                     const { id, status } = responseData.data;
+                    console.log('gud');
                     setLoading(false);
-                    clearCartData(getData(appSession));
-                    navigate(routes.summaryPage.path, { state: { id, status, totalPrice } });
+                    clearCartData();
+                    navigate(routes.summaryPage.path, { state: { id, status, totalPrice: sumCartPrice() } });
                     toast.success('Tạo đơn hàng thành công');
                 }
             },
             onError: () => {
                 setLoading(false);
+                console.log('not gud');
                 toast.error('Tạo đơn hàng thất bại !!!');
-                navigate(routes.cartPage.path);
+                // navigate(routes.cartPage.path);
             },
         });
     };
 
-    const clearCartData = (userId) => {
-        dispatch(actions.updateCart({ type: "EMPTY_CART" }));
-        let storagePath = '';
-        if (userId) {
-            storagePath = `${appCart}-${userId}`;
-        } else storagePath = `${appCart}`;
-        setData(storagePath, {
-            cartListData: [],
-            userData: null,
-        });
+    const clearCartData = () => {
+        dispatch(actions.updateCart({ type: 'EMPTY_CART' }));
     };
 
     const mappingProductData = () => {
+        let orderItems = [];
         if (cartListData.length !== 0) {
-            let orderItems = [];
             cartListData.map((item) => {
-                if (item.selectedVariants)
-                    orderItems.push({
-                        productId: item.id,
-                        quantity: item.quantity,
-                        productConfigs: item.selectedVariants.map((variant) => {
-                            return { configId: variant.configId, variantIds: [ variant.id ] };
-                        }),
-                    });
+                orderItems.push({
+                    productId: item.product.id,
+                    quantity: item.quantity,
+                    productConfigs: item.product.productConfigs.map((config) => {
+                        return { configId: config.id, variantIds: config.variants ? config.variants.map((variant) => variant.id) : [] };
+                    }),
+                });
             });
-            return orderItems;
         }
+        return orderItems;
     };
     const onEdit = (current) => {
         switch (current) {
@@ -435,7 +434,7 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                                     style={{ fontSize: '14px', cursor: 'pointer' }}
                                 />
                             </div>
-                            <div className="summary__price">{formatMoney(totalPrice || 0)}</div>
+                            <div className="summary__price">{formatMoney(sumCartPrice())}</div>
                         </div>
 
                         <div className="checkout__summary-item grid">
@@ -446,10 +445,10 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                     <div className="checkout__summary-content">
                         <div className="checkout__summary-item grid">
                             <div className="summary__name">Tổng </div>
-                            <div className="summary__price">{formatMoney(totalPrice || 0)}</div>
+                            <div className="summary__price">{formatMoney(sumCartPrice())}</div>
                         </div>
                     </div>
-                    <div className="checkout__summary-preview">
+                    {/* <div className="checkout__summary-preview">
                         <div className="content__title">Dự kiến giao Tue, Nov 8 - Tue, Nov 15 </div>
                         <div className="checkout__summary-product">
                             {product.map(({ image, name, quantity, variants, price, id }) => (
@@ -464,7 +463,7 @@ const CheckoutForm = ({ executeGetLocation, executeCreateOrder, cartListData }) 
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

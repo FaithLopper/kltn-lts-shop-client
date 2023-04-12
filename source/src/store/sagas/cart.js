@@ -65,7 +65,6 @@ function* _updateCart({ payload: { type = '', updateData = {} } }) {
                         case 'UPDATE_QUANTITY':
                             {
                                 updatedCart[updateData.indexInCart].quantity = updateData.newQuantity;
-                                //set to local
                             }
                             break;
                         case 'UPDATE_CONFIG':
@@ -74,7 +73,6 @@ function* _updateCart({ payload: { type = '', updateData = {} } }) {
                         case 'REMOVE_ITEM':
                             {
                                 updatedCart.splice(parseInt(updateData.indexInCart), 1);
-                                //set to local
                             }
                             break;
                         case 'EMPTY_CART':
