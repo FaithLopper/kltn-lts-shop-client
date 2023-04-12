@@ -11,6 +11,7 @@ import ForgetPasswordContainer from '@modules/business/containers/login/ForgetPa
 import CheckoutContainer from '@modules/business/containers/order/CheckoutContainer';
 import SummaryContainer from '@modules/business/containers/order/SummaryContainer';
 import NewDetailContainer from '@modules/business/containers/new';
+import ProfileContainer from '@modules/business/containers/profile';
 /*
 	auth
 		+ null: access login and not login
@@ -79,6 +80,12 @@ const routes = {
         path: '/news/:id',
         component: NewDetailContainer,
         auth: null,
+        title: 'Checkout page',
+    },
+    profilePage: {
+        path: '/profile',
+        component: ProfileContainer,
+        auth: true,
         title: 'Checkout page',
     },
     notFound: {

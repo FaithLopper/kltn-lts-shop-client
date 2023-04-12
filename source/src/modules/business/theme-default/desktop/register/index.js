@@ -130,9 +130,9 @@ const RegisterComponent = () => {
                         type="date"
                     />
                     <div className="switch-field">
-                        <input type="radio" id="radio-one" name="gender" value={0} checked />
+                        <input type="radio" id="radio-one" name="gender" value={1} checked />
                         <label htmlFor="radio-one">Nam</label>
-                        <input type="radio" id="radio-two" name="gender" value={1} />
+                        <input type="radio" id="radio-two" name="gender" value={2} />
                         <label htmlFor="radio-two">Nữ</label>
                     </div>
                     <div className={styles.save}>

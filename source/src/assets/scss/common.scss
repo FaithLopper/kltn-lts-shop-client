@@ -287,6 +287,14 @@ main {
     }
 }
 
+.ant-select-selector{
+    padding: 1.2rem 0 1.2rem 1.2rem !important;
+    height: auto !important;
+    border-radius: 0.25rem !important;
+    font-size: 1rem !important;
+    color: var(--title-color-dark) !important;
+}
+
 /* ============== BREAK POINT ============== */
 
 /* For large device */
