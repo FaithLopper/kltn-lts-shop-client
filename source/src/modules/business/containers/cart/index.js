@@ -1,13 +1,19 @@
 import RenderContext from '@components/common/elements/RenderContext';
 import React from 'react';
 import BussinessDefaultLayout from '@modules/business/theme-default/layout/BussinessDefaultLayout';
-import useFetch from '@hooks/useFetch';
-import apiConfig from '@constants/apiConfig';
-import { useParams } from 'react-router-dom';
 import CartComponent from '@modules/business/theme-default/desktop/cart';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '@store/actions/cart';
+
 const CartContainer = () => {
     const cartListData = useSelector((state) => state.cart.currentCart) || [];
+    const dispatch = useDispatch();
+
+    const setQuantity = (updateData) => {
+        dispatch(actions.updateCart({ type: 'UPDATE_QUANTITY', updateData }));
+    };
+
+
     return (
         <RenderContext
             layout={{
@@ -22,6 +28,7 @@ const CartContainer = () => {
                 },
             }}
             cartListData={cartListData}
+            updateCartItem={{ setQuantity }}
         />
     );
 };

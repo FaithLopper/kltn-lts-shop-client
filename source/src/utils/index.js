@@ -225,8 +225,6 @@ export const convertStringToLowerCase = (str) => {
 };
 
 export const compare2Obj = (a, b) => {
-    console.log('a', a);
-    console.log('b', b);
     return JSON.stringify(a) === JSON.stringify(b);
 };
 

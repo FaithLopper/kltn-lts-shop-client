@@ -1,7 +1,7 @@
 import RenderContext from '@components/common/elements/RenderContext';
 import React from 'react';
 import BussinessDefaultLayout from '@modules/business/theme-default/layout/BussinessDefaultLayout';
-import ProductDetailComponent from '@modules/business/theme-default/desktop/product/ProductDetailComponent';
+import { ProductDetailComponent } from '@modules/business/theme-default/desktop/product/ProductDetailComponent';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import { useParams } from 'react-router-dom';

@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import logo from '@assets/svg/logo-500.svg';
 import BasicForm from '@components/common/form/BasicForm';
 import InputField from '@components/common/form/InputField';
 import * as yup from 'yup';
 import { defineMessages, useIntl } from 'react-intl';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import routes from '@routes';
 import styles from './index.module.scss';
 import classNames from 'classnames';
@@ -18,9 +18,6 @@ import { setCacheAccessToken } from '@services/userService';
 import Button from '@components/common/elements/Button';
 import { useDispatch } from 'react-redux';
 import { actions } from '@store/actions/cart';
-import { getData } from '@utils/localStorage';
-import { appCart, appSession } from '@constants';
-import useAuth from '@hooks/useAuth';
 
 const message = defineMessages({
     username: 'Vui lòng nhập tên đăng nhập',
@@ -32,7 +29,6 @@ const message = defineMessages({
 const LoginComponent = () => {
     const intl = useIntl();
     const dispatch = useDispatch();
-    const { profile } = useAuth();
     const { execute, loading } = useFetch(apiConfig.account.login, {});
     const { execute: executeGetProfile, isLoading } = useFetchAction(accountActions.getProfile, {
         loading: useFetchAction.LOADING_TYPE.APP,
@@ -67,7 +63,17 @@ const LoginComponent = () => {
                     const { result, data } = res;
                     if (result && data) {
                         setCacheAccessToken(data.token);
-                        executeGetProfile({ params: { token: data.token } });
+                        executeGetProfile({
+                            params: { token: data.token },
+                        });
+                        dispatch(
+                            actions.updateCart({
+                                type: 'GET_USER_CART',
+                                updateData: {
+                                    userId: data.id,
+                                },
+                            }),
+                        );
                         toast.success(intl.formatMessage(message.loginSuccess));
                     }
                 } catch (error) {

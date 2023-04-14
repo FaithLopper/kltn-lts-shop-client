@@ -1,38 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import logo from '@assets/svg/logo-500.svg';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions, hideAppCartModal } from '@store/actions/app';
-import { AppConstants, shopVariantKey } from '@constants';
+import { actions } from '@store/actions/app';
+import { AppConstants } from '@constants';
+import { concatAllConfigs } from '../../desktop/cart/CartItem';
+import { formatMoney } from '@utils';
 const Nav = () => {
     const modal = useSelector((state) => state.app.cartModal);
     const showModalProduct = useSelector((state) => state.app.cartProduct);
     const cartListData = useSelector((state) => state.cart.currentCart);
     const dispatch = useDispatch();
     useEffect(() => {
-        window.addEventListener('scroll', function () {
+        function scrollEvent() {
             const nav = document.querySelector('.menu');
-            if (this.scrollY >= 36) nav.classList.add('off-nav');
+            if (window.scrollY >= 36) nav.classList.add('off-nav');
             else nav.classList.remove('off-nav');
-        });
+        }
+        window.addEventListener('scroll', scrollEvent);
+
+        return () => {
+            window.removeEventListener('scroll', scrollEvent);
+        };
     }, []);
 
     useEffect(() => {
         if (modal) showModal(true);
-        else showModal(false);
     }, [modal]);
 
     const showModal = (show) => {
         const cart = document.querySelector('.cart__modal');
-        if (show) cart.classList.add('active__modal-cart');
-        else {
+        if (show) {
+            cart.classList.add('active__modal-cart');
+            setTimeout(() => {
+                dispatch(actions.hideAppCartModal());
+                cart.classList.remove('active__modal-cart');
+            }, 4000);
+        } else {
             cart.classList.remove('active__modal-cart');
-            dispatch(actions.hideAppCartModal());
         }
-        setTimeout(() => {
-            cart.classList.remove('active__modal-cart');
-            dispatch(actions.hideAppCartModal());
-        }, 8000);
     };
     return (
         <>
@@ -71,25 +77,18 @@ const Nav = () => {
                 </div>
                 {Object.keys(showModalProduct).length !== 0 && (
                     <div className="cart__product grid">
-                        {/* <img
-                            src={
-                                AppConstants.contentRootUrl +
-                                showModalProduct.selectedVariants[shopVariantKey.color]?.image
-                            }
+                        <img
+                            src={AppConstants.contentRootUrl + showModalProduct.image.image}
                             alt=""
                             className="cart__item-image"
-                        /> */}
+                        />
                         <div className="cart__item-info">
-                            {/* <div className="cart__item-name">{showModalProduct.name}</div> */}
-                            <div className="cart__item-category">
-                                {/* {showModalProduct.selectedVariants[shopVariantKey.size]?.name} */}
+                            <div className="cart__item-name fix-ellip ">{showModalProduct.product.name}</div>
+                            <div className="cart__item-variants fix-ellip ">
+                                {concatAllConfigs(showModalProduct.product.productConfigs)}
                             </div>
-                            {/* <div className="cart__item-description">{product.description}</div> */}
-                            <div className="cart__item-variants">
-                                <span className="cart__item-size">
-                                    {/* Size {showModalProduct.selectedVariants[shopVariantKey.size]?.name} */}
-                                </span>
-                            </div>
+                            <div className="cart__item-quantity fix-ellip ">Số lượng: {showModalProduct.quantity}</div>
+                            <div className="cart__item-price fix-ellip ">{formatMoney(showModalProduct.price)}</div>
                         </div>
                     </div>
                 )}

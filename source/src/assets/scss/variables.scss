@@ -1,7 +1,7 @@
 /* ============== VARIALE CSS ============== */
 :root {
     --header-height: 6rem;
-  
+
     /* ======== Colors ======== */
     /* Color mode HSL (hue, saturation, lightness) */
     --hue: 0;
@@ -16,17 +16,17 @@
     --blur-color:rgb(210, 207, 210);
     --input-color:#8d8d8d;
     --round-button-hover:rgb(64, 64, 64);
-  
+
     /* ======== Font weight ======== */
     --font-light-ultra: 300;
     --font-light: 400;
     --font-normal: 500;
     --font-medium: 600;
     --font-semi-bold: 700;
-  
+
     /* ======== Font and typography ======== */
     --body-font: sans-serif;
-  
+
     /* ======== .5rem = 8px | 1rem = 16px ======== */
     --big-font-size: 3.5rem;
     --h1-font-size: 2.25rem;
@@ -36,7 +36,7 @@
     --small-font-size: 0.875rem;
     --smaller-font-size: 0.625rem;
     --tiny-font-size: 0.6rem;
-  
+
     /* ======== .5rem = 8px | 1rem = 16px ======== */
     --mb-0-25: 0.25rem;
     --mb-0-5: 0.5rem;
@@ -46,7 +46,7 @@
     --mb-2: 2rem;
     --mb-2-5: 2.5rem;
     --mb-3: 3rem;
-  
+
     /* ======== z-index ======== */
     --z-tooltip: 10;
     --z-fixed: 100;
@@ -60,7 +60,7 @@
     --product-name: #111111;
     --product-price: #f2f2f2;
   }
-  
+
   /* Responsive typography */
   @media screen and (max-width: 992px) {
     :root {

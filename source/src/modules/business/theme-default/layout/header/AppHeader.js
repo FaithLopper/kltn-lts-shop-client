@@ -1,4 +1,3 @@
-import { appCart, appSession } from '@constants';
 import apiConfig from '@constants/apiConfig';
 import useAuth from '@hooks/useAuth';
 import useFetch from '@hooks/useFetch';
@@ -6,7 +5,6 @@ import routes from '@routes';
 import { removeCacheAccessToken } from '@services/userService';
 import { accountActions } from '@store/actions';
 import { actions } from '@store/actions/cart';
-import { getData, setData } from '@utils/localStorage';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -25,14 +23,8 @@ const AppHeader = () => {
             onCompleted: () => {
                 try {
                     removeCacheAccessToken();
-                    setData(appSession, null);
                     dispatch(accountActions.logout());
-                    dispatch(actions.destroyCart());
-                    const current = getData(appSession);
-                    const cartData = getData(`${appCart}-${current}`)
-                        ? getData(`${appCart}-${current}`)
-                        :  getData(appCart);
-                    dispatch(actions.initCart({ cartData }));
+                    dispatch(actions.updateCart({ type: "EMPTY_CART" }));
                     toast.success("Đăng xuất thành công !");
                     navigate(routes.loginPage.path);
                 } catch (error) {

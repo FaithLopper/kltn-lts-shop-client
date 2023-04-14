@@ -50,7 +50,6 @@ const useFetchAction = (action, {
 
         try {
             const response = await new Promise((resolve, reject) => {
-
                 dispatch(
                     action({
                         ...payload,
