@@ -9,13 +9,19 @@ import { accountActions } from '@store/actions';
 import LoadingComponent from '@components/common/loading/LoadingComponent';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
+import { convertStringToDateTime, convertUtcToTimezone } from '@utils';
+import DatePickerField from '@components/common/form/DatePickerField';
+import moment from 'moment';
+import { DATE_DISPLAY_FORMAT } from '@constants';
+import { DATE_FORMAT_DISPLAY } from '@constants';
+import { convertDateTimeToString, convertLocalTimeToUtc } from '@utils/datetimeHelper';
 
 const AccountDetail = () => {
     const dispatch = useDispatch();
     const formRef = useRef();
-    const [ data, setData ] = useState({});
-    const [ loading, setLoading ] = useState(false);
-    const [ save, setSave ] = useState(false);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [save, setSave] = useState(false);
     const { execute: executeUpdateProfile } = useFetch(apiConfig.account.updateProfile, { immediate: false });
     useEffect(() => {
         setLoading(true);
@@ -47,16 +53,21 @@ const AccountDetail = () => {
                     const res = responseData.data;
                     if (res.result === true) {
                         if (res.data) {
-                            if (res.data) {
-                                setData({
-                                    ...res.data,
-                                    fullName: res.data.account.fullName,
-                                    username: res.data.account.username,
-                                    email: res.data.account.email,
-                                    birthday: res.data.birthday,
-                                });
-                                setLoading(false);
-                            }
+                            setData({
+                                ...res.data,
+                                fullName: res.data.account.fullName,
+                                username: res.data.account.username,
+                                email: res.data.account.email,
+                                birthday: moment(
+                                    convertStringToDateTime(
+                                        convertUtcToTimezone(res.data.birthday, 'DD/MM/YYYY'),
+                                        'DD/MM/YYYY',
+                                        'DD/MM/YYYY',
+                                    ),
+                                    DATE_FORMAT_DISPLAY,
+                                ),
+                            });
+                            setLoading(false);
                         }
                     }
                 },
@@ -64,15 +75,19 @@ const AccountDetail = () => {
                     showErrorMessage(error.message);
                     setLoading(false);
                 },
-            }),
-        );
+            }));
     };
 
     const handleSubmit = (formValues) => {
         setSave(true);
+        const birthday = convertLocalTimeToUtc(
+            convertDateTimeToString(formValues.birthday, 'DD/MM/YYYY'),
+            'DD/MM/YYYY');
         executeUpdateProfile({
             data: {
                 ...formValues,
+                birthday,
+                id: data.id,
             },
             onCompleted: (responseData) => {
                 console.log(responseData);
@@ -173,23 +188,16 @@ const AccountDetail = () => {
                                             rules={[
                                                 {
                                                     type: 'text',
-                                                    message: 'The input is not valid first name!',
+                                                    message: 'The input is not valid birthday!',
                                                 },
                                                 {
                                                     required: true,
-                                                    message: 'Please input your first name!',
+                                                    message: 'Please input your birthday!',
                                                 },
                                             ]}
                                         >
-                                            {/* <DatePicker className="checkout__input input" /> */}
-                                            <Input
-                                                type="date"
-                                                className="checkout__input input"
-                                                placeholder="Ngày sinh"
-                                                // disabled
-                                            />
+                                            <DatePicker format={DATE_FORMAT_DISPLAY} placeholder="Ngày sinh" />
                                         </Form.Item>
-
                                         <Form.Item
                                             name="gender"
                                             rules={[
