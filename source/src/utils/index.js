@@ -6,11 +6,14 @@ import {
     DEFAULT_LANGUAGE_ID,
     THEMES,
     KEYS,
+    DATE_FORMAT_VALUE,
 } from '@constants';
 import dayjs from 'dayjs';
 import { getObjectData } from './localStorage';
 var utc = require('dayjs/plugin/utc');
+var timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const convertGlobImportToObject = (modules) =>
     modules
@@ -159,6 +162,18 @@ export const convertUtcToLocalTime = (utcTime, format = DATE_FORMAT_DISPLAY) => 
     }
 };
 
+export const convertUtcToTimezone = (utcTime, format = DATE_FORMAT_DISPLAY, timezone = 7) => {
+    try {
+        const localTime = new Date(utcTime);
+        console.log(utcTime);
+        localTime.setHours(localTime.getHours() + timezone); // Chuyển sang múi giờ GMT+7
+        return dayjs(localTime).format(format);
+    } catch (err) {
+        console.log(err);
+        return '';
+    }
+};
+
 export const formatCurrency = (local, style, currencyType) => {
     let currency = new Intl.NumberFormat(local, {
         style: style,
@@ -210,7 +225,21 @@ export const convertStringToLowerCase = (str) => {
 };
 
 export const compare2Obj = (a, b) => {
-    return JSON.stringify(a) === JSON.stringify(b) ;
+    return JSON.stringify(a) === JSON.stringify(b);
+};
+
+export const convertStringToDateTime = (
+    strFormDateTime,
+    fromFormat = DATE_FORMAT_VALUE,
+    toFormat = DATE_FORMAT_DISPLAY,
+) => {
+    try {
+        const datetime = dayjs(strFormDateTime, fromFormat);
+        const formattedDatetime = datetime.format(toFormat);
+        return formattedDatetime;
+    } catch (err) {
+        return null;
+    }
 };
 
 /**

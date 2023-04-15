@@ -86,3 +86,17 @@
     padding: 1rem 1.5rem;
     grid-template-columns: 0.9fr 0.1fr;
 }
+
+.ant-picker {
+    padding: 1.2rem 0 1.2rem 1.2rem !important;
+    height: auto !important;
+    border-radius: 0.25rem !important;
+    color: var(--title-color-dark) !important;
+    input{
+        font-size: 1rem !important;
+    }
+}
+
+.default{
+    border: 1px solid green;
+}

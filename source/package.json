@@ -40,6 +40,7 @@
         "husky": "^8.0.2",
         "immer": "^9.0.16",
         "lint-staged": "^13.1.0",
+        "moment": "^2.29.4",
         "query-string": "^8.0.3",
         "rc-picker": "^3.1.4",
         "rc-slider": "^10.1.0",

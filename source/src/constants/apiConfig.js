@@ -31,7 +31,7 @@ const apiConfig = {
             headers: baseHeader,
         },
         updateProfile: {
-            baseURL: `${apiUrl}v1/customer/update`,
+            baseURL: `${apiUrl}v1/customer/update-profile`,
             method: 'PUT',
             headers: baseHeader,
         },
@@ -106,13 +106,45 @@ const apiConfig = {
             headers: baseHeader,
         },
         getById: {
-            baseURL: `${apiUrl}v1/order/get`,
+            baseURL: `${apiUrl}v1/order/get/:id`,
             method: 'GET',
             headers: baseHeader,
         },
         create: {
             baseURL: `${apiUrl}v1/order/create`,
             method: 'POST',
+            headers: baseHeader,
+        },
+    },
+    profile: {
+        getListAddress: {
+            baseURL: `${apiUrl}v1/customer/address/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getAddressById: {
+            baseURL: `${apiUrl}v1/customer/address/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        createAddress: {
+            baseURL: `${apiUrl}v1/customer/address/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        updateAddress: {
+            baseURL: `${apiUrl}v1/customer/address/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        deleteAddress: {
+            baseURL: `${apiUrl}v1/customer/address/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+        profileUpdate: {
+            baseURL: `${apiUrl}v1/account/update_profile`,
+            method: 'PUT',
             headers: baseHeader,
         },
     },
