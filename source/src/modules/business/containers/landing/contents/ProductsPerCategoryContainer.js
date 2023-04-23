@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { categoriesActions, landingActions } from '@store/actions';
 import LandingProducts from '@modules/business/theme-default/desktop/landing/LandingProducts';
+import LoadingComponent from '@components/common/loading/LoadingComponent';
 
 const { getAllProductCategoriesAction } = categoriesActions;
 const { getProdsPerCategoriesAction } = landingActions;
@@ -30,7 +31,7 @@ const ProductsPerCategoryContainer = (props) => {
         );
     }, []);
     return prodsPerCategoriesLoading || prodCategoriesLoading ? (
-        <div>loading</div>
+        <LoadingComponent />
     ) : (
         <div>
             {prodsPerCategoriesData.map((cateAndProds, index) => {

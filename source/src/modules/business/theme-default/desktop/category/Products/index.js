@@ -12,6 +12,7 @@ const LandingProducts = ({ data }) => {
     const { category, products } = data;
     const { icon, name, note } = category ?? {};
     const productsData = JSON.parse(JSON.stringify(products));
+
     return (
         <div>
             <div
