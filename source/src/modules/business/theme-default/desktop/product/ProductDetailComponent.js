@@ -38,15 +38,17 @@ const getPricesAndImages = ({
         configsImages = [];
 
     productConfigs.map((config) => {
-        if (config.isRequired && config.variants) {
+        if (config.variants) {
             //max price and min price of each require config
             maxPrice = config.variants[0].price;
             minPrice = config.variants[0].price;
 
             config.variants.map((variant) => {
-                if (variant.price >= maxPrice) {
-                    maxPrice = variant.price;
-                } else minPrice = variant.price;
+                if (config.isRequired) {
+                    if (variant.price >= maxPrice) {
+                        maxPrice = variant.price;
+                    } else minPrice = variant.price;
+                }
 
                 //get image
                 if (variant.image) {

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import logo from '@assets/svg/logo-500.svg';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '@store/actions/app';
 import { AppConstants } from '@constants';
 import { concatAllConfigs } from '../../desktop/cart/CartItem';
-import { formatMoney } from '@utils';
+import { formatMoney, randomString } from '@utils';
 import DropDownNav from './DropDownNav';
 import routes from '@routes';
 import { categoriesActions, productsActions } from '@store/actions';
@@ -24,7 +24,7 @@ const Nav = () => {
     const navigate = useNavigate();
     const currentParams = qs.parse(location.search);
     const [search, setSearch] = useState(currentParams.q);
-    console.log(currentParams.q);
+
     useEffect(() => {
         function scrollEvent() {
             const nav = document.querySelector('.menu');
@@ -101,18 +101,17 @@ const Nav = () => {
 
                 <ul className="nav__list">
                     {categories.map((item, index) => (
-                        <>
+                        <Fragment key={index + randomString(6)}>
                             {!item.parentId && (
                                 <li
                                     className="nav__item"
-                                    key={index}
                                     onMouseEnter={() => handleItemHover(item.id)}
                                     onMouseLeave={() => setActiveItem(null)}
                                 >
                                     {item.name || ''}
                                 </li>
                             )}
-                        </>
+                        </Fragment>
                     ))}
                 </ul>
 
@@ -135,7 +134,7 @@ const Nav = () => {
                 </div>
             </nav>
             <div>
-                {activeItem !== null && (
+                {activeItem !== null && childCategories.length && (
                     <DropDownNav
                         onMouseEnter={() => setActiveItem(true)}
                         onMouseLeave={() => setActiveItem(null)}
