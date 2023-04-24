@@ -1,16 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '@assets/svg/logo-500.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '@store/actions/app';
 import { AppConstants } from '@constants';
 import { concatAllConfigs } from '../../desktop/cart/CartItem';
 import { formatMoney } from '@utils';
+import DropDownNav from './DropDownNav';
+import routes from '@routes';
+import { categoriesActions, productsActions } from '@store/actions';
+import { makeURL } from '@utils';
+import qs from 'query-string';
 const Nav = () => {
     const modal = useSelector((state) => state.app.cartModal);
     const showModalProduct = useSelector((state) => state.app.cartProduct);
     const cartListData = useSelector((state) => state.cart.currentCart);
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.categories.prodCategories) || [];
+
+    const [activeItem, setActiveItem] = useState(null);
+    const [childCategories, setChildCategories] = useState([]);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const currentParams = qs.parse(location.search);
+    const [search, setSearch] = useState(currentParams.q);
+    console.log(currentParams.q);
     useEffect(() => {
         function scrollEvent() {
             const nav = document.querySelector('.menu');
@@ -18,6 +32,7 @@ const Nav = () => {
             else nav.classList.remove('off-nav');
         }
         window.addEventListener('scroll', scrollEvent);
+        if (categories.length === 0) dispatch(categoriesActions.getAllProductCategoriesAction());
 
         return () => {
             window.removeEventListener('scroll', scrollEvent);
@@ -40,6 +55,43 @@ const Nav = () => {
             cart.classList.remove('active__modal-cart');
         }
     };
+
+    const handleItemHover = (id) => {
+        setActiveItem(id);
+        setChildCategories(categories.filter((item) => item.parentId === id));
+    };
+
+    const handleSearchEnter = (e) => {
+        if (e.keyCode === 13) {
+            handleSearch();
+        }
+    };
+
+    const handleSearch = () => {
+        if (search !== '') {
+            dispatch(
+                productsActions.getAllProductsFilterAction({
+                    params: {
+                        categoriesId: currentParams.id,
+                        name: search,
+                    },
+                }),
+            );
+            navigate({ pathname: routes.categoryPage.path, search: qs.stringify({ ...currentParams, q: search }) });
+        }
+    };
+
+    const onChangeCategory = (id) => {
+        dispatch(
+            productsActions.getAllProductsFilterAction({
+                params: {
+                    categoriesId: id,
+                },
+            }),
+        );
+        setSearch('');
+        navigate({ pathname: routes.categoryPage.path, search: qs.stringify({ id: id }) });
+    };
     return (
         <>
             <nav className="nav wrapper">
@@ -48,18 +100,33 @@ const Nav = () => {
                 </Link>
 
                 <ul className="nav__list">
-                    <li className="nav__item">Nam</li>
-                    <li className="nav__item">Nữ</li>
-                    <li className="nav__item">Giày</li>
-                    <li className="nav__item">Dép</li>
-                    <li className="nav__item">Sale</li>
-                    <li className="nav__item">Tin tức</li>
+                    {categories.map((item, index) => (
+                        <>
+                            {!item.parentId && (
+                                <li
+                                    className="nav__item"
+                                    key={index}
+                                    onMouseEnter={() => handleItemHover(item.id)}
+                                    onMouseLeave={() => setActiveItem(null)}
+                                >
+                                    {item.name || ''}
+                                </li>
+                            )}
+                        </>
+                    ))}
                 </ul>
 
                 <div className="nav__action">
                     <div className="nav__search">
                         <i className="uil uil-search nav__search-icon"></i>
-                        <input type="text" placeholder="Tìm kiếm" className="nav__search-input" />
+                        <input
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={handleSearchEnter}
+                            type="text"
+                            placeholder="Tìm kiếm"
+                            className="nav__search-input"
+                            value={search}
+                        />
                     </div>
                     <Link to="/cart">
                         <i className="bx bx-shopping-bag nav__icon" value={cartListData.length}></i>
@@ -67,6 +134,16 @@ const Nav = () => {
                     {/* <i className="bx bx-shopping-bag nav__icon" onClick={()=>showModal(true)} value={3}></i> */}
                 </div>
             </nav>
+            <div>
+                {activeItem !== null && (
+                    <DropDownNav
+                        onMouseEnter={() => setActiveItem(true)}
+                        onMouseLeave={() => setActiveItem(null)}
+                        categories={childCategories || []}
+                        onChangeCategory={onChangeCategory}
+                    />
+                )}
+            </div>
             <div className="cart__modal">
                 <div className="card__modal-header">
                     <span>

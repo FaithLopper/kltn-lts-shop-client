@@ -12,6 +12,7 @@ import CheckoutContainer from '@modules/business/containers/order/CheckoutContai
 import SummaryContainer from '@modules/business/containers/order/SummaryContainer';
 import NewDetailContainer from '@modules/business/containers/new';
 import ProfileContainer from '@modules/business/containers/profile';
+import CategoryContainer from '@modules/business/containers/category';
 /*
 	auth
 		+ null: access login and not login
@@ -73,6 +74,12 @@ const routes = {
     summaryPage: {
         path: '/summary',
         component: SummaryContainer,
+        auth: null,
+        title: 'Checkout page',
+    },
+    categoryPage: {
+        path: '/category',
+        component: CategoryContainer,
         auth: null,
         title: 'Checkout page',
     },

@@ -1,0 +1,22 @@
+.dropdownNav {
+    min-height: 20vh;
+    background-color: var(--body-color);
+    display: flex;
+    justify-content: center;
+    transition: .3s;
+}
+
+.wrapper {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    text-align: center;
+    padding-inline: 10rem;
+    width: 60%;
+}
+
+.item{
+    cursor: pointer;
+    color: black;
+}

@@ -256,7 +256,7 @@ const DeliveryAddress = () => {
                                                             fontSize: '0.8rem',
                                                             cursor: 'pointer',
                                                         }}
-                                                        onClick={() => handleDelete(item.id)}
+                                                        onClick={() => handleEdit(item.id)}
                                                     >
                                                         <DeleteOutlined />
                                                     </div>
